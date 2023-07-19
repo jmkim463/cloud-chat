@@ -20,13 +20,14 @@ public class Scroll extends JScrollPane {
     }
 
     public Scroll(Component component) {
-        setViewportView(component);
-
         init();
+
+        setViewportView(component);
     }
 
     private void init() {
         setBorder(null);
+        setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
 
         JScrollBar bar = getVerticalScrollBar();
         bar.setUnitIncrement(30);
@@ -39,17 +40,19 @@ public class Scroll extends JScrollPane {
 
             @Override
             protected void paintThumb(Graphics g, JComponent c, Rectangle thumbBounds) {
-                int w = thumbBounds.width / 2;
-                int h = thumbBounds.height;
+                if(isFocusable()) {
+                    int w = thumbBounds.width / 2;
+                    int h = thumbBounds.height;
 
-                int x = thumbBounds.x;
-                int y = thumbBounds.y;
+                    int x = thumbBounds.x;
+                    int y = thumbBounds.y;
 
-                Graphics2D g2 = (Graphics2D) g;
-                g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+                    Graphics2D g2 = (Graphics2D) g;
+                    g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 
-                g2.setColor(this.thumbColor);
-                g2.fillRoundRect(x, y, w, h, 30, 10);
+                    g2.setColor(this.thumbColor);
+                    g2.fillRoundRect(x, y, w, h, 30, 10);
+                }
             }
 
             @Override

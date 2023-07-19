@@ -21,6 +21,9 @@ public class Frame extends JFrame {
 
     static {
         UIManager.put("Label.font", new FontUIResource("나눔고딕", 0, 15));
+        UIManager.put("Button.font", new FontUIResource("나눔고딕", 0, 15));
+        UIManager.put("TextArea.font", new FontUIResource("나눔고딕", 0, 15));
+
         UIManager.put("Panel.background", Color.white);
     }
 
@@ -29,7 +32,6 @@ public class Frame extends JFrame {
     }
 
     private void init() {
-
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setSize(width, height);
         setIconImage(ImageUtils.getMainIcon().getImage());
