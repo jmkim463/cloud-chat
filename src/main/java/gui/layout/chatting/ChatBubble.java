@@ -1,5 +1,6 @@
-package gui.components;
+package gui.layout.chatting;
 
+import gui.components.LabelFactory;
 import utils.MessageType;
 import utils.Utils;
 
@@ -22,6 +23,7 @@ public class ChatBubble extends JPanel {
 
         JTextArea textArea = new JTextArea(text);
         textArea.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
+        textArea.setFont(LabelFactory.getLabelDefaultFont());
         textArea.setOpaque(false);
         textArea.setMinimumSize(new Dimension(0, 0));
         textArea.setSelectionColor(Color.yellow);

@@ -11,20 +11,15 @@ import java.nio.Buffer;
 
 public class ImageUtils {
 
-    private static ImageIcon mainIcon;
-    private static ImageIcon checkIcon;
+    private final static ImageIcon DEFAULT_USER_IMAGE_ICON = new ImageIcon(ImageUtils.getURL("default_user.jpg"));
+    private final static ImageIcon MAIN_IMAGE_ICON = new ImageIcon(getURL("cloud.png"));
 
-    static {
-        mainIcon = new ImageIcon(getURL("cloud.png"));
-        checkIcon = new ImageIcon(getURL("check.png"));
+    public static ImageIcon getDefaultUserImageIcon() {
+        return DEFAULT_USER_IMAGE_ICON;
     }
 
-    public static ImageIcon getMainIcon() {
-        return mainIcon;
-    }
-
-    public static ImageIcon getCheckIcon() {
-        return checkIcon;
+    public static ImageIcon getMainImageIcon() {
+        return MAIN_IMAGE_ICON;
     }
 
     public static ImageIcon changePNGImageColor(String fileName, Color color) {
@@ -75,7 +70,7 @@ public class ImageUtils {
         BufferedImage bi2 = new BufferedImage(size, size, BufferedImage.TYPE_INT_ARGB);
         g2 = bi2.createGraphics();
         g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-        g2.drawImage(new ImageIcon(icon.getImage().getScaledInstance(size, size, Image.SCALE_SMOOTH)).getImage(), 0, 0, null);
+        g2.drawImage(new ImageIcon(icon.getImage().getScaledInstance(size, size, Image.SCALE_REPLICATE)).getImage(), 0, 0, null);
         g2.setComposite(AlphaComposite.getInstance(AlphaComposite.DST_IN));
         g2.drawImage(bi1, 0, 0, null);
         g2.dispose();

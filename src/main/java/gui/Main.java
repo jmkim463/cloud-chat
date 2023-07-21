@@ -1,14 +1,11 @@
 package gui;
 
-import gui.components.ChatBubble;
+import gui.layout.chatting.ChatBubble;
 import gui.components.Frame;
 import gui.components.Scroll;
 import utils.MessageType;
-import utils.Utils;
 
-import javax.sound.sampled.Line;
 import javax.swing.*;
-import javax.swing.border.Border;
 import javax.swing.border.LineBorder;
 import java.awt.*;
 import java.util.Random;

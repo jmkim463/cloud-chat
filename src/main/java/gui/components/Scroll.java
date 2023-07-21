@@ -1,10 +1,14 @@
 package gui.components;
 
+import utils.Colors;
+
 import javax.swing.*;
 import javax.swing.plaf.basic.BasicScrollBarUI;
 import java.awt.*;
 
 public class Scroll extends JScrollPane {
+
+    private boolean isShowThumb = true;
 
     public static void main(String[] args) {
         Frame frame = new Frame();
@@ -19,10 +23,18 @@ public class Scroll extends JScrollPane {
         frame.setVisible(true);
     }
 
+    public Scroll() {
+        init();
+    }
+
     public Scroll(Component component) {
         init();
 
         setViewportView(component);
+    }
+
+    public void setShowThumb(boolean showThumb) {
+        isShowThumb = showThumb;
     }
 
     private void init() {
@@ -34,17 +46,17 @@ public class Scroll extends JScrollPane {
         bar.setUI(new BasicScrollBarUI() {
             @Override
             protected void configureScrollBarColors() {
-                this.thumbColor = Color.lightGray;
+                this.thumbColor = Colors.getBorderLineColor();
                 this.trackColor = Color.white;
             }
 
             @Override
             protected void paintThumb(Graphics g, JComponent c, Rectangle thumbBounds) {
-                if(isFocusable()) {
-                    int w = thumbBounds.width / 2;
+                if(isShowThumb) {
+                    int w = thumbBounds.width / 3;
                     int h = thumbBounds.height;
 
-                    int x = thumbBounds.x;
+                    int x = thumbBounds.x + w;
                     int y = thumbBounds.y;
 
                     Graphics2D g2 = (Graphics2D) g;

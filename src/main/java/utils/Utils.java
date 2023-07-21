@@ -14,4 +14,10 @@ public class Utils {
 
         return panel;
     }
+
+    public static JLabel changeLabelFontSize(int size, JLabel label) {
+        Font font = label.getFont();
+        label.setFont(new Font(font.getFontName(), font.getStyle(), size));
+        return label;
+    }
 }
