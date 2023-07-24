@@ -20,7 +20,7 @@ public class ComponentTest {
 
     @AfterEach
     void sleep() throws InterruptedException {
-        Thread.sleep(10000);
+        Thread.sleep(999999);
     }
 
     @Test
@@ -93,7 +93,7 @@ public class ComponentTest {
         GraphicsEnvironment e = GraphicsEnvironment.getLocalGraphicsEnvironment();
 
         for(Font font : e.getAllFonts()) {
-            JLabel label = new JLabel("<html>"  + font.getName() + "</html>");
+            JLabel label = new JLabel("<html>"  + font.getName()+ " CLOUD CHAT" + "</html>");
             label.setFont(new Font(font.getName(), 1, 20));
             panel.add(label);
         }

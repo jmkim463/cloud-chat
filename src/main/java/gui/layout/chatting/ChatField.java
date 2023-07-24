@@ -11,6 +11,7 @@ import utils.Utils;
 
 import javax.swing.*;
 import javax.swing.border.LineBorder;
+import javax.swing.text.JTextComponent;
 import java.awt.*;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
@@ -92,9 +93,6 @@ public class ChatField extends JPanel {
                     }
 
                     textLengthLabel.setText(textArea.getText().length() + "");
-
-                    ChatField.this.revalidate();
-                    ChatField.this.repaint();
                 }
             });
 
@@ -103,7 +101,7 @@ public class ChatField extends JPanel {
             scroll.setBorder(new LineBorder(Colors.getBorderLineColor()));
 
             Button btn = new Button(150, 35, "전송");
-            btn.setCheckEmptyTextComponent(textArea);
+            btn.setCheckEmptyTextComponent(new JTextComponent[] {textArea});
             btn.setUseCheckIcon(true);
             btn.setActionListener(e -> {
                 sendMessage(textArea.getText());

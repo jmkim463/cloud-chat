@@ -20,4 +20,10 @@ public class Utils {
         label.setFont(new Font(font.getFontName(), font.getStyle(), size));
         return label;
     }
+
+    public static JComponent getEmptyComponent(int height) {
+        JPanel panel = new JPanel();
+        panel.setPreferredSize(new Dimension(1, height));
+        return panel;
+    }
 }

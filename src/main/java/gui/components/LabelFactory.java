@@ -13,6 +13,10 @@ public class LabelFactory {
         return new Font(FONT_NAME, FONT_STYLE, FONT_SIZE);
     }
 
+    private LabelFactory() {
+
+    }
+
     public static JLabel createLabel(String text) {
         JLabel label = new JLabel(text);
         label.setFont(getLabelDefaultFont());
@@ -31,10 +35,30 @@ public class LabelFactory {
         return label;
     }
 
+    public static JLabel createLabel(String text, int fontStyle, int fontSize,  Color color) {
+        JLabel label = new JLabel(text);
+        label.setFont(new Font(FONT_NAME, fontStyle, fontSize));
+        label.setForeground(color);
+        return label;
+    }
+
     public static JLabel createLabel(String text, int fontSize,  Color color) {
         JLabel label = new JLabel(text);
         label.setForeground(color);
         label.setFont(new Font(FONT_NAME, FONT_STYLE, fontSize));
+        return label;
+    }
+
+    public static JLabel createLabel(String text, Color color) {
+        JLabel label = new JLabel(text);
+        label.setForeground(color);
+        label.setFont(getLabelDefaultFont());
+        return label;
+    }
+
+    public static JLabel setLabelHorizontalCenter(JLabel label) {
+        label.setHorizontalAlignment(JLabel.CENTER);
+        label.setHorizontalTextPosition(JLabel.CENTER);
         return label;
     }
 }

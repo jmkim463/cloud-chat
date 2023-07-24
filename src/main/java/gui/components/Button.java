@@ -1,5 +1,6 @@
 package gui.components;
 
+import gui.layout.chatting.ChatField;
 import utils.Colors;
 import utils.ImageUtils;
 import utils.MessageType;
@@ -7,15 +8,12 @@ import utils.MessageType;
 import javax.swing.*;
 import javax.swing.text.JTextComponent;
 import java.awt.*;
-import java.awt.event.ActionListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
+import java.awt.event.*;
 
 public class Button extends JLabel {
 
-
     private ActionListener actionListener;
-    private JTextComponent textComponent;
+    private JTextComponent[] textComponent;
 
     private boolean isUseCheckIcon;
 
@@ -28,18 +26,20 @@ public class Button extends JLabel {
         addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                if(actionListener != null) {
-                    if(textComponent != null) {
-                        if(textComponent.getText().isBlank()) {
+                if(textComponent != null) {
+                    for(JTextComponent text : textComponent) {
+                        if(text.getText().isEmpty()) {
                             return;
                         }
                     }
-
-                    actionListener.actionPerformed(null);
-
-                    revalidate();
-                    repaint();
                 }
+
+                if(actionListener != null) {
+                    actionListener.actionPerformed(null);
+                }
+
+                revalidate();
+                repaint();
             }
 
             @Override
@@ -62,8 +62,18 @@ public class Button extends JLabel {
         this.actionListener = actionListener;
     }
 
-    public void setCheckEmptyTextComponent(JTextComponent textComponent) {
+    public void setCheckEmptyTextComponent(JTextComponent[] textComponent) {
         this.textComponent = textComponent;
+
+        for(JTextComponent text : textComponent) {
+            text.addKeyListener(new KeyAdapter() {
+                @Override
+                public void keyTyped(KeyEvent e) {
+                    Button.this.revalidate();
+                    Button.this.repaint();
+                }
+            });
+        }
     }
 
     @Override
@@ -72,10 +82,14 @@ public class Button extends JLabel {
         g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 
         if(textComponent != null) {
-            if(textComponent.getText().isBlank()) {
-                setBackground(Color.lightGray);
-            } else {
+            if(Color.lightGray.equals(getBackground())) {
                 setBackground(Colors.getButtonBackgroundColor());
+            }
+
+            for(JTextComponent text : textComponent) {
+                if(text.getText().isEmpty()) {
+                    setBackground(Color.lightGray);
+                }
             }
         }
 
