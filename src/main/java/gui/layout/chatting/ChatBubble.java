@@ -1,17 +1,15 @@
 package gui.layout.chatting;
 
-import gui.components.LabelFactory;
+import gui.components.Font;
+import gui.components.Panel;
 import utils.MessageType;
-import utils.Utils;
 
 import javax.swing.*;
-import javax.swing.border.Border;
 import java.awt.*;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
-import java.awt.image.BufferedImage;
 
-public class ChatBubble extends JPanel {
+public class ChatBubble extends Panel {
 
     private final static int MAX_LINE_TEXT_COUNT = 40;
 
@@ -23,7 +21,7 @@ public class ChatBubble extends JPanel {
 
         JTextArea textArea = new JTextArea(text);
         textArea.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
-        textArea.setFont(LabelFactory.getLabelDefaultFont());
+        textArea.setFont(new Font());
         textArea.setOpaque(false);
         textArea.setMinimumSize(new Dimension(0, 0));
         textArea.setSelectionColor(Color.yellow);

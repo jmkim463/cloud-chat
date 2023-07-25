@@ -1,21 +1,22 @@
 package gui.layout.login;
 
 import gui.components.Button;
-import gui.components.LabelFactory;
-import jdk.jshell.execution.Util;
+import gui.components.Font;
+import gui.components.LabelBuilder;
+import gui.components.Panel;
 import utils.Colors;
 import utils.ImageUtils;
-import utils.Utils;
 
 import javax.swing.*;
-import javax.swing.border.Border;
 import javax.swing.text.JTextComponent;
 import java.awt.*;
+import java.awt.event.ActionListener;
 
-public class LoginField extends JPanel {
+public class LoginField extends Panel {
 
-    JTextField id = new JTextField();
-    JTextField password = new JPasswordField();
+    private JTextField id = new JTextField();
+    private JTextField password = new JPasswordField();
+    private ActionListener actionListener;
 
     public LoginField() {
         init();
@@ -28,7 +29,19 @@ public class LoginField extends JPanel {
         add(new InputField());
     }
 
-    class InputField extends JPanel {
+    public String getID() {
+        return id.getText();
+    }
+
+    public String getPassword() {
+        return password.getText();
+    }
+
+    public void setClickListener(ActionListener actionListener) {
+        this.actionListener = actionListener;
+    }
+
+    class InputField extends Panel {
 
         public InputField() {
             init();
@@ -37,46 +50,47 @@ public class LoginField extends JPanel {
         private void init() {
             setBorder(BorderFactory.createEmptyBorder(30, 0, 0, 0));
 
-            JPanel grid = new JPanel(new GridLayout(0, 1));
-
             id.setPreferredSize(new Dimension(300, 28));
-            id.setFont(LabelFactory.getLabelDefaultFont());
+            id.setFont(new Font());
             id.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, Colors.getBorderLineColor()));
             password.setPreferredSize(new Dimension(300, 28));
             password.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, Colors.getBorderLineColor()));
 
-            grid.add(LabelFactory.createLabel("User ID", 13, Color.lightGray));
+            Panel grid = new Panel(new GridLayout(0, 1));
+            grid.add(new LabelBuilder("User ID").setFont(13).setColor(Color.lightGray).getLabel());
             grid.add(id);
             grid.add(new JPanel());
-            grid.add(LabelFactory.createLabel("Password", 13, Color.lightGray));
+            grid.add(new LabelBuilder("Password").setFont(13).setColor(Color.lightGray).getLabel());
             grid.add(password);
             grid.add(new JPanel());
 
             Button btn = new Button(200, 35, "Log in");
             btn.setCheckEmptyTextComponent(new JTextComponent[]{id, password});
             btn.setActionListener(e -> {
-
+                if(actionListener != null) {
+                    actionListener.actionPerformed(null);
+                }
             });
 
-            JLabel signup = LabelFactory.createLabel("Sign Up", new Color(71, 126, 251));
+            JLabel signup = new LabelBuilder("Sign Up").setColor(new Color(71, 126, 251)).getLabel();
 
             JPanel panel = new JPanel();
             panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
 
-            panel.add(Utils.coverComponentsFlowlayout(LabelFactory.createLabel("CLOUD CHAT", 1, 50)));
-            panel.add(Utils.getEmptyComponent(50));
-            panel.add(Utils.coverComponentsFlowlayout(LabelFactory.createLabel("Welcome to Cloud Chat", 20, Color.gray)));
-            panel.add(Utils.getEmptyComponent(50));
-            panel.add(Utils.coverComponentsFlowlayout(grid));
-            panel.add(Utils.coverComponentsFlowlayout(btn));
-            panel.add(Utils.getEmptyComponent(80));
-            panel.add(Utils.coverComponentsFlowlayout(LabelFactory.createLabel("Don't have an account yet?", 13, Color.gray), signup));
+            panel.add(cover(new LabelBuilder("CLOUD CHAT").setFont("Edu SA Beginner", 1, 50).getLabel()));
+            panel.add(getEmpty(50));
+            panel.add(cover(new LabelBuilder("Welcome to Cloud Chat").setFont(20).setColor(Color.gray).getLabel()));
+            panel.add(getEmpty(50));
+            panel.add(cover(grid));
+            panel.add(cover(btn));
+            panel.add(getEmpty(80));
+            panel.add(cover(new LabelBuilder("Don't have an account yet?").setFont(13).setColor(Color.gray).getLabel(), signup));
 
             add(panel);
         }
     }
 
-    class ImageBar extends JPanel {
+    class ImageBar extends Panel {
 
         public ImageBar() {
             init();
@@ -91,17 +105,16 @@ public class LoginField extends JPanel {
                     ImageUtils.setImageIconSize(400, 275,
                             new ImageIcon(ImageUtils.getURL("login-image.png"))));
 
-            JPanel grid = new JPanel(new GridLayout(0, 1, 0, 0));
+            Panel grid = new Panel(new GridLayout(0, 1, 0, 0));
             grid.setBackground(getBackground());
             grid.setBorder(BorderFactory.createEmptyBorder(50, 0, 0 ,0));
 
-            JLabel label1 = LabelFactory.createLabel("test label maker easy comment", 1, 15, Color.white);
-            JLabel label2 = LabelFactory.createLabel("ejejgrp Tmqmsmrp whgrp", 1,15, Color.white);
+            grid.add(new LabelBuilder("test label maker easy comment")
+                    .setFont(1, 15).setColor(Color.white).setHorizontalCenter().getLabel());
+            grid.add(new LabelBuilder("ejejgrp Tmqmsmrp whgrp")
+                    .setFont(1, 15).setColor(Color.white).setHorizontalCenter().getLabel());
 
-            grid.add(LabelFactory.setLabelHorizontalCenter(label1));
-            grid.add(LabelFactory.setLabelHorizontalCenter(label2));
-
-            JPanel panel = new JPanel(new BorderLayout());
+            Panel panel = new Panel(new BorderLayout());
             panel.setBackground(getBackground());
             panel.add(image);
             panel.add(grid, BorderLayout.SOUTH);

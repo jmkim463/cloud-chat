@@ -1,5 +1,6 @@
 package gui.layout.chatting;
 
+import gui.components.Panel;
 import gui.layout.MainFrame;
 
 import javax.swing.*;
@@ -25,7 +26,7 @@ public class ChatController {
     }
 
     public void show() {
-        JPanel panel = new JPanel(new BorderLayout());
+        Panel panel = new Panel(new BorderLayout());
         panel.add(new ChatRoomList(), BorderLayout.WEST);
         panel.add(new ChatField());
 

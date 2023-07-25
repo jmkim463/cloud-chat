@@ -2,6 +2,7 @@ package gui.layout;
 
 import gui.Main;
 import gui.components.Frame;
+import gui.layout.login.LoginController;
 
 import javax.swing.*;
 import java.awt.*;
@@ -28,18 +29,17 @@ public class MainFrame extends Frame {
         add(panel);
     }
 
+    @Override
+    public void dispose() {
+        super.dispose();
+        instance = null;
+
+        new LoginController().show();
+    }
+
     public void changeScreenWithSideBar(JPanel target) {
         panel.removeAll();
         panel.add(sideBar, BorderLayout.WEST);
-        panel.add(target);
-
-        revalidate();
-        repaint();
-    }
-
-    public void changeScreen(JPanel target) {
-        panel.removeAll();
-
         panel.add(target);
 
         revalidate();

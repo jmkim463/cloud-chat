@@ -23,35 +23,7 @@ public class Button extends JLabel {
         setBackground(Colors.getButtonBackgroundColor());
         setPreferredSize(new Dimension(w, h));
 
-        addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                if(textComponent != null) {
-                    for(JTextComponent text : textComponent) {
-                        if(text.getText().isEmpty()) {
-                            return;
-                        }
-                    }
-                }
-
-                if(actionListener != null) {
-                    actionListener.actionPerformed(null);
-                }
-
-                revalidate();
-                repaint();
-            }
-
-            @Override
-            public void mousePressed(MouseEvent e) {
-                setBackground(Colors.getPressBackgroundColor());
-            }
-
-            @Override
-            public void mouseReleased(MouseEvent e) {
-                setBackground(Colors.getButtonBackgroundColor());
-            }
-        });
+        addMouseListener(new ClickListener());
     }
 
     public void setUseCheckIcon(boolean useCheckIcon) {
@@ -100,7 +72,7 @@ public class Button extends JLabel {
         g2.fillRoundRect(0, 0, w, h, 25, 25);
 
         g2.setColor(getForeground());
-        g2.setFont(new Font("나눔고딕", 1, 15));
+        g2.setFont(new Font(1, 15));
 
         FontMetrics fontMetrics = g2.getFontMetrics();
         Rectangle rectangle = fontMetrics.getStringBounds(getText(), g2).getBounds();
@@ -114,6 +86,36 @@ public class Button extends JLabel {
         if(isUseCheckIcon) {
             g2.drawImage(ImageUtils.changePNGImageColor("icon/check.png", getForeground())
                     .getImage().getScaledInstance(imageSize, imageSize, Image.SCALE_SMOOTH), w - imageSize - (h - imageSize), 3, null);
+        }
+    }
+
+    class ClickListener extends MouseAdapter {
+        @Override
+        public void mouseClicked(MouseEvent e) {
+            if(textComponent != null) {
+                for(JTextComponent text : textComponent) {
+                    if(text.getText().isEmpty()) {
+                        return;
+                    }
+                }
+            }
+
+            if(actionListener != null) {
+                actionListener.actionPerformed(null);
+            }
+
+            revalidate();
+            repaint();
+        }
+
+        @Override
+        public void mousePressed(MouseEvent e) {
+            setBackground(Colors.getPressBackgroundColor());
+        }
+
+        @Override
+        public void mouseReleased(MouseEvent e) {
+            setBackground(Colors.getButtonBackgroundColor());
         }
     }
 }

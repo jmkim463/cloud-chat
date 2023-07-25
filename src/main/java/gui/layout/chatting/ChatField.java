@@ -1,13 +1,11 @@
 package gui.layout.chatting;
 
 import gui.components.Button;
-import gui.components.Frame;
-import gui.components.LabelFactory;
+import gui.components.LabelBuilder;
+import gui.components.Panel;
 import gui.components.Scroll;
 import utils.Colors;
-import utils.ImageUtils;
 import utils.MessageType;
-import utils.Utils;
 
 import javax.swing.*;
 import javax.swing.border.LineBorder;
@@ -15,15 +13,12 @@ import javax.swing.text.JTextComponent;
 import java.awt.*;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.util.Random;
 
-public class ChatField extends JPanel {
+public class ChatField extends Panel {
 
     private final static int MAX_TEXT_LENGTH = 2000;
 
-    private JPanel messagePanel = new JPanel();
+    private Panel messagePanel = new Panel();
     private JScrollPane scroll = new Scroll(messagePanel);
     private MessageInputField inputField = new MessageInputField();
 
@@ -69,10 +64,10 @@ public class ChatField extends JPanel {
         inputField.textLengthLabel.setText("0");
     }
 
-    class MessageInputField extends JPanel {
+    class MessageInputField extends Panel {
 
         JTextArea textArea = new JTextArea();
-        JLabel textLengthLabel = LabelFactory.createLabel("0", 10, Color.lightGray);
+        JLabel textLengthLabel = new LabelBuilder("0").setFont(10).setColor(Color.lightGray).getLabel();
 
         public MessageInputField() {
             init();
@@ -109,9 +104,9 @@ public class ChatField extends JPanel {
             });
 
             JPanel panel = new JPanel(new BorderLayout());
-            panel.add(Utils.coverComponentsFlowlayout(textLengthLabel,
-                    LabelFactory.createLabel("/", 10, Color.lightGray),
-                    LabelFactory.createLabel(MAX_TEXT_LENGTH + "", 10, Color.lightGray))
+            panel.add(cover(textLengthLabel,
+                    new LabelBuilder("/").setFont(10).setColor(Color.lightGray).getLabel(),
+                    new LabelBuilder(MAX_TEXT_LENGTH + "").setFont(10).setColor(Color.lightGray).getLabel())
                 , BorderLayout.WEST);
             panel.add(btn, BorderLayout.EAST);
 

@@ -10,19 +10,6 @@ public class Scroll extends JScrollPane {
 
     private boolean isShowThumb = true;
 
-    public static void main(String[] args) {
-        Frame frame = new Frame();
-
-        JPanel panel = new JPanel(new GridLayout(0, 1));
-        for(int i = 0; i < 100; i++) {
-            panel.add(new JLabel("테스트 " + i));
-        }
-
-        frame.add(new Scroll(panel));
-
-        frame.setVisible(true);
-    }
-
     public Scroll() {
         init();
     }

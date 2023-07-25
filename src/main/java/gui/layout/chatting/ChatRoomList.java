@@ -1,22 +1,20 @@
 package gui.layout.chatting;
 
-import gui.components.LabelFactory;
+import gui.components.LabelBuilder;
 import gui.components.Scroll;
-import jdk.jshell.execution.Util;
+import gui.components.Panel;
 import utils.Colors;
 import utils.ImageUtils;
-import utils.Utils;
 
 import javax.swing.*;
-import javax.swing.border.LineBorder;
 import java.awt.*;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
-public class ChatRoomList extends JPanel {
+public class ChatRoomList extends Panel {
 
-    private JPanel chatRoomList = new JPanel();
+    private Panel chatRoomList = new Panel();
     private Scroll scroll = new Scroll(chatRoomList);
 
     private ChatRoom selectedChatRoom = null;
@@ -30,14 +28,8 @@ public class ChatRoomList extends JPanel {
 
         chatRoomList.setLayout(new BoxLayout(chatRoomList, BoxLayout.Y_AXIS));
         chatRoomList.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 20));
-        for(int i = 0; i < 10; i++) {
-            chatRoomList.add(Utils.coverComponentsFlowlayout(new ChatRoom()));
-        }
 
         scroll.setShowThumb(false);
-
-        JPanel panel = new JPanel();
-        panel.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, Colors.getBorderLineColor()));
 
         UserInfo user = new UserInfo();
 
@@ -45,7 +37,7 @@ public class ChatRoomList extends JPanel {
         add(scroll);
     }
 
-    class UserInfo extends JPanel {
+    class UserInfo extends Panel {
 
         public UserInfo() {
             init();
@@ -55,16 +47,16 @@ public class ChatRoomList extends JPanel {
             setLayout(new BorderLayout(30, 0));
             setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, Colors.getBorderLineColor()));
 
-            add(Utils.coverComponentsFlowlayout(new JLabel(ImageUtils.changeToCircleImage(80, ImageUtils.getDefaultUserImageIcon())), new JLabel("이름")), BorderLayout.WEST);
+            add(cover(new JLabel(ImageUtils.changeToCircleImage(80, ImageUtils.getDefaultUserImageIcon())), new JLabel("이름")), BorderLayout.WEST);
 
         }
     }
 
-    class ChatRoom extends JPanel {
+    class ChatRoom extends Panel {
 
-        private JLabel nameLabel = LabelFactory.createLabel("방이름");
-        private JLabel chatLabel = LabelFactory.createLabel("hello world!", 13, Color.gray);
-        private JLabel lastChatTimeLabel = LabelFactory.createLabel("00일 전", 10, Color.gray);
+        private JLabel nameLabel = new LabelBuilder("방이름").getLabel();
+        private JLabel chatLabel = new LabelBuilder("hello world!").setFont(13).setColor(Color.gray).getLabel();
+        private JLabel lastChatTimeLabel = new LabelBuilder("00일 전").setFont(10).setColor(Color.gray).getLabel();
 
         private ActionListener actionListener;
 
@@ -79,7 +71,7 @@ public class ChatRoomList extends JPanel {
             setSelected(false);
 
             int count = 1;
-            JPanel profileImagesPanel = new JPanel();
+            Panel profileImagesPanel = new Panel();
             if(count == 1) {
                 profileImagesPanel.add(new JLabel(ImageUtils.changeToCircleImage(40, ImageUtils.getDefaultUserImageIcon())));
             }
@@ -91,7 +83,7 @@ public class ChatRoomList extends JPanel {
             panel.add(nameLabel);
             panel.add(chatLabel, BorderLayout.SOUTH);
 
-            add(Utils.coverComponentsFlowlayout(profileImagesPanel, panel), BorderLayout.WEST);
+            add(cover(profileImagesPanel, panel), BorderLayout.WEST);
             add(lastChatTimeLabel, BorderLayout.EAST);
             addMouseListener(new MouseAdapter() {
                 @Override
@@ -116,10 +108,6 @@ public class ChatRoomList extends JPanel {
             setBorder(BorderFactory.createMatteBorder(0, 3, 0, 0,
                     isSelected ? new Color(0, 196, 255) : Color.white));
 
-        }
-
-        public void setActionListener(ActionListener actionListener) {
-            this.actionListener = actionListener;
         }
     }
 

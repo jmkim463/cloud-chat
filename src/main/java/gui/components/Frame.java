@@ -20,20 +20,16 @@ public class Frame extends JFrame {
     int height = 700;
 
     static {
-        UIManager.put("Button.font", new FontUIResource("나눔고딕", 0, 15));
-        UIManager.put("TextArea.font", new FontUIResource("나눔고딕", 0, 15));
+        UIManager.put("Button.font", new Font());
+        UIManager.put("TextArea.font", new Font());
 
         UIManager.put("Panel.background", Color.white);
     }
 
     public Frame() {
-        init();
-    }
-
-    private void init() {
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setSize(width, height);
-        setFont(LabelFactory.getLabelDefaultFont());
+        setFont(new Font());
         setIconImage(ImageUtils.getMainImageIcon().getImage());
     }
 
@@ -42,4 +38,5 @@ public class Frame extends JFrame {
         super.setSize(width, height);
         setLocationRelativeTo(null);
     }
+
 }
