@@ -1,6 +1,6 @@
 package gui;
 
-import gui.layout.chatting.ChatBubble;
+import gui.layout.chatting.view.ChatBubble;
 import gui.components.Frame;
 import gui.components.Scroll;
 import utils.MessageType;

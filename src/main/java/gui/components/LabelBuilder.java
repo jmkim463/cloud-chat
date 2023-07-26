@@ -9,13 +9,16 @@ import java.awt.event.MouseEvent;
 public class LabelBuilder {
 
     private JLabel label = new JLabel();
-    private ActionListener clickListener;
+
+    private Logic click;
 
     public LabelBuilder(ImageIcon icon) {
+        label.addMouseListener(new MouseListener());
         label.setIcon(icon);
     }
 
     public LabelBuilder(String text) {
+        label.addMouseListener(new MouseListener());
         label.setText(text);
         label.setFont(new Font());
     }
@@ -46,13 +49,8 @@ public class LabelBuilder {
         return this;
     }
 
-    public LabelBuilder setClickListener(ActionListener clickListener) {
-        if(label.getMouseListeners().length == 0) {
-            label.addMouseListener(new MouseListener());
-            System.out.println("test");
-        }
-
-        this.clickListener = clickListener;
+    public LabelBuilder setClickListener(Logic logic) {
+        this.click = logic;
         return this;
     }
 
@@ -63,8 +61,8 @@ public class LabelBuilder {
     class MouseListener extends MouseAdapter {
         @Override
         public void mouseClicked(MouseEvent e) {
-            if(clickListener != null) {
-                clickListener.actionPerformed(null);
+            if(click != null) {
+                click.action();
             }
         }
     }

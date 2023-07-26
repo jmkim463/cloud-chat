@@ -1,11 +1,11 @@
 package test;
 
 import gui.layout.SideBar;
-import gui.layout.chatting.ChatBubble;
+import gui.layout.chatting.view.ChatBubble;
 import gui.components.Frame;
 import gui.components.Scroll;
-import gui.layout.chatting.ChatField;
-import gui.layout.chatting.ChatRoomList;
+import gui.layout.chatting.view.ChatField;
+import gui.layout.chatting.view.ChatRoomList;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 import utils.ImageUtils;

@@ -11,7 +11,7 @@ import java.nio.Buffer;
 
 public class ImageUtils {
 
-    private final static ImageIcon DEFAULT_USER_IMAGE_ICON = new ImageIcon(ImageUtils.getURL("default_user.jpg"));
+    private final static ImageIcon DEFAULT_USER_IMAGE_ICON = new ImageIcon(ImageUtils.getURL("default_user.png"));
     private final static ImageIcon MAIN_IMAGE_ICON = new ImageIcon(getURL("cloud.png"));
 
     public static ImageIcon getDefaultUserImageIcon() {

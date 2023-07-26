@@ -1,9 +1,7 @@
 package gui.components;
 
-import gui.layout.chatting.ChatField;
 import utils.Colors;
 import utils.ImageUtils;
-import utils.MessageType;
 
 import javax.swing.*;
 import javax.swing.text.JTextComponent;

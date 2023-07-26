@@ -33,8 +33,6 @@ public class MainFrame extends Frame {
     public void dispose() {
         super.dispose();
         instance = null;
-
-        new LoginController().show();
     }
 
     public void changeScreenWithSideBar(JPanel target) {

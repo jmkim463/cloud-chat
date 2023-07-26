@@ -1,4 +1,4 @@
-package gui.layout.chatting;
+package gui.layout.chatting.view;
 
 import gui.components.LabelBuilder;
 import gui.components.Scroll;

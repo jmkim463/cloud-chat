@@ -2,20 +2,19 @@ package gui.layout.chatting;
 
 import gui.components.Panel;
 import gui.layout.MainFrame;
+import gui.layout.chatting.view.ChatField;
+import gui.layout.chatting.view.ChatRoomList;
+import gui.layout.chatting.view.ChatView;
+import gui.mvc.Controller;
+import gui.mvc.Model;
+import gui.mvc.View;
 
-import javax.swing.*;
-import javax.swing.border.Border;
 import java.awt.*;
 
-public class ChatController {
+public class ChatController implements Controller {
 
-    private MainFrame mainFrame = MainFrame.getInstance();
-
-    public static void main(String[] args) {
-        new ChatController().show();
-
-        MainFrame.getInstance().setVisible(true);
-    }
+    private ChatView view = new ChatView();
+    private ChatModel model = new ChatModel();
 
     public ChatController() {
         init();
@@ -25,12 +24,14 @@ public class ChatController {
 
     }
 
-    public void show() {
-        Panel panel = new Panel(new BorderLayout());
-        panel.add(new ChatRoomList(), BorderLayout.WEST);
-        panel.add(new ChatField());
 
-        mainFrame.changeScreenWithSideBar(panel);
+    @Override
+    public Model getModel() {
+        return model;
     }
 
+    @Override
+    public View getView() {
+        return view;
+    }
 }

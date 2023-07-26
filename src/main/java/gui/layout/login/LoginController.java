@@ -3,20 +3,24 @@ package gui.layout.login;
 import gui.alert.Alert;
 import gui.alert.AlertType;
 import gui.components.Frame;
-import gui.layout.MainFrame;
+import gui.layout.account.AccountController;
 import gui.layout.chatting.ChatController;
-import gui.layout.chatting.ChatField;
-import gui.layout.chatting.ChatRoomList;
+import gui.layout.login.view.LoginField;
+import gui.layout.login.view.LoginView;
+import gui.mvc.Controller;
+import gui.mvc.Model;
+import gui.mvc.View;
 
-import javax.swing.*;
+import javax.naming.ldap.Control;
 
-public class LoginController {
+public class LoginController implements Controller {
 
-    private Frame frame = new Frame();
-    private LoginField field = new LoginField();
+    private LoginView view = new LoginView();
+    private LoginModel model = new LoginModel();
 
     public static void main(String[] args) {
-        new LoginController().show();
+        LoginController controller = new LoginController();
+        controller.getView().open();
     }
 
     public LoginController() {
@@ -24,19 +28,41 @@ public class LoginController {
     }
 
     private void init() {
-        field.setClickListener(e -> login());
-        frame.add(field);
-    }
-
-    public void show() {
-        frame.setVisible(true);
+        view.setLoginLogic(this::login);
+        view.setAccountLogic(this::account);
     }
 
     public void login() {
-        String id = field.getID();
-        String pw = field.getPassword();
+        model.setId(view.getID());
+        model.setPassword(view.getPassword());
 
+        Integer no = model.getUserNo();
 
-        Alert.createAlert(AlertType.SUCCESS, "test", "Test");
+        if(no == null) {
+            Alert.createAlert(AlertType.ERROR, "로그인 실패", "존재하지 않는 아이디 또는 잘못된 비밀번호 입니다.");
+            return;
+        }
+
+        //TODO 로그인 회원 정보 저장 로직
+
+        view.close();
+
+        Controller controller = new ChatController();
+        controller.getView().open();
+    }
+
+    public void account() {
+        Controller controller = new AccountController();
+        controller.getView().open();
+    }
+
+    @Override
+    public Model getModel() {
+        return model;
+    }
+
+    @Override
+    public View getView() {
+        return view;
     }
 }
