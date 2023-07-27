@@ -1,4 +1,4 @@
-package gui.components;
+package gui.components.button;
 
 import utils.Colors;
 import utils.ImageUtils;
@@ -10,18 +10,45 @@ import java.awt.event.*;
 
 public class Button extends JLabel {
 
+    private ButtonStyle style = ButtonStyle.Primary;
+
     private ActionListener actionListener;
     private JTextComponent[] textComponent;
 
     private boolean isUseCheckIcon;
 
-    public Button(int w, int h, String text) {
-        setText(text);
-        setForeground(Color.white);
-        setBackground(Colors.getButtonBackgroundColor());
-        setPreferredSize(new Dimension(w, h));
+    private String text;
+    private int w, h;
 
+    public Button(int w, int h, String text) {
+        this.text = text;
+        this.w = w;
+        this.h = h;
+        init();
+    }
+
+    private void init() {
+        setText(text);
+        setFont(new gui.components.Font(1, 15));
+        setForeground(style.getForeground());
+        setBackground(style.getBackground());
+        setPreferredSize(new Dimension(w, h));
         addMouseListener(new ClickListener());
+    }
+
+    public Button setFont(int size) {
+        java.awt.Font font = getFont();
+        setFont(new gui.components.Font(font.getName(), font.getStyle(), size));
+        return this;
+    }
+
+    public Button setStyle(ButtonStyle style) {
+        this.style = style;
+
+        setBackground(style.getBackground());
+        setForeground(style.getForeground());
+
+        return this;
     }
 
     public void setUseCheckIcon(boolean useCheckIcon) {
@@ -32,7 +59,7 @@ public class Button extends JLabel {
         this.actionListener = actionListener;
     }
 
-    public void setCheckEmptyTextComponent(JTextComponent[] textComponent) {
+    public void setCheckEmptyTextComponent(JTextComponent... textComponent) {
         this.textComponent = textComponent;
 
         for(JTextComponent text : textComponent) {
@@ -53,7 +80,7 @@ public class Button extends JLabel {
 
         if(textComponent != null) {
             if(Color.lightGray.equals(getBackground())) {
-                setBackground(Colors.getButtonBackgroundColor());
+                setBackground(style.getBackground());
             }
 
             for(JTextComponent text : textComponent) {
@@ -70,7 +97,7 @@ public class Button extends JLabel {
         g2.fillRoundRect(0, 0, w, h, 25, 25);
 
         g2.setColor(getForeground());
-        g2.setFont(new Font(1, 15));
+        g2.setFont(getFont());
 
         FontMetrics fontMetrics = g2.getFontMetrics();
         Rectangle rectangle = fontMetrics.getStringBounds(getText(), g2).getBounds();
@@ -79,7 +106,7 @@ public class Button extends JLabel {
         int y = (h - rectangle.height) / 2 + fontMetrics.getAscent();
         int imageSize = 25;
 
-        g2.drawString(getText(), x - 5, y);
+        g2.drawString(getText(), x - (isUseCheckIcon ? 5 : 0), y);
 
         if(isUseCheckIcon) {
             g2.drawImage(ImageUtils.changePNGImageColor("icon/check.png", getForeground())
@@ -108,12 +135,12 @@ public class Button extends JLabel {
 
         @Override
         public void mousePressed(MouseEvent e) {
-            setBackground(Colors.getPressBackgroundColor());
+            setBackground(style.getPressBackground());
         }
 
         @Override
         public void mouseReleased(MouseEvent e) {
-            setBackground(Colors.getButtonBackgroundColor());
+            setBackground(style.getBackground());
         }
     }
 }

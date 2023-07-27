@@ -1,17 +1,12 @@
 package gui.layout.login.view;
 
 import gui.components.*;
-import gui.components.Button;
-import gui.components.Font;
+import gui.components.button.Button;
 import gui.components.Panel;
-import lombok.extern.java.Log;
-import utils.Colors;
-import utils.ImageUtils;
 
 import javax.swing.*;
 import javax.swing.text.JTextComponent;
 import java.awt.*;
-import java.awt.event.ActionListener;
 
 public class LoginField extends Panel {
 
@@ -29,10 +24,8 @@ public class LoginField extends Panel {
         setBorder(BorderFactory.createEmptyBorder(30, 0, 0, 0));
 
         id.setPreferredSize(new Dimension(300, 28));
-        id.setFont(new Font());
-        id.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, Colors.getBorderLineColor()));
         password.setPreferredSize(new Dimension(300, 28));
-        password.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, Colors.getBorderLineColor()));
+        password.setBorder(id.getBorder());
 
         Panel grid = new Panel(new GridLayout(0, 1));
         grid.add(new LabelBuilder("User ID").setFont(13).setColor(Color.lightGray).getLabel());
@@ -52,7 +45,7 @@ public class LoginField extends Panel {
 
         JLabel signup = new LabelBuilder("Sign Up")
                 .setColor(new Color(71, 126, 251))
-                .setClickListener(this::clickAccountLabel)
+                .setClickListener(this::getAccount)
                 .getLabel();
 
         JPanel panel = new JPanel();
@@ -70,10 +63,8 @@ public class LoginField extends Panel {
         add(panel);
     }
 
-    private void clickAccountLabel() {
-        if(account != null) {
-            account.action();
-        }
+    private void getAccount() {
+        account.action();
     }
 
     public String getID() {

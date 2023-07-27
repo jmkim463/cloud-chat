@@ -11,7 +11,7 @@ import java.awt.*;
 public class AccountView extends Modal implements View {
 
     public AccountView() {
-        super(800, 800);
+        super(350, 600);
 
         init();
     }
@@ -20,6 +20,7 @@ public class AccountView extends Modal implements View {
         Panel panel = new Panel(new BorderLayout());
 
         panel.add(new UserImage(), BorderLayout.NORTH);
+        panel.add(new AccountField());
 
         add(panel.cover());
     }

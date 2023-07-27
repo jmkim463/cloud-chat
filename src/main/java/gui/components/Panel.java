@@ -2,8 +2,12 @@ package gui.components;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class Panel extends JPanel {
+
+    private Logic click;
 
     public Panel() {
 
@@ -16,6 +20,12 @@ public class Panel extends JPanel {
     public JPanel getEmpty(int height) {
         JPanel panel = new JPanel();
         panel.setPreferredSize(new Dimension(1, height));
+        return panel;
+    }
+
+    public JPanel getEmpty(int width, int height) {
+        JPanel panel = new JPanel();
+        panel.setPreferredSize(new Dimension(width, height));
         return panel;
     }
 
@@ -33,4 +43,20 @@ public class Panel extends JPanel {
         return panel;
     }
 
+    public void setClick(Logic click) {
+        if(getMouseListeners().length == 0) {
+            addMouseListener(new MouseListener());
+        }
+
+        this.click = click;
+    }
+
+    class MouseListener extends MouseAdapter {
+        @Override
+        public void mouseClicked(MouseEvent e) {
+            if(click != null) {
+                click.action();
+            }
+        }
+    }
 }

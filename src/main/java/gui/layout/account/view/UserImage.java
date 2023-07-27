@@ -1,15 +1,22 @@
 package gui.layout.account.view;
 
-import gui.components.LabelBuilder;
+import gui.components.*;
+import gui.components.Font;
 import gui.components.Panel;
 import utils.ImageUtils;
 
 import javax.swing.*;
 import java.awt.*;
+import java.io.File;
+import java.io.FilenameFilter;
 
 public class UserImage extends Panel {
 
-    public final static int SIZE = 150;
+    private final static int SIZE = 100;
+    private final static ImageIcon DEFAULT_USER_ICON = new ImageIcon(
+            ImageUtils.getDefaultUserImageIcon().getImage().getScaledInstance(SIZE, SIZE, Image.SCALE_SMOOTH));
+
+    private JLabel userImageIconLabel;
 
     public UserImage() {
         init();
@@ -18,12 +25,20 @@ public class UserImage extends Panel {
     private void init() {
        setLayout(new FlowLayout(FlowLayout.LEFT));
 
-       JLabel label = new LabelBuilder(new ImageIcon(
-               ImageUtils.getDefaultUserImageIcon().getImage().getScaledInstance(SIZE, SIZE, Image.SCALE_SMOOTH))).getLabel();
 
-       label.setText("dksl qn");
+       userImageIconLabel = new LabelBuilder(DEFAULT_USER_ICON)
+               .setClickListener(this::changeImage)
+               .getLabel();
 
-       add(label);
+       add(userImageIconLabel);
     }
 
+    private void changeImage() {
+        try(FileSelector selector = new FileSelector()) {
+            selector.show();
+
+            userImageIconLabel.setIcon(ImageUtils.changeToCircleImage(SIZE, new ImageIcon(selector.getFile())));
+
+        } catch (Exception e) {}
+    }
 }

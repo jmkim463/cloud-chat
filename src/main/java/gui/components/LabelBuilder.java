@@ -13,12 +13,10 @@ public class LabelBuilder {
     private Logic click;
 
     public LabelBuilder(ImageIcon icon) {
-        label.addMouseListener(new MouseListener());
         label.setIcon(icon);
     }
 
     public LabelBuilder(String text) {
-        label.addMouseListener(new MouseListener());
         label.setText(text);
         label.setFont(new Font());
     }
@@ -50,6 +48,10 @@ public class LabelBuilder {
     }
 
     public LabelBuilder setClickListener(Logic logic) {
+        if(label.getMouseListeners().length == 0) {
+            label.addMouseListener(new MouseListener());
+        }
+
         this.click = logic;
         return this;
     }

@@ -14,7 +14,6 @@ public class LoginSideBar extends Panel {
     }
 
     private void init() {
-        setBackground(new Color(71, 126, 251));
         setLayout(new FlowLayout(FlowLayout.CENTER, 0, 150));
         setBorder(BorderFactory.createEmptyBorder(0, 20, 0, 20));
 
@@ -23,20 +22,32 @@ public class LoginSideBar extends Panel {
                         new ImageIcon(ImageUtils.getURL("login-image.png"))));
 
         Panel grid = new Panel(new GridLayout(0, 1, 0, 0));
-        grid.setBackground(getBackground());
+        grid.setOpaque(false);
         grid.setBorder(BorderFactory.createEmptyBorder(50, 0, 0 ,0));
 
-        grid.add(new LabelBuilder("test label maker easy comment")
+        grid.add(new LabelBuilder("Lorem ipsum dolor sit amet, consectetur adipiscing elit,")
                 .setFont(1, 15).setColor(Color.white).setHorizontalCenter().getLabel());
-        grid.add(new LabelBuilder("ejejgrp Tmqmsmrp whgrp")
+        grid.add(new LabelBuilder("sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.")
                 .setFont(1, 15).setColor(Color.white).setHorizontalCenter().getLabel());
 
         Panel panel = new Panel(new BorderLayout());
-        panel.setBackground(getBackground());
+        panel.setOpaque(false);
         panel.add(image);
         panel.add(grid, BorderLayout.SOUTH);
 
         add(panel);
     }
 
+    @Override
+    protected void paintComponent(Graphics g) {
+        Graphics2D g2 = (Graphics2D) g;
+        g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+
+        Dimension dimension = getPreferredSize();
+        int w = dimension.width, h = dimension.height;
+
+        GradientPaint gp = new GradientPaint(100, 100, new Color(44, 111, 233), 400, 400, new Color(192, 79, 152));
+        g2.setPaint(gp);
+        g2.fillRect(0, 0, w, h);
+    }
 }

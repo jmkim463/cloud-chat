@@ -11,6 +11,14 @@ public class AccountController implements Controller {
     private AccountModel model = new AccountModel();
     private AccountView view = new AccountView();
 
+    public void account() {
+
+    }
+
+    public void isHaveSameID() {
+
+    }
+
     @Override
     public Model getModel() {
         return model;
@@ -20,4 +28,5 @@ public class AccountController implements Controller {
     public View getView() {
         return view;
     }
+
 }

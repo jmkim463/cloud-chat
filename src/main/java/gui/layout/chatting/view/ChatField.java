@@ -1,6 +1,6 @@
 package gui.layout.chatting.view;
 
-import gui.components.Button;
+import gui.components.button.Button;
 import gui.components.LabelBuilder;
 import gui.components.Panel;
 import gui.components.Scroll;
