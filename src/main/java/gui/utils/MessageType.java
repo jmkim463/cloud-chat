@@ -1,4 +1,4 @@
-package utils;
+package gui.utils;
 
 public enum MessageType {
 

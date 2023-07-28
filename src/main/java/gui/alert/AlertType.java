@@ -1,6 +1,6 @@
 package gui.alert;
 
-import utils.ImageUtils;
+import gui.utils.ImageUtils;
 
 import javax.swing.*;
 import java.awt.*;

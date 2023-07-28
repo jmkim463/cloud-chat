@@ -1,6 +1,13 @@
 package gui.layout.login;
 
 import gui.mvc.Model;
+import lombok.extern.slf4j.Slf4j;
+import module.RetrofitFactory;
+import module.dto.UserDTO;
+import module.service.LoginService;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class LoginModel implements Model {
 
@@ -23,11 +30,16 @@ public class LoginModel implements Model {
         return password;
     }
 
-    public Integer getUserNo() {
-        if("test01".equals(getId()) && "test01".equals(getPassword())) {
-            return 1;
+    public UserDTO login() {
+        LoginService service = RetrofitFactory.createService(LoginService.class);
+
+        UserDTO userDTO = null;
+        try {
+            userDTO = service.login(getId(), getPassword()).execute().body();
+        } catch (Exception e) {
+
         }
 
-        return null;
+        return userDTO;
     }
 }

@@ -2,7 +2,7 @@ package gui.layout.login.view;
 
 import gui.components.LabelBuilder;
 import gui.components.Panel;
-import utils.ImageUtils;
+import gui.utils.ImageUtils;
 
 import javax.swing.*;
 import java.awt.*;

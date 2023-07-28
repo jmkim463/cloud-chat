@@ -10,6 +10,7 @@ import gui.layout.login.view.LoginView;
 import gui.mvc.Controller;
 import gui.mvc.Model;
 import gui.mvc.View;
+import module.dto.UserDTO;
 
 import javax.naming.ldap.Control;
 
@@ -36,12 +37,14 @@ public class LoginController implements Controller {
         model.setId(view.getID());
         model.setPassword(view.getPassword());
 
-        Integer no = model.getUserNo();
+        UserDTO userDTO = model.login();
 
-        if(no == null) {
+
+        if(userDTO == null) {
             Alert.createAlert(AlertType.ERROR, "로그인 실패", "존재하지 않는 아이디 또는 잘못된 비밀번호 입니다.");
             return;
         }
+        System.out.println(userDTO.getName());
 
         //TODO 로그인 회원 정보 저장 로직
 

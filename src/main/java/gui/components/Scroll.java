@@ -1,6 +1,6 @@
 package gui.components;
 
-import utils.Colors;
+import gui.utils.Colors;
 
 import javax.swing.*;
 import javax.swing.plaf.basic.BasicScrollBarUI;

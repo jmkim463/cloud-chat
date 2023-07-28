@@ -4,8 +4,8 @@ import gui.components.button.Button;
 import gui.components.LabelBuilder;
 import gui.components.Panel;
 import gui.components.Scroll;
-import utils.Colors;
-import utils.MessageType;
+import gui.utils.Colors;
+import gui.utils.MessageType;
 
 import javax.swing.*;
 import javax.swing.border.LineBorder;

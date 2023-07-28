@@ -1,14 +1,9 @@
 package gui.alert;
 
 import gui.components.*;
-import gui.components.Frame;
 import gui.components.Panel;
-import utils.ImageUtils;
 
 import javax.swing.*;
-import java.awt.*;
-import java.util.HashMap;
-import java.util.Map;
 
 public class Alert {
 

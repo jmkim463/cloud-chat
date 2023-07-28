@@ -8,8 +8,8 @@ import gui.layout.chatting.view.ChatField;
 import gui.layout.chatting.view.ChatRoomList;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
-import utils.ImageUtils;
-import utils.MessageType;
+import gui.utils.ImageUtils;
+import gui.utils.MessageType;
 
 import javax.swing.*;
 import java.awt.*;

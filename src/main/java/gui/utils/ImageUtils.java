@@ -1,4 +1,4 @@
-package utils;
+package gui.utils;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -7,7 +7,6 @@ import java.awt.image.BufferedImage;
 import java.awt.image.WritableRaster;
 import java.io.File;
 import java.io.IOException;
-import java.nio.Buffer;
 
 public class ImageUtils {
 

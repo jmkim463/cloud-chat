@@ -1,7 +1,6 @@
 package gui.layout;
 
-import utils.Colors;
-import utils.ImageUtils;
+import gui.utils.ImageUtils;
 
 import javax.swing.*;
 import javax.swing.border.LineBorder;

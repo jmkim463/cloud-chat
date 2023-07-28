@@ -2,7 +2,7 @@ package gui.layout.chatting.view;
 
 import gui.components.Font;
 import gui.components.Panel;
-import utils.MessageType;
+import gui.utils.MessageType;
 
 import javax.swing.*;
 import java.awt.*;

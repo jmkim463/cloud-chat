@@ -3,8 +3,8 @@ package gui.layout.chatting.view;
 import gui.components.LabelBuilder;
 import gui.components.Scroll;
 import gui.components.Panel;
-import utils.Colors;
-import utils.ImageUtils;
+import gui.utils.Colors;
+import gui.utils.ImageUtils;
 
 import javax.swing.*;
 import java.awt.*;
