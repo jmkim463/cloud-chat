@@ -11,7 +11,7 @@ import java.awt.*;
 public class AccountView extends Modal implements View {
 
     public AccountView() {
-        super(350, 700);
+        super(380, 700);
 
         init();
     }

@@ -2,6 +2,8 @@ package gui.components;
 
 import java.awt.*;
 import java.awt.Frame;
+import java.io.File;
+import java.io.FilenameFilter;
 
 public class FileSelector implements AutoCloseable {
 
@@ -27,9 +29,6 @@ public class FileSelector implements AutoCloseable {
         dialog.setMode(mode);
         dialog.setFont(new Font());
         dialog.setDirectory("C:\\");
-        dialog.setFilenameFilter((dir, name) -> {
-            return name.endsWith(".png") || name.endsWith(".jpg");
-        });
     }
 
     public void show() {
@@ -40,7 +39,11 @@ public class FileSelector implements AutoCloseable {
         return dialog.getFile();
     }
 
-    public String getFile() {
+    public String getPath() {
+        if(dialog.getDirectory() == null || dialog.getFile() == null) {
+            return null;
+        }
+
         return dialog.getDirectory() + dialog.getFile();
     }
 

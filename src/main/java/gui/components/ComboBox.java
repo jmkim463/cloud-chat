@@ -30,6 +30,12 @@ public class ComboBox<T> extends JComboBox {
         });
     }
 
+    public void addItems(T...t) {
+        for(T item : t) {
+            addItem(item);
+        }
+    }
+
     class ArrowButton extends JButton {
         public ArrowButton() {
             init();

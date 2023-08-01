@@ -43,6 +43,14 @@ public class Panel extends JPanel {
         return panel;
     }
 
+    public JPanel cover(int align, int hgap, int vgap, Component...components) {
+        JPanel panel = new JPanel(new FlowLayout(align, hgap, vgap));
+        for(Component obj : components) {
+            panel.add(obj);
+        }
+        return panel;
+    }
+
     public void setClick(Logic click) {
         if(getMouseListeners().length == 0) {
             addMouseListener(new MouseListener());

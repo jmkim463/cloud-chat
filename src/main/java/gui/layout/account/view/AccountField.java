@@ -6,6 +6,7 @@ import gui.components.LabelBuilder;
 import gui.components.button.Button;
 import gui.components.Panel;
 import gui.components.button.ButtonStyle;
+import okhttp3.MultipartBody;
 
 import javax.swing.*;
 import javax.swing.plaf.basic.BasicArrowButton;
@@ -34,6 +35,8 @@ public class AccountField extends Panel {
 
         JTextField email = new JTextField();
         ComboBox<String> domain = new ComboBox<>();
+        domain.addItem("gmail.com");
+        domain.addItem("naver.com");
 
         email.setPreferredSize(new Dimension(150, 25));
         domain.setPreferredSize(new Dimension(100, 25));
@@ -51,14 +54,14 @@ public class AccountField extends Panel {
         grid.add(new LabelBuilder("이메일").setFont(13).getLabel());
         grid.add(cover(email, new LabelBuilder("@").setFont(13).getLabel(), domain));
 
-        Button loginButton = new Button(135, 35, "취소").setFont(13);
+        Button loginButton = new Button(135, 35, "완료").setFont(13).setStyle(ButtonStyle.Success);
         loginButton.setCheckEmptyTextComponent(id, password, passwordCheck, name);
 
         Button cancelButton = new Button(135, 35,"취소").setFont(13).setStyle(ButtonStyle.Danger);
 
         Panel panel = new Panel(new BorderLayout(0, 50));
         panel.add(grid);
-        panel.add(cover(loginButton, cancelButton), BorderLayout.SOUTH);
+        panel.add(cover(FlowLayout.CENTER, 10, 5,  loginButton, cancelButton), BorderLayout.SOUTH);
         add(panel);
     }
 

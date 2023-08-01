@@ -22,7 +22,6 @@ public class UserImage extends Panel {
     private void init() {
        setLayout(new FlowLayout(FlowLayout.LEFT));
 
-
        userImageIconLabel = new LabelBuilder(DEFAULT_USER_ICON)
                .setClickListener(this::changeImage)
                .getLabel();
@@ -30,11 +29,27 @@ public class UserImage extends Panel {
        add(userImageIconLabel);
     }
 
+    private void checkSameID() {
+        
+    }
+
     private void changeImage() {
         try(FileSelector selector = new FileSelector()) {
             selector.show();
 
-            userImageIconLabel.setIcon(ImageUtils.changeToCircleImage(SIZE, new ImageIcon(selector.getFile())));
+            String path = selector.getPath();
+            String name = selector.getFileName();
+
+            if(path == null) {
+                return;
+            }
+
+            if(!(name.endsWith(".jpg") || name.endsWith(".png"))) {
+                return;
+            }
+
+            userImageIconLabel.setIcon(ImageUtils.changeToCircleImage(SIZE, new ImageIcon(path)));
+            userImageIconLabel.setName(path);
 
         } catch (Exception e) {}
     }

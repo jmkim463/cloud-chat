@@ -5,6 +5,7 @@ import gui.components.Scroll;
 import gui.components.Panel;
 import gui.utils.Colors;
 import gui.utils.ImageUtils;
+import module.UserSession;
 
 import javax.swing.*;
 import java.awt.*;
@@ -47,8 +48,11 @@ public class ChatRoomList extends Panel {
             setLayout(new BorderLayout(30, 0));
             setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, Colors.getBorderLineColor()));
 
-            add(cover(new JLabel(ImageUtils.changeToCircleImage(80, ImageUtils.getDefaultUserImageIcon())), new JLabel("이름")), BorderLayout.WEST);
+            UserSession session = UserSession.getInstance();
 
+            add(cover(
+                    new JLabel(ImageUtils.changeToCircleImage(80, session.getImage())),
+                    new JLabel(session.getName())), BorderLayout.WEST);
         }
     }
 
