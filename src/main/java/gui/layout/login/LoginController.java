@@ -2,18 +2,14 @@ package gui.layout.login;
 
 import gui.alert.Alert;
 import gui.alert.AlertType;
-import gui.components.Frame;
 import gui.layout.account.AccountController;
 import gui.layout.chatting.ChatController;
-import gui.layout.login.view.LoginField;
 import gui.layout.login.view.LoginView;
 import gui.mvc.Controller;
 import gui.mvc.Model;
 import gui.mvc.View;
-import module.UserSession;
+import module.session.UserSession;
 import module.dto.UserDTO;
-
-import javax.naming.ldap.Control;
 
 public class LoginController implements Controller {
 

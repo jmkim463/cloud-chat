@@ -5,8 +5,10 @@ import gui.mvc.Controller;
 import gui.mvc.View;
 import gui.layout.MainFrame;
 import gui.layout.login.LoginController;
+import module.dto.ChatRoomDTO;
 
 import java.awt.*;
+import java.util.List;
 
 public class ChatView implements View {
 
@@ -16,12 +18,18 @@ public class ChatView implements View {
         init();
     }
 
+    private ChatRoomList chatRoomList = new ChatRoomList();
+
     private void init() {
         Panel panel = new Panel(new BorderLayout());
-        panel.add(new ChatRoomList(), BorderLayout.WEST);
+        panel.add(chatRoomList, BorderLayout.WEST);
         panel.add(new ChatField());
 
         frame.changeScreenWithSideBar(panel);
+    }
+
+    public void setAllChatRoomList(List<ChatRoomDTO> list) {
+        chatRoomList.setChatRoomList(list);
     }
 
     @Override

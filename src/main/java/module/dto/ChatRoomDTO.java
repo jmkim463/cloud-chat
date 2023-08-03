@@ -5,13 +5,11 @@ import lombok.Data;
 
 @Data
 @Builder
-public class UserDTO {
+public class ChatRoomDTO {
 
     private String no;
-    private String name;
-    private String id;
-    private String password;
-    private String email;
-    private String imageURL;
 
+    private String name;
+
+    private String createdAt;
 }

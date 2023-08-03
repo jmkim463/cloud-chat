@@ -6,7 +6,4 @@ public class AccountModel implements Model {
 
     String id;
 
-    public boolean isHaveSameID(String id) {
-
-    }
 }

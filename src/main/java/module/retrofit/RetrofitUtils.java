@@ -1,14 +1,14 @@
-package module;
+package module.retrofit;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import okhttp3.OkHttpClient;
+import retrofit2.Call;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-import java.util.concurrent.TimeUnit;
+import java.io.IOException;
 
-public class RetrofitFactory {
+public class RetrofitUtils {
 
     private final static String BASE_URL = "http://127.0.0.1:8080";
 
@@ -23,19 +23,19 @@ public class RetrofitFactory {
         return retrofit;
     }
 
-    public static <T> T createService(final Class<T> serviceClass) {
+    public static <T> T createService(Class<T> serviceClass) {
         T service = createRetrofit().create(serviceClass);
         return service;
     }
 
-    public static OkHttpClient createOkHttpClient() {
-        OkHttpClient client = new OkHttpClient.Builder()
-                .connectTimeout(20, TimeUnit.SECONDS)
-                .writeTimeout(60, TimeUnit.SECONDS)
-                .readTimeout(60, TimeUnit.SECONDS)
-                .build();
+    public static <T> T getCallBody(Call<T> call) {
+        T t = null;
 
-        return client;
+        try {
+            t = call.execute().body();
+        } catch (IOException e) {}
+
+        return t;
     }
 
 }

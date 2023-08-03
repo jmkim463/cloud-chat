@@ -19,7 +19,7 @@ public class ChatField extends Panel {
     private final static int MAX_TEXT_LENGTH = 2000;
 
     private Panel messagePanel = new Panel();
-    private JScrollPane scroll = new Scroll(messagePanel);
+    private JScrollPane scroll = new Scroll();
     private MessageInputField inputField = new MessageInputField();
 
     public ChatField() {
@@ -28,6 +28,11 @@ public class ChatField extends Panel {
 
     private void init() {
         setLayout(new BorderLayout());
+
+        Panel scrollViewPort = new Panel(new BorderLayout());
+        scrollViewPort.add(messagePanel, BorderLayout.NORTH);
+        scrollViewPort.add(new Panel());
+        scroll.setViewportView(scrollViewPort);
 
         messagePanel.setLayout(new BoxLayout(messagePanel, BoxLayout.Y_AXIS));
 

@@ -1,4 +1,4 @@
-package module;
+package module.session;
 
 import gui.utils.ImageUtils;
 import module.dto.UserDTO;
@@ -10,7 +10,7 @@ public class UserSession {
 
     private static UserSession instance;
 
-    private int no;
+    private String no;
     private String name;
     private String email;
     private String imageURL;
@@ -34,7 +34,7 @@ public class UserSession {
         this.imageURL = userDTO.getImageURL();
     }
 
-    public int getNo() {
+    public String getNo() {
         return no;
     }
 

@@ -1,9 +1,9 @@
 package gui.layout.login;
 
 import gui.mvc.Model;
-import module.RetrofitFactory;
-import module.RetrofitUtils;
+import module.retrofit.RetrofitUtils;
 import module.dto.UserDTO;
+import module.service.UserService;
 
 public class LoginModel implements Model {
 
@@ -27,7 +27,7 @@ public class LoginModel implements Model {
     }
 
     public UserDTO login() {
-        LoginService service = RetrofitFactory.createService(LoginService.class);
+        UserService service = RetrofitFactory.createService(UserService.class);
 
         UserDTO userDTO = RetrofitUtils.getCallBody(service.login(getId(), getPassword()));
 

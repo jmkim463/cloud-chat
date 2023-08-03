@@ -1,15 +1,15 @@
 package gui.layout.chatting;
 
-import gui.components.Panel;
-import gui.layout.MainFrame;
-import gui.layout.chatting.view.ChatField;
-import gui.layout.chatting.view.ChatRoomList;
 import gui.layout.chatting.view.ChatView;
 import gui.mvc.Controller;
 import gui.mvc.Model;
 import gui.mvc.View;
+import module.retrofit.RetrofitUtils;
+import module.session.UserSession;
+import module.dto.ChatRoomDTO;
+import module.service.ChatService;
 
-import java.awt.*;
+import java.util.List;
 
 public class ChatController implements Controller {
 
@@ -21,8 +21,13 @@ public class ChatController implements Controller {
     }
 
     private void init() {
+        ChatService service = RetrofitFactory.createService(ChatService.class);
 
+        List<ChatRoomDTO> list = RetrofitUtils.getCallBody(service.getUserRoomListAll(UserSession.getInstance().getNo()));
+
+        view.setAllChatRoomList(list);
     }
+
 
 
     @Override
