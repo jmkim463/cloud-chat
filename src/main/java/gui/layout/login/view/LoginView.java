@@ -1,7 +1,7 @@
 package gui.layout.login.view;
 
+import gui.components.EventObserver;
 import gui.components.Frame;
-import gui.components.Logic;
 import gui.components.Panel;
 import gui.mvc.View;
 
@@ -26,20 +26,8 @@ public class LoginView extends Frame implements View {
         add(panel);
     }
 
-    public void setLoginLogic(Logic logic) {
-        field.setLoginLogic(logic);
-    }
-
-    public void setAccountLogic(Logic logic) {
-        field.setAccountLogic(logic);
-    }
-
-    public String getID() {
-        return field.getID();
-    }
-
-    public String getPassword() {
-        return field.getPassword();
+    public void setClickLoginListener(EventObserver observer) {
+        field.setObserver(observer);
     }
 
     @Override

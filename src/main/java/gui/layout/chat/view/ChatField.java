@@ -1,5 +1,6 @@
-package gui.layout.chatting.view;
+package gui.layout.chat.view;
 
+import gui.components.EventObserver;
 import gui.components.button.Button;
 import gui.components.LabelBuilder;
 import gui.components.Panel;
@@ -13,6 +14,9 @@ import javax.swing.text.JTextComponent;
 import java.awt.*;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Optional;
 
 public class ChatField extends Panel {
 
@@ -21,6 +25,8 @@ public class ChatField extends Panel {
     private Panel messagePanel = new Panel();
     private JScrollPane scroll = new Scroll();
     private MessageInputField inputField = new MessageInputField();
+
+    private EventObserver observer;
 
     public ChatField() {
         init();
@@ -40,31 +46,19 @@ public class ChatField extends Panel {
         add(inputField, BorderLayout.SOUTH);
     }
 
-    public void addMessage(String text, MessageType messageType) {
+    void addMessage(String text, MessageType messageType) {
         ChatBubble chat = new ChatBubble(text, messageType);
         messagePanel.add(chat);
     }
 
-    public void sendMessage(String text) {
-        addMessage(text, MessageType.Me);
-
-        messagePanel.revalidate();
-        messagePanel.repaint();
-
-        scrollToBottom();
-    }
-
-    public void scrollToBottom() {
-        SwingUtilities.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                JScrollBar bar = scroll.getVerticalScrollBar();
-                bar.setValue(bar.getMaximum());
-            }
+    void scrollToBottom() {
+        SwingUtilities.invokeLater(() -> {
+            JScrollBar bar = scroll.getVerticalScrollBar();
+            bar.setValue(bar.getMaximum());
         });
     }
 
-    public void initInputField() {
+    void initInputField() {
         inputField.textArea.setText("");
         inputField.textLengthLabel.setText("0");
     }
@@ -103,9 +97,8 @@ public class ChatField extends Panel {
             Button btn = new Button(150, 35, "전송");
             btn.setCheckEmptyTextComponent(new JTextComponent[] {textArea});
             btn.setUseCheckIcon(true);
-            btn.setActionListener(e -> {
-                sendMessage(textArea.getText());
-                initInputField();
+            btn.setClickEvent(e -> {
+                sendMessage();
             });
 
             JPanel panel = new JPanel(new BorderLayout());
@@ -118,5 +111,25 @@ public class ChatField extends Panel {
             add(panel, BorderLayout.NORTH);
             add(scroll);
         }
+
+        private void sendMessage() {
+            String text = textArea.getText();
+
+            addMessage(text, MessageType.ME);
+
+            Map<String, Object> paramMap = new HashMap<>();
+            paramMap.put("message", text);
+
+            if(observer != null) {
+                observer.execute(paramMap);
+            }
+
+            initInputField();
+            scrollToBottom();
+        }
+    }
+
+    void setObserver(EventObserver observer) {
+        this.observer = observer;
     }
 }

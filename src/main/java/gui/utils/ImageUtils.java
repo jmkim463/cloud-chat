@@ -8,6 +8,8 @@ import java.awt.image.WritableRaster;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
 
 public class ImageUtils {
 
@@ -87,5 +89,13 @@ public class ImageUtils {
 
         ByteArrayOutputStream stream = new ByteArrayOutputStream();
         return null;
+    }
+
+    public static ImageIcon getURLImageIcon(String url) {
+        try {
+            return new ImageIcon(new URL(url));
+        } catch (MalformedURLException e) {
+            return null;
+        }
     }
 }

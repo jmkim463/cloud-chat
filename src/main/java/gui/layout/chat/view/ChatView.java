@@ -1,10 +1,12 @@
-package gui.layout.chatting.view;
+package gui.layout.chat.view;
 
+import gui.components.EventObserver;
 import gui.components.Panel;
 import gui.mvc.Controller;
 import gui.mvc.View;
 import gui.layout.MainFrame;
 import gui.layout.login.LoginController;
+import gui.utils.MessageType;
 import module.dto.ChatRoomDTO;
 
 import java.awt.*;
@@ -19,16 +21,25 @@ public class ChatView implements View {
     }
 
     private ChatRoomList chatRoomList = new ChatRoomList();
+    private ChatField chatField = new ChatField();
 
     private void init() {
         Panel panel = new Panel(new BorderLayout());
         panel.add(chatRoomList, BorderLayout.WEST);
-        panel.add(new ChatField());
+        panel.add(chatField);
 
         frame.changeScreenWithSideBar(panel);
     }
 
-    public void setAllChatRoomList(List<ChatRoomDTO> list) {
+    public void setSendMessageListener(EventObserver observer) {
+        chatField.setObserver(observer);
+    }
+
+    public void receiveMessage(String text) {
+        chatField.addMessage(text, MessageType.OTHER);
+    }
+
+    public void setChatRoomList(List<ChatRoomDTO> list) {
         chatRoomList.setChatRoomList(list);
     }
 

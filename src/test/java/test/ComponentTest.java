@@ -1,11 +1,11 @@
 package test;
 
 import gui.layout.SideBar;
-import gui.layout.chatting.view.ChatBubble;
+import gui.layout.chat.view.ChatBubble;
 import gui.components.Frame;
 import gui.components.Scroll;
-import gui.layout.chatting.view.ChatField;
-import gui.layout.chatting.view.ChatRoomList;
+import gui.layout.chat.view.ChatField;
+import gui.layout.chat.view.ChatRoomList;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 import gui.utils.ImageUtils;
@@ -15,10 +15,8 @@ import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.awt.image.ImageObserver;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Random;
 
@@ -100,7 +98,7 @@ public class ComponentTest {
         for(int i = 0; i < 20; i++) {
             Random rnd = new Random();
 
-            chatField.addMessage("히히히 안뇽안뇽", rnd.nextInt(2) == 0 ? MessageType.Me : MessageType.Other);
+        //    chatField.addMessage("히히히 안뇽안뇽", rnd.nextInt(2) == 0 ? MessageType.ME : MessageType.OTHER);
         }
 
         JPanel panel = new JPanel(new BorderLayout());
@@ -140,7 +138,7 @@ public class ComponentTest {
         for(int i = 0; i < 10; i++) {
             Random rnd = new Random();
 
-            JPanel p = new ChatBubble("히히히 안뇽안뇽", rnd.nextInt(2) == 0 ? MessageType.Me : MessageType.Other);
+            JPanel p = new ChatBubble("히히히 안뇽안뇽", rnd.nextInt(2) == 0 ? MessageType.ME : MessageType.OTHER);
             panel1.add(p);
         }
 

@@ -2,14 +2,17 @@ package gui.layout.login;
 
 import gui.alert.Alert;
 import gui.alert.AlertType;
+import gui.components.EventObserver;
 import gui.layout.account.AccountController;
-import gui.layout.chatting.ChatController;
+import gui.layout.chat.ChatController;
 import gui.layout.login.view.LoginView;
 import gui.mvc.Controller;
 import gui.mvc.Model;
 import gui.mvc.View;
-import module.session.UserSession;
+import module.session.Session;
 import module.dto.UserDTO;
+
+import java.util.Map;
 
 public class LoginController implements Controller {
 
@@ -21,32 +24,9 @@ public class LoginController implements Controller {
     }
 
     private void init() {
-        view.setLoginLogic(this::login);
-        view.setAccountLogic(this::account);
-    }
 
-    public void login() {
-        model.setId(view.getID());
-        model.setPassword(view.getPassword());
+        view.setClickLoginListener(new ClickLoginListener());
 
-        UserDTO userDTO = model.login();
-
-        if(userDTO == null) {
-            Alert.createAlert(AlertType.ERROR, "로그인 실패", "존재하지 않는 아이디 또는 잘못된 비밀번호 입니다.");
-            return;
-        }
-
-        UserSession.getInstance().setUserSession(userDTO);
-
-        view.close();
-
-        Controller controller = new ChatController();
-        controller.getView().open();
-    }
-
-    public void account() {
-        Controller controller = new AccountController();
-        controller.getView().open();
     }
 
     @Override
@@ -58,4 +38,29 @@ public class LoginController implements Controller {
     public View getView() {
         return view;
     }
+
+    class ClickLoginListener extends EventObserver {
+
+        @Override
+        public void execute(Map<String, Object> paramMap) {
+            String id = (String) paramMap.get("id");
+            String password = (String) paramMap.get("password");
+
+            UserDTO userDTO = model.login(id, password);
+
+            if(userDTO == null) {
+                Alert.createAlert(AlertType.ERROR, "로그인 실패", "존재하지 않는 아이디 또는 잘못된 비밀번호 입니다.");
+                return;
+            }
+
+            Session.getInstance().addAttribute("userDTO", userDTO);
+
+            view.close();
+
+            Controller controller = new ChatController();
+            controller.getView().open();
+        }
+
+    }
+
 }

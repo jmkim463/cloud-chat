@@ -2,12 +2,13 @@ package gui.components;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 public class Panel extends JPanel {
 
-    private Logic click;
+    private ActionListener click;
 
     public Panel() {
 
@@ -51,7 +52,7 @@ public class Panel extends JPanel {
         return panel;
     }
 
-    public void setClick(Logic click) {
+    public void setClick(ActionListener actionListener) {
         if(getMouseListeners().length == 0) {
             addMouseListener(new MouseListener());
         }
@@ -63,7 +64,7 @@ public class Panel extends JPanel {
         @Override
         public void mouseClicked(MouseEvent e) {
             if(click != null) {
-                click.action();
+                click.actionPerformed(null);
             }
         }
     }

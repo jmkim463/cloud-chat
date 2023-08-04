@@ -1,10 +1,11 @@
-package gui.layout.chatting.view;
+package gui.layout.chat.view;
 
 import gui.components.Scroll;
 import gui.components.Panel;
 import gui.utils.Colors;
 import gui.utils.ImageUtils;
-import module.session.UserSession;
+import module.dto.UserDTO;
+import module.session.Session;
 import module.dto.ChatRoomDTO;
 
 import javax.swing.*;
@@ -61,11 +62,13 @@ public class ChatRoomList extends Panel {
             setLayout(new BorderLayout(30, 0));
             setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, Colors.getBorderLineColor()));
 
-            UserSession session = UserSession.getInstance();
+            Session session = Session.getInstance();
+
+            UserDTO userDTO = (UserDTO) Session.getInstance().getAttribute("userDTO");
 
             add(cover(
-                    new JLabel(ImageUtils.changeToCircleImage(80, session.getImage())),
-                    new JLabel(session.getName())), BorderLayout.WEST);
+                    new JLabel(ImageUtils.changeToCircleImage(80, ImageUtils.getURLImageIcon(userDTO.getImageURL()))),
+                    new JLabel(userDTO.getName())), BorderLayout.WEST);
         }
     }
 

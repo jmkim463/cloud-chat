@@ -23,14 +23,11 @@ public class UserImage extends Panel {
        setLayout(new FlowLayout(FlowLayout.LEFT));
 
        userImageIconLabel = new LabelBuilder(DEFAULT_USER_ICON)
-               .setClickListener(this::changeImage)
-               .getLabel();
+               .setClickListener(e -> {
+                   changeImage();
+               }).getLabel();
 
        add(userImageIconLabel);
-    }
-
-    private void checkSameID() {
-        
     }
 
     private void changeImage() {

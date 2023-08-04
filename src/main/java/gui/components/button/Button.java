@@ -54,7 +54,7 @@ public class Button extends JLabel {
         isUseCheckIcon = useCheckIcon;
     }
 
-    public void setActionListener(ActionListener actionListener) {
+    public void setClickEvent(ActionListener actionListener) {
         this.actionListener = actionListener;
     }
 

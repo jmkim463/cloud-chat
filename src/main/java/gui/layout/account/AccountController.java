@@ -26,14 +26,6 @@ public class AccountController implements Controller {
 
     }
 
-    public void account() {
-
-    }
-
-    public void isHaveSameID() {
-
-    }
-
     @Override
     public Model getModel() {
         return model;

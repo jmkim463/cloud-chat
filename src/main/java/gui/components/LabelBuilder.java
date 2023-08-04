@@ -10,7 +10,7 @@ public class LabelBuilder {
 
     private JLabel label = new JLabel();
 
-    private Logic click;
+    private ActionListener click;
 
     public LabelBuilder(ImageIcon icon) {
         label.setIcon(icon);
@@ -47,12 +47,12 @@ public class LabelBuilder {
         return this;
     }
 
-    public LabelBuilder setClickListener(Logic logic) {
+    public LabelBuilder setClickListener(ActionListener listener) {
         if(label.getMouseListeners().length == 0) {
             label.addMouseListener(new MouseListener());
         }
 
-        this.click = logic;
+        this.click = listener;
         return this;
     }
 
@@ -64,7 +64,7 @@ public class LabelBuilder {
         @Override
         public void mouseClicked(MouseEvent e) {
             if(click != null) {
-                click.action();
+                click.actionPerformed(null);
             }
         }
     }

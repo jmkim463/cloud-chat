@@ -7,8 +7,7 @@ import okhttp3.WebSocketListener;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-@Slf4j
-public class ChatWebSocketListener extends WebSocketListener {
+public class SocketListener extends WebSocketListener {
 
     @Override
     public void onMessage(@NotNull WebSocket webSocket, @NotNull String text) {
@@ -32,6 +31,6 @@ public class ChatWebSocketListener extends WebSocketListener {
 
     @Override
     public void onFailure(@NotNull WebSocket webSocket, @NotNull Throwable t, @Nullable Response response) {
-        super.onFailure(webSocket, t, response);
+        System.out.println(t.getMessage());
     }
 }

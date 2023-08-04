@@ -1,4 +1,4 @@
-package gui.layout.chatting.view;
+package gui.layout.chat.view;
 
 import gui.components.Font;
 import gui.components.Panel;
@@ -54,11 +54,11 @@ public class ChatBubble extends Panel {
 
         String align = null;
 
-        if(messageType == MessageType.Me) {
+        if(messageType == MessageType.ME) {
             panel.setBackground(ME_BACKGROUND);
             align = BorderLayout.EAST;
             setBorder(BorderFactory.createEmptyBorder(5, 0, 5, 10));
-        } else if (messageType == MessageType.Other) {
+        } else if (messageType == MessageType.OTHER) {
             panel.setBackground(OTHER_BACKGROUND);
             align = BorderLayout.WEST;
             setBorder(BorderFactory.createEmptyBorder(5, 10, 5, 0));

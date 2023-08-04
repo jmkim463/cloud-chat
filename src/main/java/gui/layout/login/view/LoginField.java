@@ -3,18 +3,22 @@ package gui.layout.login.view;
 import gui.components.*;
 import gui.components.button.Button;
 import gui.components.Panel;
+import gui.layout.account.AccountController;
+import gui.mvc.Controller;
 
 import javax.swing.*;
 import javax.swing.text.JTextComponent;
 import java.awt.*;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Objects;
 
 public class LoginField extends Panel {
 
     private JTextField id = new JTextField();
     private JTextField password = new JPasswordField();
 
-    private Logic login;
-    private Logic account;
+    private EventObserver observer;
 
     public LoginField() {
         init();
@@ -37,16 +41,20 @@ public class LoginField extends Panel {
 
         Button btn = new Button(200, 35, "Log in");
         btn.setCheckEmptyTextComponent(new JTextComponent[]{id, password});
-        btn.setActionListener(e -> {
-            if(login != null) {
-                login.action();
-            }
+        btn.setClickEvent(e -> {
+            Map<String, Object> paramMap = new HashMap<>();
+            paramMap.put("id", id.getText());
+            paramMap.put("password", password.getText());
+
+            observer.execute(paramMap);
         });
 
         JLabel signup = new LabelBuilder("Sign Up")
                 .setColor(new Color(71, 126, 251))
-                .setClickListener(this::getAccount)
-                .getLabel();
+                .setClickListener(e -> {
+                    Controller controller = new AccountController();
+                    controller.getView().open();
+                }).getLabel();
 
         JPanel panel = new JPanel();
         panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
@@ -63,23 +71,7 @@ public class LoginField extends Panel {
         add(panel);
     }
 
-    private void getAccount() {
-        account.action();
-    }
-
-    public String getID() {
-        return id.getText();
-    }
-
-    public String getPassword() {
-        return password.getText();
-    }
-
-    public void setLoginLogic(Logic logic) {
-        this.login = logic;
-    }
-
-    public void setAccountLogic(Logic logic) {
-        this.account = logic;
+    void setObserver(EventObserver observer) {
+        this.observer = observer;
     }
 }
