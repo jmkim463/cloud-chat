@@ -3,6 +3,7 @@ package gui.layout;
 import gui.Main;
 import gui.components.Frame;
 import gui.layout.login.LoginController;
+import module.SocketManager;
 
 import javax.swing.*;
 import java.awt.*;
@@ -32,6 +33,9 @@ public class MainFrame extends Frame {
     @Override
     public void dispose() {
         super.dispose();
+
+        SocketManager.getInstance().shutDown();
+
         instance = null;
     }
 

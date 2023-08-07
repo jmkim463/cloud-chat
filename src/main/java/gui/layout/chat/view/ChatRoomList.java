@@ -5,7 +5,7 @@ import gui.components.Panel;
 import gui.utils.Colors;
 import gui.utils.ImageUtils;
 import module.dto.UserDTO;
-import module.session.Session;
+import module.Storage;
 import module.dto.ChatRoomDTO;
 
 import javax.swing.*;
@@ -62,9 +62,9 @@ public class ChatRoomList extends Panel {
             setLayout(new BorderLayout(30, 0));
             setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, Colors.getBorderLineColor()));
 
-            Session session = Session.getInstance();
+            Storage storage = Storage.getInstance();
 
-            UserDTO userDTO = (UserDTO) Session.getInstance().getAttribute("userDTO");
+            UserDTO userDTO = (UserDTO) Storage.getInstance().getAttribute("userDTO");
 
             add(cover(
                     new JLabel(ImageUtils.changeToCircleImage(80, ImageUtils.getURLImageIcon(userDTO.getImageURL()))),

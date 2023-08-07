@@ -47,8 +47,6 @@ public class ChatRoom extends Panel {
         });
     }
 
-
-
     public void setSelected(boolean selected) {
         isSelected = selected;
         setBorder(BorderFactory.createMatteBorder(0, 3, 0, 0,

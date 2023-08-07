@@ -1,21 +1,19 @@
-package module.session;
+package module;
 
-import gui.utils.ImageUtils;
-import module.dto.UserDTO;
-
-import javax.swing.*;
-import java.net.URL;
 import java.util.HashMap;
-import java.util.Objects;
 
-public class Session {
+public class Storage {
 
-    private static Session instance = new Session();
+    private static Storage instance = new Storage();
 
     private HashMap<String, Object> map = new HashMap<>();
 
-    public static Session getInstance() {
+    public static Storage getInstance() {
         return instance;
+    }
+
+    private Storage() {
+
     }
 
     public void addAttribute(String key, Object obj) {

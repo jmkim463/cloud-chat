@@ -8,8 +8,6 @@ import lombok.Data;
 public class ChatRoomDTO {
 
     private String no;
-
-    private String name;
-
     private String createdAt;
+
 }

@@ -55,6 +55,9 @@ public class ChatField extends Panel {
         SwingUtilities.invokeLater(() -> {
             JScrollBar bar = scroll.getVerticalScrollBar();
             bar.setValue(bar.getMaximum());
+
+            revalidate();
+            repaint();
         });
     }
 

@@ -1,4 +1,4 @@
-package module.retrofit;
+package module;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;

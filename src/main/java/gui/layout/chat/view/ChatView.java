@@ -37,6 +37,7 @@ public class ChatView implements View {
 
     public void receiveMessage(String text) {
         chatField.addMessage(text, MessageType.OTHER);
+        chatField.scrollToBottom();
     }
 
     public void setChatRoomList(List<ChatRoomDTO> list) {

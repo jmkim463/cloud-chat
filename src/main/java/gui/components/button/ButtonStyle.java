@@ -5,7 +5,7 @@ import lombok.Setter;
 
 import java.awt.*;
 
-public enum   ButtonStyle {
+public enum ButtonStyle {
 
     Primary(
         new Color(0,   121, 255),
@@ -14,7 +14,7 @@ public enum   ButtonStyle {
     ),
     Secondary(
         new Color(157, 178, 191),
-        new Color(82, 109, 130),
+        new Color(82,  109, 130),
         new Color(255, 255, 255)
     ),
     Success(

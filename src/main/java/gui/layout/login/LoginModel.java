@@ -1,9 +1,12 @@
 package gui.layout.login;
 
 import gui.mvc.Model;
-import module.retrofit.RetrofitUtils;
+import module.RetrofitUtils;
 import module.dto.UserDTO;
 import module.service.UserService;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class LoginModel implements Model {
 

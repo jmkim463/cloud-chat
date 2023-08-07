@@ -3,16 +3,16 @@ package gui.layout.login;
 import gui.alert.Alert;
 import gui.alert.AlertType;
 import gui.components.EventObserver;
-import gui.layout.account.AccountController;
 import gui.layout.chat.ChatController;
 import gui.layout.login.view.LoginView;
 import gui.mvc.Controller;
 import gui.mvc.Model;
 import gui.mvc.View;
-import module.session.Session;
+import module.Storage;
 import module.dto.UserDTO;
 
 import java.util.Map;
+import java.util.Random;
 
 public class LoginController implements Controller {
 
@@ -53,7 +53,8 @@ public class LoginController implements Controller {
                 return;
             }
 
-            Session.getInstance().addAttribute("userDTO", userDTO);
+            userDTO.setNo("USER-" + new Random().nextInt());
+            Storage.getInstance().addAttribute("userDTO", userDTO);
 
             view.close();
 
