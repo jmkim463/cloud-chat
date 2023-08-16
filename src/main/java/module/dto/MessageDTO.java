@@ -8,7 +8,7 @@ import lombok.Data;
 public class MessageDTO {
 
     private String no;
-    private String roomNo;
+    private String chatRoomNo;
     private String senderUserNo;
     private String content;
     private String sendAt;

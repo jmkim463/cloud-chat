@@ -12,12 +12,6 @@ public class AccountController implements Controller {
     private AccountModel model = new AccountModel();
     private AccountView view = new AccountView();
 
-    public static void main(String[] args) {
-        new Frame();
-
-        new AccountController().getView().open();
-    }
-
     public AccountController() {
         init();
     }
@@ -25,6 +19,11 @@ public class AccountController implements Controller {
     private void init() {
 
     }
+
+    boolean test() {
+
+    }
+
 
     @Override
     public Model getModel() {

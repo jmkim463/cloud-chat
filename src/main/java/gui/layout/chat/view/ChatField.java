@@ -6,7 +6,11 @@ import gui.components.LabelBuilder;
 import gui.components.Panel;
 import gui.components.Scroll;
 import gui.utils.Colors;
+import gui.utils.ImageUtils;
 import gui.utils.MessageType;
+import module.Storage;
+import module.dto.MessageDTO;
+import module.dto.UserDTO;
 
 import javax.swing.*;
 import javax.swing.border.LineBorder;
@@ -14,9 +18,12 @@ import javax.swing.text.JTextComponent;
 import java.awt.*;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
+
+import static module.Storage.getInstance;
 
 public class ChatField extends Panel {
 
@@ -46,8 +53,23 @@ public class ChatField extends Panel {
         add(inputField, BorderLayout.SOUTH);
     }
 
-    void addMessage(String text, MessageType messageType) {
+    void addMessage(MessageDTO messageDTO) {
+        MessageType type;
+
+        UserDTO me = (UserDTO) Storage.getInstance().getAttribute("userDTO");
+
+        if(messageDTO.getNo().equals(me.getNo())) {
+            type = MessageType.ME;
+        } else {
+            type = MessageType.OTHER;
+        }
+
         ChatBubble chat = new ChatBubble(text, messageType);
+
+        if(messageType == MessageType.OTHER) {
+
+        }
+
         messagePanel.add(chat);
     }
 
@@ -119,6 +141,9 @@ public class ChatField extends Panel {
             String text = textArea.getText();
 
             addMessage(text, MessageType.ME);
+
+            MessageDTO dto = MessageDTO.builder()
+                    .sendAt(new Date())
 
             Map<String, Object> paramMap = new HashMap<>();
             paramMap.put("message", text);

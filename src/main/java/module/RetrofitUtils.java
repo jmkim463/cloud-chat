@@ -3,6 +3,7 @@ package module;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import retrofit2.Call;
+import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
@@ -26,6 +27,15 @@ public class RetrofitUtils {
     public static <T> T createService(Class<T> serviceClass) {
         T service = createRetrofit().create(serviceClass);
         return service;
+    }
+
+    public static <T> Response<T> execute(Call<T> call) {
+        try {
+            return call.execute();
+        } catch (IOException e) {
+            //서버 오류 ~~~~~~~
+            return null;
+        }
     }
 
     public static <T> T getCallBody(Call<T> call) {

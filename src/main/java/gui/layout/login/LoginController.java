@@ -8,16 +8,27 @@ import gui.layout.login.view.LoginView;
 import gui.mvc.Controller;
 import gui.mvc.Model;
 import gui.mvc.View;
+import module.RetrofitUtils;
 import module.Storage;
 import module.dto.UserDTO;
+import module.service.UserService;
+import retrofit2.Call;
+import retrofit2.Response;
 
+import java.net.http.HttpRequest;
 import java.util.Map;
 import java.util.Random;
 
 public class LoginController implements Controller {
 
+    private static UserService service;
+
     private LoginView view = new LoginView();
     private LoginModel model = new LoginModel();
+
+    static {
+        service = RetrofitUtils.createService(UserService.class);
+    }
 
     public LoginController() {
         init();
@@ -26,6 +37,16 @@ public class LoginController implements Controller {
     private void init() {
 
         view.setClickLoginListener(new ClickLoginListener());
+
+    }
+
+    static Map<String, Object> login(String id, String password) {
+        Response<UserDTO> response = RetrofitUtils.execute(service.login(id, password));
+
+        if(response.code() != 200) {
+            return null;   
+        }
+
 
     }
 
@@ -46,15 +67,19 @@ public class LoginController implements Controller {
             String id = (String) paramMap.get("id");
             String password = (String) paramMap.get("password");
 
-            UserDTO userDTO = model.login(id, password);
+            if(id.isEmpty() || password.isEmpty()) {
+                Alert.createAlert(AlertType.ERROR, "로그인 실패", "아아디, 비밀번호를 입력해주세요.");
+                return;
+            }
+
+
 
             if(userDTO == null) {
                 Alert.createAlert(AlertType.ERROR, "로그인 실패", "존재하지 않는 아이디 또는 잘못된 비밀번호 입니다.");
                 return;
             }
 
-            userDTO.setNo("USER-" + new Random().nextInt());
-            Storage.getInstance().addAttribute("userDTO", userDTO);
+            Storage.getInstance().addAttribute("loginUserDTO", userDTO);
 
             view.close();
 

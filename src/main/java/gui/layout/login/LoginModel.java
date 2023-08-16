@@ -11,9 +11,7 @@ import retrofit2.Response;
 public class LoginModel implements Model {
 
     public UserDTO login(String id, String password) {
-        UserService service = RetrofitUtils.createService(UserService.class);
 
-        UserDTO userDTO = RetrofitUtils.getCallBody(service.login(id, password));
 
         return userDTO;
     }

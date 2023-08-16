@@ -18,8 +18,6 @@ public class LoginField extends Panel {
     private JTextField id = new JTextField();
     private JTextField password = new JPasswordField();
 
-    private EventObserver observer;
-
     public LoginField() {
         init();
     }
@@ -42,11 +40,9 @@ public class LoginField extends Panel {
         Button btn = new Button(200, 35, "Log in");
         btn.setCheckEmptyTextComponent(new JTextComponent[]{id, password});
         btn.setClickEvent(e -> {
-            Map<String, Object> paramMap = new HashMap<>();
-            paramMap.put("id", id.getText());
-            paramMap.put("password", password.getText());
 
-            observer.execute(paramMap);
+
+
         });
 
         JLabel signup = new LabelBuilder("Sign Up")
@@ -71,7 +67,4 @@ public class LoginField extends Panel {
         add(panel);
     }
 
-    void setObserver(EventObserver observer) {
-        this.observer = observer;
-    }
 }

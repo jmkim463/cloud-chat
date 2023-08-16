@@ -25,9 +25,9 @@ public class LoginSideBar extends Panel {
         grid.setOpaque(false);
         grid.setBorder(BorderFactory.createEmptyBorder(50, 0, 0 ,0));
 
-        grid.add(new LabelBuilder("Lorem ipsum dolor sit amet, consectetur adipiscing elit,")
+        grid.add(new LabelBuilder("Lorem ipsum dolor sit amet, consectetu elit,")
                 .setFont(1, 15).setColor(Color.white).setHorizontalCenter().getLabel());
-        grid.add(new LabelBuilder("sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.")
+        grid.add(new LabelBuilder("sed do eiusmod tempor incididunt ut labore et.")
                 .setFont(1, 15).setColor(Color.white).setHorizontalCenter().getLabel());
 
         Panel panel = new Panel(new BorderLayout());

@@ -1,5 +1,7 @@
 package gui.layout.account.view;
 
+import gui.alert.Alert;
+import gui.alert.AlertType;
 import gui.components.ComboBox;
 import gui.components.Font;
 import gui.components.LabelBuilder;
@@ -12,6 +14,8 @@ import javax.swing.*;
 import javax.swing.plaf.basic.BasicArrowButton;
 import javax.swing.plaf.basic.BasicComboBoxUI;
 import java.awt.*;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 public class AccountField extends Panel {
 
@@ -19,6 +23,8 @@ public class AccountField extends Panel {
     private JTextField password = new JPasswordField();
     private JTextField passwordCheck = new JPasswordField();
     private JTextField name = new JTextField();
+
+    private boolean isCheckHaveSameID = false;
 
     public AccountField() {
         init();
@@ -28,6 +34,23 @@ public class AccountField extends Panel {
 
         Button idChecKButton = new Button(80,25,"중복확인").setFont(12);
         idChecKButton.setCheckEmptyTextComponent(id);
+        idChecKButton.setClickEvent(e -> {
+            String input = id.getText();
+
+            if(input.isEmpty()) {
+                Alert.createAlert(AlertType.ERROR, "회원가입 오류", "아이디를 입력해주세요.");
+                return;
+            }
+
+            boolean
+        });
+
+        id.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyTyped(KeyEvent e) {
+                isCheckHaveSameID = false;
+            }
+        });
 
         Panel p = new Panel(new BorderLayout(0, 15));
         p.add(id);

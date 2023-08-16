@@ -3,6 +3,9 @@ package gui.layout.chat.view;
 import gui.components.Font;
 import gui.components.Panel;
 import gui.utils.MessageType;
+import module.Storage;
+import module.dto.MessageDTO;
+import module.dto.UserDTO;
 
 import javax.swing.*;
 import java.awt.*;
@@ -16,10 +19,10 @@ public class ChatBubble extends Panel {
     private final static Color ME_BACKGROUND = new Color(208, 227, 237);
     private final static Color OTHER_BACKGROUND = new Color(239, 239, 239);
 
-    public ChatBubble(String text, MessageType messageType) {
+    public ChatBubble(MessageDTO message) {
         setLayout(new BorderLayout());
 
-        JTextArea textArea = new JTextArea(text);
+        JTextArea textArea = new JTextArea(message.getContent());
         textArea.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
         textArea.setFont(new Font());
         textArea.setOpaque(false);
@@ -54,14 +57,20 @@ public class ChatBubble extends Panel {
 
         String align = null;
 
-        if(messageType == MessageType.ME) {
+        UserDTO meDTO = (UserDTO) Storage.getInstance().getAttribute("userDTO");
+
+        MessageType type = meDTO.equals(message.getSenderUserNo()) ? MessageType.ME : MessageType.OTHER;
+
+        if(type == MessageType.ME) {
             panel.setBackground(ME_BACKGROUND);
             align = BorderLayout.EAST;
             setBorder(BorderFactory.createEmptyBorder(5, 0, 5, 10));
-        } else if (messageType == MessageType.OTHER) {
+        } else if (type == MessageType.OTHER) {
             panel.setBackground(OTHER_BACKGROUND);
             align = BorderLayout.WEST;
             setBorder(BorderFactory.createEmptyBorder(5, 10, 5, 0));
+
+
         }
 
         add(panel, align);

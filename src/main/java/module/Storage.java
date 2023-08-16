@@ -4,6 +4,12 @@ import java.util.HashMap;
 
 public class Storage {
 
+    /**
+     * key
+     * loginUserDTO : 현재 로그인 한 회원의 dto
+     *
+     */
+
     private static Storage instance = new Storage();
 
     private HashMap<String, Object> map = new HashMap<>();
