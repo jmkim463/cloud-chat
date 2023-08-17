@@ -12,9 +12,9 @@ public interface UserService {
             @Query("password") String password
     );
 
-    @GET("/api/user/check/{id}")
-    Call<Boolean> checkID(
-            @Path("id") String id
+    @GET("/api/user/check")
+    Call<Boolean> checkIsSaveSameID(
+            @Query("id") String id
     );
 
     @POST("/api/user/account")

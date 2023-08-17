@@ -6,6 +6,8 @@ import chat.gui.layout.account.view.UserImage;
 
 import java.awt.*;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 public class AccountView extends Panel {
 
@@ -24,10 +26,21 @@ public class AccountView extends Panel {
     private void init() {
         setLayout(new BorderLayout());
 
-        add(new UserImage(), BorderLayout.NORTH);
-        add(new AccountField());
+        add(image, BorderLayout.NORTH);
+        add(field);
+
+        field.getID().addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyTyped(KeyEvent e) {
+                setHaveSameIDCheck(false);
+            }
+        });
 
         cover();
+    }
+
+    public void addCancelButtonClickListener(ActionListener actionListener) {
+        field.getCancelButton().setClickEvent(actionListener);
     }
 
     public void addSameIDCheckClickListener(ActionListener actionListener) {
@@ -38,8 +51,31 @@ public class AccountView extends Panel {
         isHaveSameIDCheck = haveSameIDCheck;
     }
 
-    public String getID() {
-        return field.getID();
+    public boolean isHaveSameIDCheck() {
+        return isHaveSameIDCheck;
     }
 
+    public String getID() {
+        return field.getID().getText();
+    }
+
+    public String getPassword() {
+        return field.getPassword().getText();
+    }
+
+    public String getPasswordCheck() {
+        return field.getPasswordCheck().getText();
+    }
+
+    public String getName() {
+        return field.getNameField().getName();
+    }
+
+    public String getEmail() {
+        return field.getEmail().getText();
+    }
+
+    public String getDomain() {
+        return field.getDomain().getSelectedItem() + "";
+    }
 }

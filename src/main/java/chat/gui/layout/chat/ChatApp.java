@@ -27,6 +27,8 @@ public class ChatApp implements App {
     }
 
     private void init() {
+        view.addSendMessageListener(e -> presenter.clickMessageSendButton());
+
         SocketManager manager = SocketManager.getInstance();
         manager.startUp(new WebSocketListener() {
             @Override

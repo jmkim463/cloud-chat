@@ -1,11 +1,13 @@
 package chat.gui.layout.chat;
 
+import chat.gui.components.button.Button;
 import chat.gui.layout.chat.view.ChatField;
 import chat.gui.layout.chat.view.ChatRoomList;
 import chat.gui.components.Panel;
 import chat.module.dto.MessageDTO;
 
 import java.awt.*;
+import java.awt.event.ActionListener;
 
 public class ChatView extends Panel {
 
@@ -35,4 +37,7 @@ public class ChatView extends Panel {
         return chatField.getMessage();
     }
 
+    public void addSendMessageListener(ActionListener actionListener) {
+        chatField.getMessageSendButton().setClickEvent(actionListener);
+    }
 }

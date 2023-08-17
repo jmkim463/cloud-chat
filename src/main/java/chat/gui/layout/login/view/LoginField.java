@@ -9,7 +9,7 @@ import javax.swing.*;
 import javax.swing.text.JTextComponent;
 import java.awt.*;
 
-public class LoginField extends chat.gui.components.Panel {
+public class LoginField extends Panel {
 
     private final JTextField id;
     private final JTextField password;
@@ -19,7 +19,7 @@ public class LoginField extends chat.gui.components.Panel {
     public LoginField() {
         id = new JTextField();
         password = new JPasswordField();
-        loginButton = new chat.gui.components.button.Button(200, 35, "Log in");
+        loginButton = new Button(200, 35, "Log in");
 
         init();
     }
@@ -31,7 +31,7 @@ public class LoginField extends chat.gui.components.Panel {
         password.setPreferredSize(new Dimension(300, 28));
         password.setBorder(id.getBorder());
 
-        chat.gui.components.Panel grid = new Panel(new GridLayout(0, 1));
+        Panel grid = new Panel(new GridLayout(0, 1));
         grid.add(new LabelBuilder("User ID").setFont(13).setColor(Color.lightGray).getLabel());
         grid.add(id);
         grid.add(new JPanel());

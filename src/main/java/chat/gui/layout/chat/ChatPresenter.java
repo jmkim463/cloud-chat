@@ -1,5 +1,7 @@
 package chat.gui.layout.chat;
 
+import chat.module.Storage;
+import chat.module.dto.UserDTO;
 import com.google.gson.Gson;
 import chat.module.SocketManager;
 import chat.module.dto.MessageDTO;
@@ -34,6 +36,13 @@ public class ChatPresenter {
 
         SocketManager manager = SocketManager.getInstance();
         manager.sendMessage("MESSAGE", paramMap);
+
+        MessageDTO messageDTO = MessageDTO.builder()
+                .senderUserDTO((UserDTO) Storage.getInstance().getData(Storage.LOGIN_USER))
+                .content(message)
+                .build();
+
+        view.addMessage(messageDTO);
     }
 
     public void receiveMessage(String text) {

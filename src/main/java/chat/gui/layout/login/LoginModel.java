@@ -7,9 +7,9 @@ import retrofit2.Response;
 
 public class LoginModel {
 
-    private static UserService service;
+    private final UserService service;
 
-    static {
+    public LoginModel() {
         service = RetrofitUtils.createService(UserService.class);
     }
 

@@ -135,12 +135,6 @@ public class ComponentTest {
         JPanel panel1 = new JPanel();
         panel1.setLayout(new BoxLayout(panel1, BoxLayout.Y_AXIS));
 
-        for(int i = 0; i < 10; i++) {
-            Random rnd = new Random();
-
-            JPanel p = new ChatBubble("히히히 안뇽안뇽", rnd.nextInt(2) == 0 ? MessageType.ME : MessageType.OTHER);
-            panel1.add(p);
-        }
 
         JTextField text = new JFormattedTextField();
         text.setPreferredSize(new Dimension(500, 100));

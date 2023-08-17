@@ -24,6 +24,7 @@ public class AccountApp implements App {
 
     private void init() {
         view.addSameIDCheckClickListener(e -> presenter.clickIsHaveSameIDButton());
+        view.addCancelButtonClickListener(e -> close());
     }
 
     @Override
@@ -31,7 +32,7 @@ public class AccountApp implements App {
         Container container = modal.getContentPane();
         container.removeAll();
 
-        container.add(view);
+        container.add(view.cover());
         modal.setVisible(true);
     }
 

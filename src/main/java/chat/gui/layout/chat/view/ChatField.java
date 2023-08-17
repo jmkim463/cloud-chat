@@ -48,6 +48,10 @@ public class ChatField extends Panel {
         add(inputField, BorderLayout.SOUTH);
     }
 
+    public Button getMessageSendButton() {
+        return messageSendButton;
+    }
+
     public void addMessage(MessageDTO messageDTO) {
         ChatBubble chat = new ChatBubble(messageDTO);
 
