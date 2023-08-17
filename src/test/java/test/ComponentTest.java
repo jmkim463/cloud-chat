@@ -1,15 +1,15 @@
 package test;
 
-import gui.layout.SideBar;
-import gui.layout.chat.view.ChatBubble;
-import gui.components.Frame;
-import gui.components.Scroll;
-import gui.layout.chat.view.ChatField;
-import gui.layout.chat.view.ChatRoomList;
+import chat.gui.layout.SideBar;
+import chat.gui.layout.chat.view.ChatBubble;
+import chat.gui.components.Frame;
+import chat.gui.components.Scroll;
+import chat.gui.layout.chat.view.ChatField;
+import chat.gui.layout.chat.view.ChatRoomList;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
-import gui.utils.ImageUtils;
-import gui.utils.MessageType;
+import chat.gui.utils.ImageUtils;
+import chat.gui.utils.MessageType;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
