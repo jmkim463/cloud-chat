@@ -43,8 +43,12 @@ public class AccountView extends Panel {
         field.getCancelButton().setClickEvent(actionListener);
     }
 
-    public void addSameIDCheckClickListener(ActionListener actionListener) {
+    public void addSameIDCheckButtonClickListener(ActionListener actionListener) {
         field.getSameIDCheckButton().setClickEvent(actionListener);
+    }
+
+    public void addAccountButtonClickListener(ActionListener actionListener) {
+        field.getAccountButton().setClickEvent(actionListener);
     }
 
     public void setHaveSameIDCheck(boolean haveSameIDCheck) {
@@ -67,8 +71,8 @@ public class AccountView extends Panel {
         return field.getPasswordCheck().getText();
     }
 
-    public String getName() {
-        return field.getNameField().getName();
+    public String getUsername() {
+        return field.getUsername().getText();
     }
 
     public String getEmail() {
@@ -78,4 +82,9 @@ public class AccountView extends Panel {
     public String getDomain() {
         return field.getDomain().getSelectedItem() + "";
     }
+
+    public String getImageFilePath() {
+        return image.getSelectedImagePath();
+    }
+
 }

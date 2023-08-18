@@ -33,7 +33,7 @@ public class FileSelector implements AutoCloseable {
         dialog.setVisible(true);
     }
 
-    public String getFileName() {
+    public String getFile() {
         return dialog.getFile();
     }
 
@@ -45,9 +45,6 @@ public class FileSelector implements AutoCloseable {
         return dialog.getDirectory() + dialog.getFile();
     }
 
-    public String getDirectory() {
-        return dialog.getDirectory();
-    }
 
     @Override
     public void close() throws Exception {

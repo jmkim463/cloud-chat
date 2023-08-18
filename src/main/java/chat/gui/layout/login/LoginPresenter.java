@@ -1,7 +1,7 @@
 package chat.gui.layout.login;
 
-import chat.gui.alert.Alert;
-import chat.gui.alert.AlertType;
+import chat.gui.components.alert.Alert;
+import chat.gui.components.alert.AlertType;
 import chat.gui.layout.chat.ChatApp;
 import chat.module.Storage;
 import chat.module.dto.UserDTO;

@@ -16,22 +16,23 @@ public class AccountField extends Panel {
     private final JTextField id;
     private final JTextField password;
     private final JTextField passwordCheck;
-    private final JTextField name;
+    private final JTextField username;
     private final JTextField email;
     private final ComboBox<String> domain;
 
     private final Button sameIDCheckButton;
     private final Button cancelButton;
-
+    private final Button accountButton;
 
     public AccountField() {
         id = new JTextField();
         password = new JPasswordField();
         passwordCheck = new JPasswordField();
-        name = new JTextField();
+        username = new JTextField();
         email = new JTextField();
         domain = new ComboBox<>();
 
+        accountButton = new Button(135, 35, "완료").setFont(13).setStyle(ButtonStyle.Success);
         sameIDCheckButton = new Button(80,25,"중복확인").setFont(12);
         cancelButton = new Button(135, 35,"취소").setFont(13).setStyle(ButtonStyle.Danger);
         init();
@@ -39,6 +40,7 @@ public class AccountField extends Panel {
 
     private void init() {
         sameIDCheckButton.setCheckEmptyTextComponent(id);
+        accountButton.setCheckEmptyTextComponent(id, password, passwordCheck, username, email);
 
         Panel p = new Panel(new BorderLayout(0, 15));
         p.add(id);
@@ -64,16 +66,13 @@ public class AccountField extends Panel {
         grid.add(new LabelBuilder("비밀번호 확인").setFont(13).getLabel());
         grid.add(passwordCheck);
         grid.add(new LabelBuilder("이름").setFont(13).getLabel());
-        grid.add(name);
+        grid.add(username);
         grid.add(new LabelBuilder("이메일").setFont(13).getLabel());
         grid.add(emailPanel);
 
-        Button loginButton = new Button(135, 35, "완료").setFont(13).setStyle(ButtonStyle.Success);
-        loginButton.setCheckEmptyTextComponent(id, password, passwordCheck, name, email);
-
         Panel panel = new Panel(new BorderLayout(0, 50));
         panel.add(grid);
-        panel.add(cover(FlowLayout.CENTER, 10, 5,  loginButton, cancelButton), BorderLayout.SOUTH);
+        panel.add(cover(FlowLayout.CENTER, 10, 5,  accountButton, cancelButton), BorderLayout.SOUTH);
         add(panel);
     }
 
@@ -93,8 +92,8 @@ public class AccountField extends Panel {
         return passwordCheck;
     }
 
-    public JTextField getNameField() {
-        return name;
+    public JTextField getUsername() {
+        return username;
     }
 
     public JTextField getEmail() {
@@ -107,5 +106,9 @@ public class AccountField extends Panel {
 
     public Button getSameIDCheckButton() {
         return sameIDCheckButton;
+    }
+
+    public Button getAccountButton() {
+        return accountButton;
     }
 }

@@ -7,6 +7,7 @@ import chat.gui.utils.ImageUtils;
 
 import javax.swing.*;
 import java.awt.*;
+import java.io.File;
 
 public class UserImage extends Panel {
 
@@ -15,6 +16,8 @@ public class UserImage extends Panel {
             ImageUtils.getDefaultUserImageIcon().getImage().getScaledInstance(SIZE, SIZE, Image.SCALE_SMOOTH));
 
     private JLabel userImageIconLabel;
+
+    private String selectedImagePath = null;
 
     public UserImage() {
         init();
@@ -34,7 +37,7 @@ public class UserImage extends Panel {
             selector.show();
 
             String path = selector.getPath();
-            String name = selector.getFileName();
+            String name = selector.getFile();
 
             if(path == null) {
                 return;
@@ -45,8 +48,12 @@ public class UserImage extends Panel {
             }
 
             userImageIconLabel.setIcon(ImageUtils.changeToCircleImage(SIZE, new ImageIcon(path)));
-            userImageIconLabel.setName(path);
+            selectedImagePath = path;
 
         } catch (Exception e) {}
+    }
+
+    public String getSelectedImagePath() {
+        return selectedImagePath;
     }
 }

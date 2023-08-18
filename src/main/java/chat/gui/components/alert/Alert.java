@@ -1,4 +1,4 @@
-package chat.gui.alert;
+package chat.gui.components.alert;
 
 import chat.gui.components.LabelBuilder;
 import chat.gui.components.Modal;

@@ -23,8 +23,9 @@ public class AccountApp implements App {
     }
 
     private void init() {
-        view.addSameIDCheckClickListener(e -> presenter.clickIsHaveSameIDButton());
+        view.addSameIDCheckButtonClickListener(e -> presenter.clickSameUsernameCheckButton());
         view.addCancelButtonClickListener(e -> close());
+        view.addAccountButtonClickListener(e -> presenter.clickAccountButton());
     }
 
     @Override

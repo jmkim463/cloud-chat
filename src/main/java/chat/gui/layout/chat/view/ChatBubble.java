@@ -58,7 +58,7 @@ public class ChatBubble extends Panel {
         UserDTO me = (UserDTO) Storage.getInstance().getData(Storage.LOGIN_USER);
         UserDTO sender = message.getSenderUserDTO();
 
-        if(me.getNo() == sender.getNo()) {
+        if(me.getId().equals(sender.getId())) {
             bubble.setBackground(ME_BACKGROUND);
             setBorder(BorderFactory.createEmptyBorder(5, 0, 5, 10));
 
