@@ -1,6 +1,7 @@
 package chat.gui.layout.chat.view;
 
-import chat.gui.utils.ImageUtils;
+import chat.gui.components.ImageBuilder;
+import chat.gui.components.LabelBuilder;
 import chat.gui.components.Scroll;
 import chat.gui.components.Panel;
 import chat.gui.utils.Colors;
@@ -42,7 +43,6 @@ public class ChatRoomList extends Panel {
 
         for(ChatRoomDTO item : list) {
             ChatRoom room = new ChatRoom(item);
-
             chatRoomList.add(room);
         }
 
@@ -62,9 +62,14 @@ public class ChatRoomList extends Panel {
 
             UserDTO userDTO = (UserDTO) Storage.getInstance().getData(Storage.LOGIN_USER);
 
-            add(cover(
-                    new JLabel(ImageUtils.changeToCircleImage(80, ImageUtils.getURLImageIcon(userDTO.getImageURL()))),
-                    new JLabel(userDTO.getName())), BorderLayout.WEST);
+            JLabel profile = new JLabel(
+                    new ImageBuilder(userDTO.getImageURL(), ImageBuilder.URL)
+                            .changeCircleImage(70).getImageIcon());
+            profile.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 10));
+
+            JPanel panel = cover(profile, new LabelBuilder(userDTO.getName()).getLabel());
+            panel.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 50));
+            add(panel, BorderLayout.WEST);
         }
     }
 

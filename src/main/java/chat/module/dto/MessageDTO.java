@@ -1,15 +1,17 @@
 package chat.module.dto;
 
-import lombok.Builder;
-import lombok.Data;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import lombok.*;
 
 @Data
 @Builder
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class MessageDTO {
 
-    private String no;
-    private String chatRoomNo;
-    private UserDTO senderUserDTO;
+    private Long no;
+    private Long chatroomNo;
+    private UserDTO senderDTO;
     private String content;
     private String sendAt;
 

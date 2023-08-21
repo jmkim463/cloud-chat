@@ -1,20 +1,24 @@
 package chat.module.dto;
 
 import chat.module.RetrofitUtils;
-import lombok.Builder;
-import lombok.Data;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import lombok.*;
 
-@Data
+@Getter
+@Setter
+@ToString
 @Builder
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class UserDTO {
 
-    private String no;
+    private Long no;
     private String name;
     private String id;
     private String password;
     private String email;
 
     public String getImageURL() {
-        return RetrofitUtils.getBaseUrl() + "/api/images/display?filename=" + getId() + ".jpg&type=user";
+        return RetrofitUtils.getBaseUrl() + "/api/image/display?filename=" + getId().hashCode() + ".jpg&type=user";
     }
+
 }

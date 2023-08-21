@@ -6,6 +6,7 @@ import com.google.gson.Gson;
 import chat.module.SocketManager;
 import chat.module.dto.MessageDTO;
 
+import java.awt.*;
 import java.util.HashMap;
 
 public class ChatPresenter {
@@ -29,18 +30,16 @@ public class ChatPresenter {
     }
 
     public void clickMessageSendButton() {
-        String message = view.getMessage();
+        String content = view.getMessage();
 
-        HashMap<String, Object> paramMap = new HashMap<>();
-        paramMap.put("message", message);
-
-        SocketManager manager = SocketManager.getInstance();
-        manager.sendMessage("MESSAGE", paramMap);
+        UserDTO userDTO = (UserDTO) Storage.getInstance().getData(Storage.LOGIN_USER);
 
         MessageDTO messageDTO = MessageDTO.builder()
-                .senderUserDTO((UserDTO) Storage.getInstance().getData(Storage.LOGIN_USER))
-                .content(message)
-                .build();
+                .senderDTO(userDTO)
+                .content(content).build();
+
+        SocketManager manager = SocketManager.getInstance();
+        manager.sendMessage("MESSAGE", messageDTO);
 
         view.addMessage(messageDTO);
     }

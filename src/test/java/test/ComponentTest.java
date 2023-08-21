@@ -1,15 +1,12 @@
 package test;
 
 import chat.gui.layout.SideBar;
-import chat.gui.layout.chat.view.ChatBubble;
 import chat.gui.components.Frame;
 import chat.gui.components.Scroll;
 import chat.gui.layout.chat.view.ChatField;
 import chat.gui.layout.chat.view.ChatRoomList;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
-import chat.gui.utils.ImageUtils;
-import chat.gui.utils.MessageType;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -117,12 +114,11 @@ public class ComponentTest {
     void circleImageTest() {
          Frame frame = new Frame();
 
-         JPanel panel = new JPanel();
-         panel.add(new JLabel(ImageUtils.changeToCircleImage(100, new ImageIcon(ImageUtils.getURL("hamburger.jpg")))));
-         panel.add(new JLabel(new ImageIcon(new ImageIcon(ImageUtils.getURL("hamburger.jpg")).getImage().getScaledInstance(100, 100, Image.SCALE_SMOOTH))));
+         /*JPanel panel = new JPanel();
+         panel.add(new JLabel(Icons.changeToCircleImage(100, new ImageIcon(Icons.getURL("hamburger.jpg")))));
+         panel.add(new JLabel(new ImageIcon(new ImageIcon(Icons.getURL("hamburger.jpg")).getImage().getScaledInstance(100, 100, Image.SCALE_SMOOTH))));
          panel.setBackground(Color.red);
-         frame.add(panel);
-
+         frame.add(panel);*/
          frame.setVisible(true);
     }
 
@@ -161,4 +157,6 @@ public class ComponentTest {
         frame.add(new Scroll(panel));
         frame.setVisible(true);
     }
+
+
 }

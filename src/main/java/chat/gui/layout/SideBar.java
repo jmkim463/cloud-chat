@@ -1,6 +1,6 @@
 package chat.gui.layout;
 
-import chat.gui.utils.ImageUtils;
+import chat.gui.components.ImageBuilder;
 
 import javax.swing.*;
 import javax.swing.border.LineBorder;
@@ -45,10 +45,11 @@ public class SideBar extends JPanel {
         }
 
         private void init() {
-            ImageIcon icon = new ImageIcon(ImageUtils.changePNGImageColor("icon/" + name + ".png", Color.white)
-                    .getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH));
+            ImageIcon icon = new ImageBuilder(name, ImageBuilder.ICON).setSize(30, 30).changeImageColor(Color.WHITE).getImageIcon();
+
 
             setToolTipText(name);
+            setOpaque(false);
             setIcon(icon);
         }
 

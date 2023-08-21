@@ -31,6 +31,10 @@ public class ChatView extends Panel {
     public void addMessage(MessageDTO messageDTO) {
         chatField.addMessage(messageDTO);
         chatField.scrollToBottom();
+        chatField.initInputField();
+
+        chatField.revalidate();
+        chatField.repaint();
     }
 
     public String getMessage() {

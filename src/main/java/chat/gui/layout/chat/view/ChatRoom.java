@@ -1,6 +1,6 @@
 package chat.gui.layout.chat.view;
 
-import chat.gui.utils.ImageUtils;
+import chat.gui.components.ImageBuilder;
 import chat.gui.components.LabelBuilder;
 import chat.gui.components.Panel;
 import chat.module.dto.ChatRoomDTO;
@@ -31,7 +31,8 @@ public class ChatRoom extends Panel {
 
         Panel profileImagesPanel = new Panel(new GridLayout(2, 2));
 
-        profileImagesPanel.add(new JLabel(ImageUtils.changeToCircleImage(40, ImageUtils.getDefaultUserImageIcon())));
+        profileImagesPanel.add(
+                new JLabel(new ImageBuilder("default_user", ImageBuilder.ICON).setSize(40, 40).getImageIcon()));
 
         lastChatTimeLabel.setVerticalTextPosition(JLabel.BOTTOM);
         lastChatTimeLabel.setVerticalAlignment(JLabel.BOTTOM);

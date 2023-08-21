@@ -1,8 +1,8 @@
 package chat.gui.layout.chat.view;
 
 import chat.gui.components.Font;
+import chat.gui.components.ImageBuilder;
 import chat.gui.components.Panel;
-import chat.gui.utils.ImageUtils;
 import chat.module.Storage;
 import chat.module.dto.MessageDTO;
 import chat.module.dto.UserDTO;
@@ -55,10 +55,12 @@ public class ChatBubble extends Panel {
         };
         bubble.add(textArea);
 
-        UserDTO me = (UserDTO) Storage.getInstance().getData(Storage.LOGIN_USER);
-        UserDTO sender = message.getSenderUserDTO();
+        System.out.println(message);
 
-        if(me.getId().equals(sender.getId())) {
+        UserDTO user = (UserDTO) Storage.getInstance().getData(Storage.LOGIN_USER);
+        UserDTO sender = message.getSenderDTO();
+
+        if(user.getNo().equals(sender.getNo())) {
             bubble.setBackground(ME_BACKGROUND);
             setBorder(BorderFactory.createEmptyBorder(5, 0, 5, 10));
 
@@ -68,7 +70,9 @@ public class ChatBubble extends Panel {
             setBorder(BorderFactory.createEmptyBorder(5, 10, 5, 0));
 
             Panel panel = new Panel();
-            panel.add(new JLabel(ImageUtils.changeToCircleImage(50, ImageUtils.getURLImageIcon(sender.getImageURL()))));
+            panel.add(new JLabel(
+                    new ImageBuilder(sender.getImageURL(), ImageBuilder.URL)
+                            .changeCircleImage(50).getImageIcon()));
             panel.add(bubble);
 
             add(panel, BorderLayout.WEST);

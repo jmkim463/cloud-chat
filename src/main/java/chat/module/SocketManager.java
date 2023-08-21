@@ -1,5 +1,7 @@
 package chat.module;
 
+import chat.module.dto.MessageDTO;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.JsonObject;
 import chat.module.dto.UserDTO;
 import okhttp3.OkHttpClient;
@@ -54,21 +56,16 @@ public class SocketManager {
         sendMessage(type, null);
     }
 
-    public void sendMessage(String type, Map<String, Object> paramMap) {
+    public void sendMessage(String type, MessageDTO messageDTO) {
         JsonObject json = new JsonObject();
 
-        Storage storage = Storage.getInstance();
-        UserDTO userDTO = (UserDTO) storage.getData(Storage.LOGIN_USER);
+        Long no = ((UserDTO) Storage.getInstance().getData(Storage.LOGIN_USER)).getNo();
 
-        String userNo = userDTO.getNo();
-
-        json.addProperty("userNo", userNo);
         json.addProperty("type", type.toUpperCase());
+        json.addProperty("senderNo", no);
 
-        if(paramMap != null) {
-            for(String key : paramMap.keySet()) {
-                json.addProperty(key, paramMap.get(key).toString());
-            }
+        if(messageDTO != null) {
+            json.addProperty("messageDTO", JsonUtils.toString(messageDTO));
         }
 
         socket.send(json.toString());

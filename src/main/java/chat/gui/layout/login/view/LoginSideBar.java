@@ -1,8 +1,8 @@
 package chat.gui.layout.login.view;
 
+import chat.gui.components.ImageBuilder;
 import chat.gui.components.LabelBuilder;
 import chat.gui.components.Panel;
-import chat.gui.utils.ImageUtils;
 
 import javax.swing.*;
 import java.awt.*;
@@ -18,8 +18,8 @@ public class LoginSideBar extends Panel {
         setBorder(BorderFactory.createEmptyBorder(0, 20, 0, 20));
 
         JLabel image = new JLabel(
-                ImageUtils.setImageIconSize(400, 275,
-                        new ImageIcon(ImageUtils.getURL("login-image.png"))));
+                new ImageBuilder("login-image", ImageBuilder.RESOURCES)
+                        .setSize(400, 275).getImageIcon());
 
         Panel grid = new Panel(new GridLayout(0, 1, 0, 0));
         grid.setOpaque(false);

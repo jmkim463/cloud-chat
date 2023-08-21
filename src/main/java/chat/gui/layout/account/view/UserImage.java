@@ -1,19 +1,18 @@
 package chat.gui.layout.account.view;
 
 import chat.gui.components.FileSelector;
+import chat.gui.components.ImageBuilder;
 import chat.gui.components.LabelBuilder;
 import chat.gui.components.Panel;
-import chat.gui.utils.ImageUtils;
 
 import javax.swing.*;
 import java.awt.*;
-import java.io.File;
 
 public class UserImage extends Panel {
 
     private final static int SIZE = 100;
-    private final static ImageIcon DEFAULT_USER_ICON = new ImageIcon(
-            ImageUtils.getDefaultUserImageIcon().getImage().getScaledInstance(SIZE, SIZE, Image.SCALE_SMOOTH));
+    private final static ImageIcon DEFAULT_USER_ICON = new ImageBuilder("default_user", ImageBuilder.ICON)
+            .setSize(SIZE, SIZE).getImageIcon();
 
     private JLabel userImageIconLabel;
 
@@ -47,7 +46,8 @@ public class UserImage extends Panel {
                 return;
             }
 
-            userImageIconLabel.setIcon(ImageUtils.changeToCircleImage(SIZE, new ImageIcon(path)));
+            userImageIconLabel.setIcon(
+                    new ImageBuilder(path, ImageBuilder.FILE).changeCircleImage(SIZE).getImageIcon());
             selectedImagePath = path;
 
         } catch (Exception e) {}

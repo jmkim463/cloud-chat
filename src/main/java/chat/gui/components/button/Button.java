@@ -1,6 +1,6 @@
 package chat.gui.components.button;
 
-import chat.gui.utils.ImageUtils;
+import chat.gui.components.ImageBuilder;
 
 import javax.swing.*;
 import javax.swing.text.JTextComponent;
@@ -108,8 +108,12 @@ public class Button extends JLabel {
         g2.drawString(getText(), x - (isUseCheckIcon ? 5 : 0), y);
 
         if(isUseCheckIcon) {
-            g2.drawImage(ImageUtils.changePNGImageColor("icon/check.png", getForeground())
-                    .getImage().getScaledInstance(imageSize, imageSize, Image.SCALE_SMOOTH), w - imageSize - (h - imageSize), 3, null);
+            g2.drawImage(
+                    new ImageBuilder("check", ImageBuilder.ICON)
+                            .setSize(imageSize, imageSize)
+                            .changeImageColor(getForeground())
+                            .getImageIcon().getImage(),
+                    w - imageSize - (h - imageSize), 3, null);
         }
     }
 

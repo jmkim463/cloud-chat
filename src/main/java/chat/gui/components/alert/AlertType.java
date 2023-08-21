@@ -1,6 +1,6 @@
 package chat.gui.components.alert;
 
-import chat.gui.utils.ImageUtils;
+import chat.gui.components.ImageBuilder;
 
 import javax.swing.*;
 import java.awt.*;
@@ -26,7 +26,7 @@ public enum AlertType {
     }
 
     public static ImageIcon getImageIcon(String fileName, Color color) {
-        return new ImageIcon(ImageUtils.changePNGImageColor("icon/" + fileName + "_circle.png", color)
-                .getImage().getScaledInstance(60, 60, Image.SCALE_SMOOTH));
+        return new ImageBuilder(fileName + "_circle", ImageBuilder.ICON)
+                .setSize(60, 60).getImageIcon();
     }
 }
