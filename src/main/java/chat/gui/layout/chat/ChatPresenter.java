@@ -1,6 +1,7 @@
 package chat.gui.layout.chat;
 
 import chat.module.Storage;
+import chat.module.dto.ChatRoomDTO;
 import chat.module.dto.UserDTO;
 import com.google.gson.Gson;
 import chat.module.SocketManager;
@@ -8,6 +9,7 @@ import chat.module.dto.MessageDTO;
 
 import java.awt.*;
 import java.util.HashMap;
+import java.util.List;
 
 public class ChatPresenter {
 
@@ -27,6 +29,12 @@ public class ChatPresenter {
 
     private void init() {
 
+    }
+
+    public void refreshChatRoomList() {
+        List<ChatRoomDTO> list = model.getUserChatRoomList();
+
+        view.refreshChatRoomList(list);
     }
 
     public void clickMessageSendButton() {

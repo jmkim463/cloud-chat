@@ -51,6 +51,8 @@ public class ChatApp implements App {
         panel.add(new SideBar(), BorderLayout.WEST);
         panel.add(view);
 
+        presenter.refreshChatRoomList();
+
         Container container = frame.getContentPane();
         container.removeAll();
         container.add(panel);

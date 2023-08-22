@@ -12,9 +12,8 @@ import java.util.List;
 public class ChatRoomDTO {
 
     private Long no;
-
+    private String name;
     private String createdAt;
-
-    private List<ParticipantDTO> participants;
+    private String lastChatAt;
 
 }

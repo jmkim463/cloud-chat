@@ -4,6 +4,7 @@ import chat.gui.components.ImageBuilder;
 import chat.gui.components.LabelBuilder;
 import chat.gui.components.Panel;
 import chat.module.dto.ChatRoomDTO;
+import org.intellij.lang.annotations.Flow;
 
 import javax.swing.*;
 import java.awt.*;
@@ -29,7 +30,7 @@ public class ChatRoom extends Panel {
         setBorder(BorderFactory.createEmptyBorder(5, 0, 5, 0));
         setSelected(false);
 
-        Panel profileImagesPanel = new Panel(new GridLayout(2, 2));
+        Panel profileImagesPanel = new Panel(new FlowLayout());
 
         profileImagesPanel.add(
                 new JLabel(new ImageBuilder("default_user", ImageBuilder.ICON).setSize(40, 40).getImageIcon()));
@@ -37,11 +38,15 @@ public class ChatRoom extends Panel {
         lastChatTimeLabel.setVerticalTextPosition(JLabel.BOTTOM);
         lastChatTimeLabel.setVerticalAlignment(JLabel.BOTTOM);
 
-        JPanel panel = new JPanel(new BorderLayout());
+        if(chatroom != null) {
+            nameLabel.setText(chatroom.getName());
+        }
+
+        Panel panel = new Panel(new BorderLayout());
         panel.add(nameLabel);
         panel.add(chatLabel, BorderLayout.SOUTH);
 
-        add(cover(profileImagesPanel, panel), BorderLayout.WEST);
+        add(cover(profileImagesPanel, panel.cover()), BorderLayout.WEST);
         add(lastChatTimeLabel, BorderLayout.EAST);
     }
 

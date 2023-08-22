@@ -43,6 +43,7 @@ public class ChatRoomList extends Panel {
 
         for(ChatRoomDTO item : list) {
             ChatRoom room = new ChatRoom(item);
+
             chatRoomList.add(room);
         }
 

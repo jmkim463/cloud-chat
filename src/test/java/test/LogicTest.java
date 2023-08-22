@@ -6,6 +6,6 @@ public class LogicTest {
 
     @Test
     void test() {
-        System.out.println("user01".hashCode());
+        System.out.println("tester".hashCode());
     }
 }

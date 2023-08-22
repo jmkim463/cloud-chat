@@ -9,9 +9,9 @@ import java.util.List;
 
 public interface ChatService {
 
-    @GET("/api/chat/roomList")
-    public Call<List<ChatRoomDTO>> getUserRoomListAll(
-            @Query("userNo") String no
+    @GET("/api/chat/user/chatroom")
+    public Call<List<ChatRoomDTO>> selectUserChatRoomList(
+            @Query("userNo") Long userNo
     );
 
 }

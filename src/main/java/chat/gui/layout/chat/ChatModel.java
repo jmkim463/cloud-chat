@@ -1,24 +1,30 @@
 package chat.gui.layout.chat;
 
 import chat.module.RetrofitUtils;
+import chat.module.Storage;
+import chat.module.dto.ChatRoomDTO;
+import chat.module.dto.UserDTO;
+import chat.module.service.ChatService;
 import chat.module.service.UserService;
+import retrofit2.Call;
+
+import java.util.List;
 
 public class ChatModel {
 
-    private static UserService service;
+    private final ChatService service;
 
-    static {
-        service = RetrofitUtils.createService(UserService.class);
+    public ChatModel() {
+        service = RetrofitUtils.createService(ChatService.class);
     }
 
-//    public List<ChatRoomDTO> getChatRoomListAll() {
-//        ChatService service = RetrofitUtils.createService(ChatService.class);
-//
-//        UserDTO userDTO = (UserDTO) Storage.getInstance().getAttribute("userDTO");
-//
-//        List<ChatRoomDTO> list = RetrofitUtils.getCallBody(service.getUserRoomListAll(userDTO.getNo()));
-//
-//        return list;
-//    }
+    public List<ChatRoomDTO> getUserChatRoomList() {
+        UserDTO user = (UserDTO) Storage.getInstance().getData(Storage.LOGIN_USER);
+
+        List<ChatRoomDTO> list = RetrofitUtils.getCallBody(service.selectUserChatRoomList(user.getNo()));
+
+        return list;
+    }
+
 
 }

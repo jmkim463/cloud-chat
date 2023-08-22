@@ -2,6 +2,7 @@ package chat.gui.layout.chat.view;
 
 import chat.gui.components.Font;
 import chat.gui.components.ImageBuilder;
+import chat.gui.components.LabelBuilder;
 import chat.gui.components.Panel;
 import chat.module.Storage;
 import chat.module.dto.MessageDTO;
@@ -69,13 +70,14 @@ public class ChatBubble extends Panel {
             bubble.setBackground(OTHER_BACKGROUND);
             setBorder(BorderFactory.createEmptyBorder(5, 10, 5, 0));
 
-            Panel panel = new Panel();
-            panel.add(new JLabel(
-                    new ImageBuilder(sender.getImageURL(), ImageBuilder.URL)
-                            .changeCircleImage(50).getImageIcon()));
+            Panel panel = new Panel(new BorderLayout(5, 10));
+            panel.add(new LabelBuilder(sender.getName()).setFont(13).setColor(Color.gray).getLabel(), BorderLayout.NORTH);
             panel.add(bubble);
+            //panel.add(new LabelBuilder(message.getSendAt()).setFont(13).setColor(Color.gray).getLabel(), BorderLayout.SOUTH);
 
-            add(panel, BorderLayout.WEST);
+            JLabel senderImage = new JLabel(new ImageBuilder(sender.getImageURL(), ImageBuilder.URL).changeCircleImage(50).getImageIcon());
+
+            add(senderImage, BorderLayout.WEST);
         }
     }
 }

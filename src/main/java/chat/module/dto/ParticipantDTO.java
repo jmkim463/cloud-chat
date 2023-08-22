@@ -9,9 +9,9 @@ import lombok.Data;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class ParticipantDTO {
 
-    private String no;
-    private String userNo;
-    private String chatRoomNo;
+    private Long no;
+    private Long userNo;
+    private Long chatRoomNo;
     private String joinAt;
 
 }
