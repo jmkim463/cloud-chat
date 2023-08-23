@@ -12,6 +12,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.text.SimpleDateFormat;
 
 public class ChatBubble extends Panel {
 
@@ -41,7 +42,10 @@ public class ChatBubble extends Panel {
             textArea.setColumns(MAX_LINE_TEXT_COUNT);
         }
 
-        JPanel bubble = new JPanel() {
+        UserDTO user = (UserDTO) Storage.getInstance().getData(Storage.LOGIN_USER);
+        UserDTO sender = message.getSenderDTO();
+
+        JPanel bubble = new JPanel(new FlowLayout(FlowLayout.LEFT, 5, 5)) {
             @Override
             protected void paintComponent(Graphics g) {
                 Graphics2D g2 = (Graphics2D) g;
@@ -51,15 +55,10 @@ public class ChatBubble extends Panel {
                 int w = dimension.width, h = dimension.height;
 
                 g2.setColor(getBackground());
-                g2.fillRoundRect(0, 0, w, h, 25, 25);
+                g2. fillRoundRect(0, 0, w, h, 25, 25);
             }
         };
         bubble.add(textArea);
-
-        System.out.println(message);
-
-        UserDTO user = (UserDTO) Storage.getInstance().getData(Storage.LOGIN_USER);
-        UserDTO sender = message.getSenderDTO();
 
         if(user.getNo().equals(sender.getNo())) {
             bubble.setBackground(ME_BACKGROUND);
@@ -70,14 +69,19 @@ public class ChatBubble extends Panel {
             bubble.setBackground(OTHER_BACKGROUND);
             setBorder(BorderFactory.createEmptyBorder(5, 10, 5, 0));
 
-            Panel panel = new Panel(new BorderLayout(5, 10));
+            String time = message.getSendAt().split(" ")[1];
+            time = time.substring(0, time.lastIndexOf(":"));
+
+            Panel panel = new Panel(new BorderLayout(0, 0));
             panel.add(new LabelBuilder(sender.getName()).setFont(13).setColor(Color.gray).getLabel(), BorderLayout.NORTH);
             panel.add(bubble);
-            //panel.add(new LabelBuilder(message.getSendAt()).setFont(13).setColor(Color.gray).getLabel(), BorderLayout.SOUTH);
+            panel.add(new LabelBuilder(time).setFont(13).setColor(Color.gray).getLabel(), BorderLayout.SOUTH);
 
             JLabel senderImage = new JLabel(new ImageBuilder(sender.getImageURL(), ImageBuilder.URL).changeCircleImage(50).getImageIcon());
+            senderImage.setVerticalAlignment(JLabel.TOP);
+            senderImage.setVerticalTextPosition(JLabel.TOP);
 
-            add(senderImage, BorderLayout.WEST);
+            add(cover(senderImage, panel), BorderLayout.WEST);
         }
     }
 }

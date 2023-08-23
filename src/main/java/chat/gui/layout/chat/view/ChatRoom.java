@@ -50,12 +50,21 @@ public class ChatRoom extends Panel {
         add(lastChatTimeLabel, BorderLayout.EAST);
     }
 
+    public ChatRoomDTO getChatroomDTO() {
+        return chatroom;
+    }
+
     public void setSelected(boolean selected) {
         isSelected = selected;
         setBorder(BorderFactory.createMatteBorder(0, 3, 0, 0,
                 isSelected ? new Color(0, 196, 255) : Color.white));
 
+        revalidate();
+        repaint();
     }
 
+    public void setChatLabelText(String text) {
+        chatLabel.setText(text);
+    }
 
 }

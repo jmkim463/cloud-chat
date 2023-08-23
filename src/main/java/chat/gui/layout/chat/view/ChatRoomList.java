@@ -11,14 +11,13 @@ import chat.module.dto.ChatRoomDTO;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.ArrayList;
 import java.util.List;
 
 public class ChatRoomList extends Panel {
 
     private Panel chatRoomList = new Panel();
     private Scroll scroll = new Scroll(chatRoomList.cover());
-
-    private ChatRoom selectedChatRoom = null;
 
     public ChatRoomList() {
         init();
@@ -38,13 +37,11 @@ public class ChatRoomList extends Panel {
         add(scroll);
     }
 
-    public void setChatRoomList(List<ChatRoomDTO> list) {
+    public void refreshChatRoomList(List<ChatRoom> list) {
         chatRoomList.removeAll();
 
-        for(ChatRoomDTO item : list) {
-            ChatRoom room = new ChatRoom(item);
-
-            chatRoomList.add(room);
+        for(ChatRoom chatRoom : list) {
+            chatRoomList.add(chatRoom);
         }
 
         revalidate();

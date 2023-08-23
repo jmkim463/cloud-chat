@@ -57,7 +57,7 @@ public class Panel extends JPanel {
             addMouseListener(new MouseListener());
         }
 
-        this.click = click;
+        this.click = actionListener;
     }
 
     class MouseListener extends MouseAdapter {

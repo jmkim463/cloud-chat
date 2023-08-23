@@ -73,6 +73,13 @@ public class ChatField extends Panel {
         inputField.textLengthLabel.setText("0");
     }
 
+    public void clearMessageScroll() {
+        messagePanel.removeAll();
+
+        revalidate();
+        repaint();
+    }
+
     class MessageInputField extends Panel {
         JLabel textLengthLabel = new LabelBuilder("0").setFont(10).setColor(Color.lightGray).getLabel();
 

@@ -12,6 +12,7 @@ public class MessageDTO {
     private Long no;
     private Long chatroomNo;
     private UserDTO senderDTO;
+    private Long senderNo;
     private String content;
     private String sendAt;
 

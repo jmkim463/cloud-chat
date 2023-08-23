@@ -3,6 +3,7 @@ package chat.gui.layout.chat;
 import chat.module.RetrofitUtils;
 import chat.module.Storage;
 import chat.module.dto.ChatRoomDTO;
+import chat.module.dto.MessageDTO;
 import chat.module.dto.UserDTO;
 import chat.module.service.ChatService;
 import chat.module.service.UserService;
@@ -22,6 +23,12 @@ public class ChatModel {
         UserDTO user = (UserDTO) Storage.getInstance().getData(Storage.LOGIN_USER);
 
         List<ChatRoomDTO> list = RetrofitUtils.getCallBody(service.selectUserChatRoomList(user.getNo()));
+
+        return list;
+    }
+
+    public List<MessageDTO> getChatRoomOfMessageList(Long chatroomNo) {
+        List<MessageDTO> list = RetrofitUtils.getCallBody(service.selectChatRoomOfMessage(chatroomNo));
 
         return list;
     }
