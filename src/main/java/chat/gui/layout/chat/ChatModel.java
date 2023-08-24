@@ -28,6 +28,7 @@ public class ChatModel {
     }
 
     public List<MessageDTO> getChatRoomOfMessageList(Long chatroomNo) {
+        // TODO SQL LIGHT 적용예정
         List<MessageDTO> list = RetrofitUtils.getCallBody(service.selectChatRoomOfMessage(chatroomNo));
 
         return list;

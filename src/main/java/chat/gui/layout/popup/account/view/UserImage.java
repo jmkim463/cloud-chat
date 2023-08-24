@@ -1,4 +1,4 @@
-package chat.gui.layout.account.view;
+package chat.gui.layout.popup.account.view;
 
 import chat.gui.components.FileSelector;
 import chat.gui.components.ImageBuilder;

@@ -19,10 +19,19 @@ public class Button extends JLabel {
     private String text;
     private int w, h;
 
+    private int round = 25;
+
     public Button(int w, int h, String text) {
         this.text = text;
         this.w = w;
         this.h = h;
+        init();
+    }
+    public Button(int w, int h, int round, String text) {
+        this.text = text;
+        this.w = w;
+        this.h = h;
+        this.round = round;
         init();
     }
 
@@ -93,7 +102,7 @@ public class Button extends JLabel {
         int w = dimension.width, h = dimension.height;
 
         g2.setColor(getBackground());
-        g2.fillRoundRect(0, 0, w, h, 25, 25);
+        g2.fillRoundRect(0, 0, w, h, round, round);
 
         g2.setColor(getForeground());
         g2.setFont(getFont());

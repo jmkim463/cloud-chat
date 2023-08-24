@@ -3,7 +3,7 @@ package chat.gui.layout.login.view;
 import chat.gui.components.LabelBuilder;
 import chat.gui.components.Panel;
 import chat.gui.components.button.Button;
-import chat.gui.layout.account.AccountApp;
+import chat.gui.layout.popup.account.AccountApp;
 
 import javax.swing.*;
 import javax.swing.text.JTextComponent;

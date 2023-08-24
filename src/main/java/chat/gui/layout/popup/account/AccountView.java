@@ -1,8 +1,8 @@
-package chat.gui.layout.account;
+package chat.gui.layout.popup.account;
 
 import chat.gui.components.Panel;
-import chat.gui.layout.account.view.AccountField;
-import chat.gui.layout.account.view.UserImage;
+import chat.gui.layout.popup.account.view.AccountField;
+import chat.gui.layout.popup.account.view.UserImage;
 
 import java.awt.*;
 import java.awt.event.ActionListener;

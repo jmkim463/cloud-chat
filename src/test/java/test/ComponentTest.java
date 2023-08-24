@@ -1,6 +1,6 @@
 package test;
 
-import chat.gui.layout.SideBar;
+import chat.gui.layout.sidebar.SideBarView;
 import chat.gui.components.Frame;
 import chat.gui.components.Scroll;
 import chat.gui.layout.chat.view.ChatField;
@@ -104,7 +104,7 @@ public class ComponentTest {
 
         JPanel main = new JPanel(new BorderLayout());
         main.add(panel);
-        main.add(new SideBar(), BorderLayout.WEST);
+        main.add(new SideBarView(), BorderLayout.WEST);
 
         frame.add(main);
 

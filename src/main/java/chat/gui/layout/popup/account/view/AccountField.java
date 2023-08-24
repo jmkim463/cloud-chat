@@ -1,4 +1,4 @@
-package chat.gui.layout.account.view;
+package chat.gui.layout.popup.account.view;
 
 import chat.gui.components.ComboBox;
 import chat.gui.components.LabelBuilder;

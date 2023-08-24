@@ -11,6 +11,7 @@ import java.awt.*;
 import java.awt.event.ActionListener;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 public class ChatView extends Panel {
 
@@ -23,6 +24,7 @@ public class ChatView extends Panel {
     public ChatView() {
         chatRoomList = new ChatRoomList();
         chatField = new ChatField();
+        chatRoomMap = new ConcurrentHashMap<>();
 
         init();
     }

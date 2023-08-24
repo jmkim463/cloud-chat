@@ -41,8 +41,10 @@ public class ChatPresenter {
             chatRooms.add(chatroom);
         }
 
-        selectChatRoom(chatRooms.get(0));
-        view.refreshChatRoomList(chatRooms);
+        if(chatRooms.size() != 0) {
+            selectChatRoom(chatRooms.get(0));
+            view.refreshChatRoomList(chatRooms);
+        }
     }
 
     public void selectChatRoom(ChatRoom chatroom) {

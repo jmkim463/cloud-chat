@@ -1,4 +1,4 @@
-package chat.gui.layout.account;
+package chat.gui.layout.popup.account;
 
 import chat.gui.components.Modal;
 import chat.gui.layout.App;

@@ -2,7 +2,8 @@ package chat.gui.layout.chat;
 
 import chat.gui.layout.App;
 import chat.gui.layout.MainFrame;
-import chat.gui.layout.SideBar;
+import chat.gui.layout.sidebar.SideBar;
+import chat.gui.layout.sidebar.SideBarView;
 import chat.gui.components.Frame;
 import chat.module.SocketManager;
 import okhttp3.Response;
@@ -29,6 +30,8 @@ public class ChatApp implements App {
     private void init() {
         view.addSendMessageListener(e -> presenter.clickMessageSendButton());
 
+        presenter.refreshChatRoomList();
+
         SocketManager manager = SocketManager.getInstance();
         manager.startUp(new WebSocketListener() {
             @Override
@@ -43,15 +46,14 @@ public class ChatApp implements App {
         });
     }
 
+
     @Override
     public void open() {
         Frame frame = MainFrame.getInstance();
 
         Panel panel = new Panel(new BorderLayout());
-        panel.add(new SideBar(), BorderLayout.WEST);
+        panel.add(new SideBar().getView(), BorderLayout.WEST);
         panel.add(view);
-
-        presenter.refreshChatRoomList();
 
         Container container = frame.getContentPane();
         container.removeAll();
