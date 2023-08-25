@@ -67,7 +67,6 @@ public class AccountPresenter {
             return;
         }
 
-        System.out.println(imageFilePath);
         model.createAccount(id, password, name, email + "@" + domain, new File(imageFilePath));
 
         Alert.createAlert(AlertType.SUCCESS, "회원가입 성공", "완료");

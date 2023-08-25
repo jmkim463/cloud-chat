@@ -1,5 +1,6 @@
 package chat.gui.components.button;
 
+import chat.gui.components.Font;
 import chat.gui.components.ImageBuilder;
 
 import javax.swing.*;
@@ -20,6 +21,7 @@ public class Button extends JLabel {
     private int w, h;
 
     private int round = 25;
+    private Font font = new Font();
 
     public Button(int w, int h, String text) {
         this.text = text;
@@ -46,7 +48,7 @@ public class Button extends JLabel {
 
     public Button setFont(int size) {
         java.awt.Font font = getFont();
-        setFont(new chat.gui.components.Font(font.getName(), font.getStyle(), size));
+        setFont(new Font(font.getName(), font.getStyle(), size));
         return this;
     }
 

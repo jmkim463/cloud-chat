@@ -1,13 +1,9 @@
 package chat.gui.layout.sidebar;
 
-import chat.gui.components.Frame;
 import chat.gui.layout.MainFrame;
 import chat.gui.layout.chat.ChatApp;
 import chat.gui.layout.friend.FriendApp;
 import chat.gui.layout.login.LoginApp;
-import chat.gui.layout.popup.friend.FriendView;
-
-import java.awt.*;
 
 public class SideBarPresenter {
 
@@ -41,6 +37,5 @@ public class SideBarPresenter {
         LoginApp app = new LoginApp();
         app.open();
     }
-
 
 }

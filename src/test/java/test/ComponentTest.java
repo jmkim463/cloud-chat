@@ -2,14 +2,17 @@ package test;
 
 import chat.gui.layout.sidebar.SideBarView;
 import chat.gui.components.Frame;
+import chat.gui.components.Panel;
 import chat.gui.components.Scroll;
 import chat.gui.layout.chat.view.ChatField;
 import chat.gui.layout.chat.view.ChatRoomList;
+import chat.gui.utils.Colors;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
+import javax.swing.border.MatteBorder;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayOutputStream;
@@ -22,7 +25,36 @@ public class ComponentTest {
 
     @AfterEach
     void sleep() throws InterruptedException {
-        Thread.sleep(999999);
+        Thread.sleep(1000 * 10);
+    }
+
+    @Test
+    void shadowBorder() {
+
+        MatteBorder border = new MatteBorder(0, 0,0,0, (Color) null) {
+            @Override
+            public void paintBorder(Component c, Graphics g, int x, int y, int width, int height) {
+                Color shadow = new Color(0, 0, 0, 100);
+
+                g.setColor(Colors.getBorderLineColor());
+                g.fillRect(0, height - 1, width - 0, 1);
+
+                g.setColor(shadow);
+                g.fillRect(0, height - 5, width - 0, 5);
+            }
+        };
+
+        Panel panel = new Panel();
+        panel.setBackground(Color.RED);
+        panel.setPreferredSize(new Dimension(200, 200));
+        panel.setBorder(border);
+
+        JPanel p = panel.cover();
+        p.setBackground(Color.white);
+
+        Frame frame = new Frame();
+        frame.add(p);
+        frame.setVisible(true);
     }
 
     @Test

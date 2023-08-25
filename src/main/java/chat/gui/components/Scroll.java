@@ -27,6 +27,7 @@ public class Scroll extends JScrollPane {
     private void init() {
         setBorder(null);
         setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+        setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
 
         JScrollBar bar = getVerticalScrollBar();
         bar.setUnitIncrement(30);

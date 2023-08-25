@@ -28,5 +28,4 @@ public class FriendPresenter {
         view.refresh(pendingList, acceptedList);
     }
 
-
 }
