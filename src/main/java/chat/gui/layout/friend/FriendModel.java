@@ -19,7 +19,7 @@ public class FriendModel {
     public List<UserDTO> getFriendList() {
         UserDTO user = (UserDTO) Storage.getInstance().getData(Storage.LOGIN_USER);
 
-        List<UserDTO> list = RetrofitUtils.getCallBody(service.getFriendList(2, user.getNo()));
+        List<UserDTO> list = RetrofitUtils.getCallBody(service.getFriendList(user.getNo()));
 
         return list;
     }
@@ -27,7 +27,7 @@ public class FriendModel {
     public List<UserDTO> getPendingFriendList() {
         UserDTO user = (UserDTO) Storage.getInstance().getData(Storage.LOGIN_USER);
 
-        List<UserDTO> list = RetrofitUtils.getCallBody(service.getFriendList(1, user.getNo()));
+        List<UserDTO> list = RetrofitUtils.getCallBody(service.getPendingFriendList(user.getNo()));
 
         return list;
     }

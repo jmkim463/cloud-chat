@@ -58,7 +58,7 @@ public class AccountField extends Panel {
         emailPanel.add(domain);
 
         Panel grid = new Panel(new GridLayout(0, 1, 0, 5));
-        grid.add(getEmpty(280, 28));
+        grid.add(getEmpty(0));
         grid.add(new LabelBuilder("아이디").setFont(13).getLabel());
         grid.add(p);
         grid.add(new LabelBuilder("비밀번호").setFont(13).getLabel());
@@ -69,8 +69,9 @@ public class AccountField extends Panel {
         grid.add(username);
         grid.add(new LabelBuilder("이메일").setFont(13).getLabel());
         grid.add(emailPanel);
+        grid.setBorder(BorderFactory.createEmptyBorder(0, 0, 30, 0));
 
-        Panel panel = new Panel(new BorderLayout(0, 50));
+        Panel panel = new Panel(new BorderLayout(0, 20));
         panel.add(grid);
         panel.add(cover(FlowLayout.CENTER, 10, 5,  accountButton, cancelButton), BorderLayout.SOUTH);
         add(panel);

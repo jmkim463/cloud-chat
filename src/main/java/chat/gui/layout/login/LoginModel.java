@@ -16,7 +16,7 @@ public class LoginModel {
     public UserDTO login(String id, String password) {
         Response<UserDTO> response = RetrofitUtils.execute(service.login(id, password));
 
-        if(response.code() != 200) {
+        if(response == null) {
             throw new IllegalArgumentException("Wrong ID or Password");
         }
 

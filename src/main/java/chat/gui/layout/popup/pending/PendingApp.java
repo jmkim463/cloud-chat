@@ -23,7 +23,13 @@ public class PendingApp implements App {
         view = new PendingView();
         presenter = new PendingPresenter(model, view);
 
-        modal = new Modal(500, 700);
+        modal = new Modal(300, 200);
+
+        init();
+    }
+
+    private void init() {
+        view.addEnterKeyListener(e -> presenter.search());
     }
 
     @Override

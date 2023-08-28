@@ -17,7 +17,7 @@ public class AccountApp implements App {
         model = new AccountModel();
         view = new AccountView();
         presenter = new AccountPresenter(model, view);
-        modal = new Modal(380, 700);
+        modal = new Modal(380, 690);
 
         init();
     }

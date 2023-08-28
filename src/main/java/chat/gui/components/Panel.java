@@ -36,6 +36,12 @@ public class Panel extends JPanel {
         return panel;
     }
 
+    public JPanel cover(int align) {
+        JPanel panel = new JPanel(new FlowLayout(align));
+        panel.add(this);
+        return panel;
+    }
+
     public JPanel cover(Component...components) {
         JPanel panel = new JPanel(new FlowLayout());
         for(Component obj : components) {

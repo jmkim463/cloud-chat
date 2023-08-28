@@ -36,7 +36,7 @@ public class ChatPresenter {
         List<ChatRoom> chatRooms = new ArrayList<>();
         for(ChatRoomDTO item : list) {
             ChatRoom chatroom = new ChatRoom(item);
-            chatroom.setClick(evt -> selectChatRoom(chatroom));
+            chatroom.setClick(e -> selectChatRoom(chatroom));
 
             chatRooms.add(chatroom);
         }

@@ -11,12 +11,12 @@ import java.util.List;
 public interface ChatService {
 
     @GET("/api/chat/user/chatroom")
-    public Call<List<ChatRoomDTO>> selectUserChatRoomList(
+    Call<List<ChatRoomDTO>> selectUserChatRoomList(
             @Query("userNo") Long userNo
     );
 
     @GET("/api/chat/chatroom/massage")
-    public Call<List<MessageDTO>> selectChatRoomOfMessage(
+    Call<List<MessageDTO>> selectChatRoomOfMessage(
             @Query("chatroomNo") Long chatroomNo
     );
 
