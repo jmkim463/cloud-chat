@@ -30,6 +30,7 @@ public class FriendPresenter {
         List<JPanel> acceptedList = new ArrayList<>();
         for(UserDTO userDTO : model.getFriendList()) {
             AcceptedFriend item = new AcceptedFriend(userDTO);
+            item.addClickListener(e -> chatFriend(userDTO));
             acceptedList.add(item);
         }
 
@@ -53,6 +54,10 @@ public class FriendPresenter {
         model.updateStatus(userDTO.getNo(), status);
 
         refresh();
+    }
+
+    public void chatFriend(UserDTO userDTO) {
+
     }
 
 }

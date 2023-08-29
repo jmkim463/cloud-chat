@@ -4,6 +4,7 @@ import chat.gui.layout.sidebar.SideBarView;
 import chat.gui.components.Frame;
 import chat.gui.components.Panel;
 import chat.gui.components.Scroll;
+import chat.gui.components.PopupMenu;
 import chat.gui.layout.chat.view.ChatField;
 import chat.gui.layout.chat.view.ChatRoomList;
 import chat.gui.utils.Colors;
@@ -12,8 +13,12 @@ import org.junit.jupiter.api.Test;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
+import javax.swing.border.LineBorder;
 import javax.swing.border.MatteBorder;
+import javax.swing.plaf.basic.BasicMenuItemUI;
 import java.awt.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -26,6 +31,43 @@ public class ComponentTest {
     @AfterEach
     void sleep() throws InterruptedException {
         Thread.sleep(1000 * 10);
+    }
+
+    @Test
+    void testPopupMenu() {
+        JMenuItem item1 = new JMenuItem("챗팅하기");
+        item1.setFont(new chat.gui.components.Font(12));
+        item1.setBorderPainted(false);
+        item1.setBackground(Color.white);
+        item1.setUI(new BasicMenuItemUI() {
+            @Override
+            protected void paintMenuItem(Graphics g, JComponent c, Icon checkIcon, Icon arrowIcon, Color background, Color foreground, int defaultTextIconGap) {
+                super.paintMenuItem(g, c, checkIcon, arrowIcon, Color.white, foreground, defaultTextIconGap);
+            }
+        });
+        item1.setOpaque(false);
+
+        JPopupMenu menu = new JPopupMenu();
+        menu.setBackground(Color.white);
+        menu.setBorder(new LineBorder(Color.black));
+        menu.add(item1);
+
+        Panel panel = new Panel();
+        panel.setBackground(Color.RED);
+        panel.setPreferredSize(new Dimension(200, 200));
+        panel.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                menu.show(panel, e.getX(), e.getY());
+            }
+        });
+
+        JPanel p = panel.cover();
+        p.setBackground(Color.white);
+
+        Frame frame = new Frame();
+        frame.add(p);
+        frame.setVisible(true);
     }
 
     @Test

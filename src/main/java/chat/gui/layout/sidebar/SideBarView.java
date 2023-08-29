@@ -9,19 +9,17 @@ import java.awt.*;
 
 public class SideBarView extends JPanel {
 
-    MenuIcon personIcon;
-    MenuIcon chatIcon;
+    private final MenuIcon personIcon;
+    private final MenuIcon chatIcon;
 
-    MenuIcon friendAddIcon;
-    MenuIcon settingIcon;
-    MenuIcon logoutIcon;
+    private final MenuIcon friendAddIcon;
+    private final MenuIcon logoutIcon;
 
     public SideBarView() {
         personIcon = new MenuIcon("person");
         chatIcon = new MenuIcon("chat");
 
         friendAddIcon = new MenuIcon("friend_add");
-        settingIcon = new MenuIcon("setting");
         logoutIcon = new MenuIcon("logout");
 
         init();
@@ -39,7 +37,6 @@ public class SideBarView extends JPanel {
         top.add(chatIcon);
 
         bottom.add(friendAddIcon);
-        bottom.add(settingIcon);
         bottom.add(logoutIcon);
 
         top.setOpaque(false);
