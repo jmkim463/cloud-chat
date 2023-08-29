@@ -1,8 +1,11 @@
 package chat.gui.layout.popup.account;
 
+import chat.gui.components.ImageBuilder;
+import chat.gui.components.Modal;
 import chat.gui.components.Panel;
 import chat.gui.layout.popup.account.view.AccountField;
 import chat.gui.layout.popup.account.view.UserImage;
+import chat.module.dto.UserDTO;
 
 import java.awt.*;
 import java.awt.event.ActionListener;
@@ -37,6 +40,18 @@ public class AccountView extends Panel {
         });
 
         cover();
+    }
+
+    public void setAccount(UserDTO userDTO) {
+        field.getID().setText(userDTO.getId());
+        field.getPassword().setText(userDTO.getPassword());
+        field.getUsername().setText(userDTO.getName());
+        field.getEmail().setText(userDTO.getEmail().split("@")[0]);
+        field.getDomain().setSelectedItem(userDTO.getEmail().split("@")[1]);
+        image.getUserImageIconLabel().setIcon(new ImageBuilder(userDTO.getImageURL(), ImageBuilder.URL).changeCircleImage(100).getImageIcon());
+
+        field.getID().setFocusable(false);
+        field.getSameIDCheckButton().setEnabled(false);
     }
 
     public void addCancelButtonClickListener(ActionListener actionListener) {

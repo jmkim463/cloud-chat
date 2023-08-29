@@ -28,6 +28,13 @@ public interface FriendService {
         @Query("userNo") Long userNo
     );
 
+    @GET("/api/friend/update/status")
+    Call<Long> updateStatus(
+            @Query("userNo1") Long userNo1,
+            @Query("userNo2") Long userNo2,
+            @Query("status") int status
+    );
+
     @POST("/api/friend/save")
     Call<Long> save(
         @Body FriendDTO friendDTO

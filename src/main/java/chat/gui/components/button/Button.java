@@ -100,6 +100,12 @@ public class Button extends JLabel {
             }
         }
 
+        if(isEnabled()) {
+            setBackground(style.getBackground());
+        } else {
+            setBackground(Color.lightGray);
+        }
+
         Dimension dimension = getPreferredSize();
         int w = dimension.width, h = dimension.height;
 
@@ -131,6 +137,10 @@ public class Button extends JLabel {
     class ClickListener extends MouseAdapter {
         @Override
         public void mouseClicked(MouseEvent e) {
+            if(!isEnabled()) {
+                return;
+            }
+
             if(textComponent != null) {
                 for(JTextComponent text : textComponent) {
                     if(text.getText().isEmpty()) {

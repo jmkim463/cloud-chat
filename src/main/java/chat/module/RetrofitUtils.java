@@ -2,11 +2,16 @@ package chat.module;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
+import retrofit2.converter.scalars.ScalarsConverterFactory;
 
+import java.io.File;
 import java.io.IOException;
 
 public class RetrofitUtils {
@@ -18,7 +23,8 @@ public class RetrofitUtils {
 
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(BASE_URL)
-                .addConverterFactory(GsonConverterFactory.create(gson))
+                .addConverterFactory(GsonConverterFactory.create())
+                .addConverterFactory(ScalarsConverterFactory.create())
                 .build();
 
         return retrofit;
@@ -51,5 +57,20 @@ public class RetrofitUtils {
 
         return t;
     }
+
+    public static MultipartBody.Part imageToMultipartBody(File file) {
+        RequestBody requestBody = RequestBody.create(MediaType.parse("image/*"), file);
+        MultipartBody.Part multipartBody = MultipartBody.Part.createFormData("image", file.getName(), requestBody);
+
+        return multipartBody;
+    }
+
+    public static RequestBody textToRequestBody(String text) {
+        MediaType mediaType = MediaType.parse("text/plain");
+        RequestBody requestBody = RequestBody.create(mediaType, text);
+
+        return  requestBody;
+    }
+
 
 }

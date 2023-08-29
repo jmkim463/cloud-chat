@@ -1,8 +1,10 @@
 package chat.gui.layout.popup.account;
 
 
+import chat.gui.components.Modal;
 import chat.gui.components.alert.Alert;
 import chat.gui.components.alert.AlertType;
+import chat.module.dto.UserDTO;
 
 import java.io.File;
 
@@ -11,9 +13,20 @@ public class AccountPresenter {
     private final AccountModel model;
     private final AccountView view;
 
+    private Modal modal;
+
     public AccountPresenter(AccountModel model, AccountView view) {
         this.model = model;
         this.view = view;
+    }
+
+    public void setModal(Modal modal) {
+        this.modal = modal;
+    }
+
+    public void setAccount(UserDTO userDTO) {
+        model.setOldUserDTO(userDTO);
+        view.setAccount(userDTO);
     }
 
     public void clickSameUsernameCheckButton() {
@@ -42,14 +55,16 @@ public class AccountPresenter {
 
         boolean isCheckHaveSameID = view.isHaveSameIDCheck();
 
-        if(!model.isCorrectIDPattern(id)) {
-            Alert.createAlert(AlertType.ERROR, "회원가입 실패", "아이디 형식");
-            return;
-        }
+        if(model.getOldUserDTO() == null) {
+            if(!model.isCorrectIDPattern(id)) {
+                Alert.createAlert(AlertType.ERROR, "회원가입 실패", "아이디 형식");
+                return;
+            }
 
-        if(!isCheckHaveSameID) {
-            Alert.createAlert(AlertType.ERROR, "회원가입 실패", "아이디 중복 체크");
-            return;
+            if(!isCheckHaveSameID) {
+                Alert.createAlert(AlertType.ERROR, "회원가입 실패", "아이디 중복 체크");
+                return;
+            }
         }
 
         if(!model.isCorrectPasswordPattern(password)) {
@@ -67,9 +82,14 @@ public class AccountPresenter {
             return;
         }
 
-        model.createAccount(id, password, name, email + "@" + domain, new File(imageFilePath));
+        if(model.getOldUserDTO() == null) {
+            model.createAccount(id, password, name, email + "@" + domain, new File(imageFilePath));
+        } else {
+            model.updateAccount(password, name, email + "@" + domain, new File(imageFilePath));
+        }
 
         Alert.createAlert(AlertType.SUCCESS, "회원가입 성공", "완료");
-    }
 
+        modal.dispose();
+    }
 }

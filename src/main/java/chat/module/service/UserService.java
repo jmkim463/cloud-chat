@@ -8,15 +8,10 @@ import retrofit2.http.*;
 
 public interface UserService {
 
-    @GET("/api/user/login")
+    @GET("/api/user/account")
     Call<UserDTO> login(
             @Query("id") String id,
             @Query("password") String password
-    );
-
-    @GET("/api/user/check/id")
-    Call<Boolean> checkIsSaveSameID(
-            @Query("id") String id
     );
 
     @POST("/api/user/account")
@@ -24,12 +19,21 @@ public interface UserService {
             @Body UserDTO userDTO
     );
 
+    @PUT("/api/user/account")
+    Call<Long> updateAccount(
+            @Body UserDTO userDTO
+    );
+
+    @GET("/api/user/check/id")
+    Call<Boolean> checkIsSaveSameID(
+            @Query("id") String id
+    );
+
     @Multipart
-    @POST("/api/image/upload")
-    Call<Integer> uploadAccountImage(
+    @POST("/api/user/image")
+    Call<String> uploadImage(
             @Part MultipartBody.Part image,
-            @Part("filename") RequestBody filename,
-            @Part("type") RequestBody type
+            @Part("id") RequestBody id
     );
 
 }

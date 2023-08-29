@@ -56,4 +56,8 @@ public class UserImage extends Panel {
     public String getSelectedImagePath() {
         return selectedImagePath;
     }
+
+    public JLabel getUserImageIconLabel() {
+        return userImageIconLabel;
+    }
 }

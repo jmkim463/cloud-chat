@@ -5,6 +5,7 @@ import chat.gui.components.Panel;
 import chat.gui.components.LabelBuilder;
 import chat.gui.components.button.Button;
 import chat.gui.components.button.ButtonStyle;
+import chat.gui.layout.popup.account.AccountApp;
 import chat.module.Storage;
 import chat.module.dto.UserDTO;
 
@@ -39,6 +40,9 @@ public class LoginUser extends Panel {
         button.setStyle(ButtonStyle.Secondary);
         button.setFont(13);
         button.setClickEvent(e -> {
+            AccountApp app = new AccountApp();
+            app.setAccount((UserDTO) Storage.getInstance().getData(Storage.LOGIN_USER));
+            app.open();
         });
 
         add(cover(image, info), BorderLayout.WEST);

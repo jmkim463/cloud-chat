@@ -18,7 +18,7 @@ public class UserDTO {
     private String email;
 
     public String getImageURL() {
-        return RetrofitUtils.getBaseUrl() + "/api/image/display?filename=" + getId().hashCode() + ".jpg&type=user";
+        return RetrofitUtils.getBaseUrl() + "/api/user/image?id=" + getId();
     }
 
 }

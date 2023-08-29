@@ -17,6 +17,8 @@ public class AccountModel {
 
     private final UserService service;
 
+    private UserDTO oldUserDTO;
+
     public AccountModel() {
         service = RetrofitUtils.createService(UserService.class);
     }
@@ -34,7 +36,7 @@ public class AccountModel {
         return password.matches("^(?=.*[A-Za-z])(?=.*\\d)(?=.*[!@#$%^&*]).{5,50}$");
     }
 
-    public int createAccount(String id, String password, String name, String email, File file) {
+    public Long createAccount(String id, String password, String name, String email, File file) {
         UserDTO userDTO = UserDTO.builder()
                 .id(id)
                 .password(password)
@@ -42,15 +44,28 @@ public class AccountModel {
                 .email(email).build();
 
         Long no = RetrofitUtils.getCallBody(service.createAccount(userDTO));
+        RetrofitUtils.execute(service.uploadImage(RetrofitUtils.imageToMultipartBody(file), RetrofitUtils.textToRequestBody(id)));
 
-        RequestBody requestBody = RequestBody.create(MediaType.parse("multipart/form-data"), file);
-        MultipartBody.Part image = MultipartBody.Part.createFormData("file", file.getName(), requestBody);
+        return no;
+    }
 
-        RequestBody filenameRequestBody = RequestBody.create(MediaType.parse("text/plain"), id + "_" + no + ".jpg");
-        RequestBody typeRequestBody = RequestBody.create(MediaType.parse("text/plain"), "user");
+    public void updateAccount(String password, String name, String email, File file) {
+        UserDTO userDTO = UserDTO.builder()
+                .no(oldUserDTO.getNo())
+                .id(oldUserDTO.getId())
+                .password(password)
+                .name(name)
+                .email(email).build();
 
-        service.uploadAccountImage(image, filenameRequestBody, typeRequestBody);
+        service.updateAccount(userDTO);
+        RetrofitUtils.execute(service.uploadImage(RetrofitUtils.imageToMultipartBody(file), RetrofitUtils.textToRequestBody(oldUserDTO.getId())));
+    }
 
-        return 200;
+    public void setOldUserDTO(UserDTO oldUserDTO) {
+        this.oldUserDTO = oldUserDTO;
+    }
+
+    public UserDTO getOldUserDTO() {
+        return oldUserDTO;
     }
 }

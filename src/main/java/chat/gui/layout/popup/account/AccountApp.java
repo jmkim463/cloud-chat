@@ -2,6 +2,7 @@ package chat.gui.layout.popup.account;
 
 import chat.gui.components.Modal;
 import chat.gui.layout.App;
+import chat.module.dto.UserDTO;
 
 import java.awt.*;
 
@@ -26,6 +27,12 @@ public class AccountApp implements App {
         view.addSameIDCheckButtonClickListener(e -> presenter.clickSameUsernameCheckButton());
         view.addCancelButtonClickListener(e -> close());
         view.addAccountButtonClickListener(e -> presenter.clickAccountButton());
+
+        presenter.setModal(modal);
+    }
+
+    public void setAccount(UserDTO userDTO) {
+        presenter.setAccount(userDTO);
     }
 
     @Override

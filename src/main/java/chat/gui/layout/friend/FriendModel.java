@@ -32,5 +32,12 @@ public class FriendModel {
         return list;
     }
 
+    public Long updateStatus(Long userNo1, int status) {
+        Long userNo2 = ((UserDTO) Storage.getInstance().getData(Storage.LOGIN_USER)).getNo();
+
+        Long no = RetrofitUtils.getCallBody(service.updateStatus(userNo1, userNo2, status));
+
+        return no;
+    }
 }
 
