@@ -47,6 +47,11 @@ public class ChatPresenter {
         }
     }
 
+    public void selectChatRoom(ChatRoomDTO chatRoomDTO) {
+        ChatRoom chatRoom = view.getChatRoomComponent(chatRoomDTO.getNo());
+        selectChatRoom(chatRoom);
+    }
+
     public void selectChatRoom(ChatRoom chatroom) {
         if(view.getSelectedChatRoom() != null) {
             view.getSelectedChatRoom().setSelected(false);
@@ -74,16 +79,21 @@ public class ChatPresenter {
                 .senderDTO(userDTO)
                 .senderNo(userDTO.getNo())
                 .chatroomNo(chatRoomDTO.getNo())
-                .content(content).build();
+                .content(content)
+                .sendAt(MessageDTO.getNowDateTime()).build();
 
         SocketManager manager = SocketManager.getInstance();
         manager.sendMessage("MESSAGE", messageDTO);
 
         view.addMessage(messageDTO);
+
+        view.refresh(chatRoomDTO, messageDTO);
     }
 
     public void receiveMessage(String text) {
         MessageDTO messageDTO = gson.fromJson(text, MessageDTO.class);
+        ChatRoomDTO chatRoomDTO = ChatRoomDTO.builder()
+                .no(messageDTO.getChatroomNo()).build();
 
         ChatRoom curChatroom = view.getSelectedChatRoom();
         ChatRoomDTO curChatroomDTO = curChatroom.getChatroomDTO();
@@ -91,9 +101,10 @@ public class ChatPresenter {
         if(messageDTO.getChatroomNo() == curChatroomDTO.getNo()) {
             view.addMessage(messageDTO);
         } else {
-
+            view.getChatRoomComponent(chatRoomDTO.getNo()).countNotRead();
         }
 
+        view.refresh(chatRoomDTO, messageDTO);
     }
 
 }

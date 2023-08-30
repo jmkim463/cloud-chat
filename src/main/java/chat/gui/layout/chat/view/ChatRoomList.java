@@ -37,6 +37,11 @@ public class ChatRoomList extends Panel {
         add(scroll);
     }
 
+    public void moveChatRoomToTop(ChatRoom chatRoom) {
+        chatRoomList.remove(chatRoom);
+        chatRoomList.add(chatRoom, 0);
+    }
+
     public void refreshChatRoomList(List<ChatRoom> list) {
         chatRoomList.removeAll();
 

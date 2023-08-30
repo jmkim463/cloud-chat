@@ -20,4 +20,9 @@ public interface ChatService {
             @Query("chatroomNo") Long chatroomNo
     );
 
+    @GET("/api/chat/chatroom")
+    Call<ChatRoomDTO> selectPrivateChatRoom(
+            @Query("userNo1") Long userNo1,
+            @Query("userNo2") Long userNo2
+    );
 }

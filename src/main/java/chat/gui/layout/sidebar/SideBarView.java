@@ -12,14 +12,12 @@ public class SideBarView extends JPanel {
     private final MenuIcon personIcon;
     private final MenuIcon chatIcon;
 
-    private final MenuIcon friendAddIcon;
     private final MenuIcon logoutIcon;
 
     public SideBarView() {
         personIcon = new MenuIcon("person");
         chatIcon = new MenuIcon("chat");
 
-        friendAddIcon = new MenuIcon("friend_add");
         logoutIcon = new MenuIcon("logout");
 
         init();
@@ -36,7 +34,6 @@ public class SideBarView extends JPanel {
         top.add(personIcon);
         top.add(chatIcon);
 
-        bottom.add(friendAddIcon);
         bottom.add(logoutIcon);
 
         top.setOpaque(false);

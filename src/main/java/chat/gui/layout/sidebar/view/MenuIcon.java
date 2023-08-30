@@ -1,6 +1,7 @@
 package chat.gui.layout.sidebar.view;
 
 import chat.gui.components.ImageBuilder;
+import chat.gui.components.ToolTip;
 
 import javax.swing.*;
 import javax.swing.border.LineBorder;
@@ -38,13 +39,7 @@ public class MenuIcon extends JLabel {
 
     @Override
     public JToolTip createToolTip() {
-        JToolTip toolTip = new JToolTip();
-        toolTip.setComponent(this);
-        toolTip.setBorder(new LineBorder(Color.black));
-        toolTip.setBackground(Color.WHITE);
-        toolTip.setFont(new Font("나눔고딕", 0, 13));
-        toolTip.setForeground(Color.BLACK);
-        return toolTip;
+        return new ToolTip(this);
     }
 
 }

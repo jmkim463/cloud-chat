@@ -1,8 +1,12 @@
 package chat.gui.layout.friend;
 
+import chat.gui.layout.chat.ChatApp;
 import chat.gui.layout.friend.view.AcceptedFriend;
 import chat.gui.layout.friend.view.PendingFriend;
+import chat.module.Storage;
+import chat.module.dto.ChatRoomDTO;
 import chat.module.dto.UserDTO;
+import chat.module.service.ChatService;
 
 import javax.swing.*;
 import java.awt.event.MouseAdapter;
@@ -30,7 +34,7 @@ public class FriendPresenter {
         List<JPanel> acceptedList = new ArrayList<>();
         for(UserDTO userDTO : model.getFriendList()) {
             AcceptedFriend item = new AcceptedFriend(userDTO);
-            item.addClickListener(e -> chatFriend(userDTO));
+            item.addClickListener(e -> chatWithFriend(userDTO));
             acceptedList.add(item);
         }
 
@@ -56,8 +60,15 @@ public class FriendPresenter {
         refresh();
     }
 
-    public void chatFriend(UserDTO userDTO) {
+    public void chatWithFriend(UserDTO userDTO) {
+        Long userNo1 = ((UserDTO) Storage.getInstance().getData(Storage.LOGIN_USER)).getNo();
+        Long userNo2 = userDTO.getNo();
 
+        ChatRoomDTO chatRoomDTO = model.getPrivateChatroom(userNo1, userNo2);
+
+        ChatApp app = new ChatApp();
+        app.selectChatroom(chatRoomDTO);
+        app.open();
     }
 
 }

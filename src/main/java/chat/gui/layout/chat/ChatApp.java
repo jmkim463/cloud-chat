@@ -6,6 +6,7 @@ import chat.gui.layout.sidebar.SideBar;
 import chat.gui.layout.sidebar.SideBarView;
 import chat.gui.components.Frame;
 import chat.module.SocketManager;
+import chat.module.dto.ChatRoomDTO;
 import okhttp3.Response;
 import okhttp3.WebSocket;
 import okhttp3.WebSocketListener;
@@ -46,6 +47,9 @@ public class ChatApp implements App {
         });
     }
 
+    public void selectChatroom(ChatRoomDTO chatRoomDTO) {
+        presenter.selectChatRoom(chatRoomDTO);
+    }
 
     @Override
     public void open() {

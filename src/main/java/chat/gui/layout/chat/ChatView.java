@@ -4,6 +4,7 @@ import chat.gui.layout.chat.view.ChatField;
 import chat.gui.layout.chat.view.ChatRoom;
 import chat.gui.layout.chat.view.ChatRoomList;
 import chat.gui.components.Panel;
+import chat.module.dto.ChatRoomDTO;
 import chat.module.dto.MessageDTO;
 
 import javax.swing.*;
@@ -20,6 +21,7 @@ public class ChatView extends Panel {
 
     private Map<Long, ChatRoom> chatRoomMap;
     private ChatRoom selectedChatRoom;
+    private List<ChatRoom> chatRooms;
 
     public ChatView() {
         chatRoomList = new ChatRoomList();
@@ -66,6 +68,8 @@ public class ChatView extends Panel {
 
     public void refreshChatRoomList(List<ChatRoom> chatRooms) {
         chatRoomMap.clear();
+
+        this.chatRooms = chatRooms;
         for(ChatRoom item : chatRooms) {
             chatRoomMap.put(item.getChatroomDTO().getNo(), item);
         }
@@ -89,8 +93,24 @@ public class ChatView extends Panel {
         chatField.getMessageSendButton().setClickEvent(actionListener);
     }
 
-    public void setChatRoomInfo(String message, String sendAt) {
+    public ChatRoom getChatRoomComponent(Long no) {
+        for(ChatRoom item : chatRooms) {
+            ChatRoomDTO dto = item.getChatroomDTO();
 
+            if(dto.getNo() == no) {
+                return item;
+            }
+        }
+        return null;
     }
 
+    public void refresh(ChatRoomDTO chatRoomDTO, MessageDTO messageDTO) {
+        ChatRoom chatroom = getChatRoomComponent(chatRoomDTO.getNo());
+        chatroom.refresh(messageDTO.getContent(), messageDTO.getSendAt());
+
+        chatRoomList.moveChatRoomToTop(chatroom);
+
+        revalidate();
+        repaint();
+    }
 }
