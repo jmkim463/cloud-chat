@@ -10,6 +10,8 @@ import chat.module.dto.MessageDTO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
@@ -112,5 +114,23 @@ public class ChatView extends Panel {
 
         revalidate();
         repaint();
+    }
+
+    public void addClickGroupAddListener(ActionListener actionListener) {
+        chatRoomList.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                actionListener.actionPerformed(null);
+            }
+        });
+    }
+
+    public void addClickImageLabelListener(ActionListener actionListener) {
+        chatField.getImageLabel().addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                actionListener.actionPerformed(null);
+            }
+        });
     }
 }

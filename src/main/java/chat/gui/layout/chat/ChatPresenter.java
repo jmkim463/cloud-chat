@@ -1,13 +1,19 @@
 package chat.gui.layout.chat;
 
+import chat.gui.components.FileSelector;
+import chat.gui.components.ImageBuilder;
 import chat.gui.layout.chat.view.ChatRoom;
+import chat.gui.layout.popup.group.GroupApp;
+import chat.module.RetrofitUtils;
 import chat.module.Storage;
 import chat.module.dto.ChatRoomDTO;
 import chat.module.dto.UserDTO;
 import com.google.gson.Gson;
 import chat.module.SocketManager;
 import chat.module.dto.MessageDTO;
+import okhttp3.MultipartBody;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -27,6 +33,12 @@ public class ChatPresenter {
     }
 
     private void init() {
+
+    }
+
+    public void addGroupChatroom() {
+        GroupApp app = new GroupApp();
+        app.open();
 
     }
 
@@ -69,9 +81,35 @@ public class ChatPresenter {
         view.refreshChatField(list);
     }
 
+    public void clickImageLabel() {
+        try(FileSelector selector = new FileSelector()) {
+            selector.show();
+
+            String path = selector.getPath();
+            String name = selector.getFile();
+
+            if(path == null) {
+                return;
+            }
+
+            if(!(name.endsWith(".jpg") || name.endsWith(".png"))) {
+                return;
+            }
+
+            String content = model.uploadImage(new File(path));
+            System.out.println(content);
+            sendMessage(content);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
     public void clickMessageSendButton() {
         String content = view.getMessage();
+        sendMessage(content);
+    }
 
+    public void sendMessage(String content) {
         UserDTO userDTO = (UserDTO) Storage.getInstance().getData(Storage.LOGIN_USER);
         ChatRoomDTO chatRoomDTO = view.getSelectedChatRoom().getChatroomDTO();
 
@@ -86,7 +124,6 @@ public class ChatPresenter {
         manager.sendMessage("MESSAGE", messageDTO);
 
         view.addMessage(messageDTO);
-
         view.refresh(chatRoomDTO, messageDTO);
     }
 

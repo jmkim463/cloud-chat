@@ -1,5 +1,6 @@
 package chat.gui.layout.chat.view;
 
+import chat.gui.components.ImageBuilder;
 import chat.gui.components.button.Button;
 import chat.gui.components.LabelBuilder;
 import chat.gui.components.Panel;
@@ -23,11 +24,13 @@ public class ChatField extends Panel {
     private final MessageInputField inputField;
     private final JTextArea textArea;
     private final Button messageSendButton;
+    private final JLabel imageLabel;
 
     public ChatField() {
         textArea = new JTextArea();
         messagePanel = new Panel();
         messageSendButton = new Button(150, 35, "전송");
+        imageLabel = new JLabel(new ImageBuilder("image", ImageBuilder.ICON).setSize(25, 25).getImageIcon());
         scroll = new Scroll();
         inputField = new MessageInputField();
 
@@ -50,6 +53,10 @@ public class ChatField extends Panel {
 
     public Button getMessageSendButton() {
         return messageSendButton;
+    }
+
+    public JLabel getImageLabel() {
+        return imageLabel;
     }
 
     public void addMessage(MessageDTO messageDTO) {
@@ -117,7 +124,7 @@ public class ChatField extends Panel {
                     new LabelBuilder("/").setFont(10).setColor(Color.lightGray).getLabel(),
                     new LabelBuilder(MAX_TEXT_LENGTH + "").setFont(10).setColor(Color.lightGray).getLabel())
                 , BorderLayout.WEST);
-            panel.add(messageSendButton, BorderLayout.EAST);
+            panel.add(cover(imageLabel, messageSendButton), BorderLayout.EAST);
 
             add(panel, BorderLayout.NORTH);
             add(scroll);

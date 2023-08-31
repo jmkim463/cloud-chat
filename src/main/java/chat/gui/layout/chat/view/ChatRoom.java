@@ -120,6 +120,10 @@ public class ChatRoom extends Panel {
     }
 
     public void refresh(String content, String sendAt) {
+        if(MessageDTO.isImageMessage(content)) {
+            content = "사진을 보냈습니다.";
+        }
+
         chatLabel.setText(content);
         lastChatTimeLabel.setText(sendAt);
     }

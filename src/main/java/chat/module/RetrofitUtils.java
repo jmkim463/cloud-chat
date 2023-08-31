@@ -23,8 +23,8 @@ public class RetrofitUtils {
 
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(BASE_URL)
-                .addConverterFactory(GsonConverterFactory.create())
                 .addConverterFactory(ScalarsConverterFactory.create())
+                .addConverterFactory(GsonConverterFactory.create(gson))
                 .build();
 
         return retrofit;
@@ -53,7 +53,9 @@ public class RetrofitUtils {
 
         try {
             t = call.execute().body();
-        } catch (IOException e) {}
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
         return t;
     }

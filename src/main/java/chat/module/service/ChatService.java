@@ -2,22 +2,17 @@ package chat.module.service;
 
 import chat.module.dto.ChatRoomDTO;
 import chat.module.dto.MessageDTO;
+import okhttp3.MultipartBody;
 import retrofit2.Call;
-import retrofit2.http.GET;
-import retrofit2.http.Query;
+import retrofit2.http.*;
 
 import java.util.List;
 
 public interface ChatService {
 
-    @GET("/api/chat/user/chatroom")
+    @GET("/api/chat/chatroom/{userNo}")
     Call<List<ChatRoomDTO>> selectUserChatRoomList(
-            @Query("userNo") Long userNo
-    );
-
-    @GET("/api/chat/chatroom/massage")
-    Call<List<MessageDTO>> selectChatRoomOfMessage(
-            @Query("chatroomNo") Long chatroomNo
+            @Path("userNo") Long userNo
     );
 
     @GET("/api/chat/chatroom")
@@ -25,4 +20,16 @@ public interface ChatService {
             @Query("userNo1") Long userNo1,
             @Query("userNo2") Long userNo2
     );
+
+    @GET("/api/chat/massage")
+    Call<List<MessageDTO>> selectChatRoomOfMessage(
+            @Query("chatroomNo") Long chatroomNo
+    );
+
+    @Multipart
+    @POST("/api/chat/image")
+    Call<String> uploadImage(
+            @Part MultipartBody.Part image
+    );
+
 }

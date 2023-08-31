@@ -30,6 +30,7 @@ public class ChatApp implements App {
 
     private void init() {
         view.addSendMessageListener(e -> presenter.clickMessageSendButton());
+        view.addClickImageLabelListener(e -> presenter.clickImageLabel());
 
         presenter.refreshChatRoomList();
 

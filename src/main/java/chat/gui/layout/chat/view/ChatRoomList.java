@@ -1,8 +1,6 @@
 package chat.gui.layout.chat.view;
 
-import chat.gui.components.ImageBuilder;
-import chat.gui.components.LabelBuilder;
-import chat.gui.components.Scroll;
+import chat.gui.components.*;
 import chat.gui.components.Panel;
 import chat.gui.utils.Colors;
 import chat.module.dto.UserDTO;
@@ -16,10 +14,15 @@ import java.util.List;
 
 public class ChatRoomList extends Panel {
 
-    private Panel chatRoomList = new Panel();
-    private Scroll scroll = new Scroll(chatRoomList.cover());
+    private final Panel chatRoomList;
+    private final Scroll scroll;
+    private final JLabel groupAddLabel;
 
     public ChatRoomList() {
+        chatRoomList = new Panel();
+        scroll = new Scroll(chatRoomList.cover());
+        groupAddLabel = new JLabel();
+
         init();
     }
 
@@ -31,9 +34,16 @@ public class ChatRoomList extends Panel {
 
         scroll.setShowThumb(false);
 
+        groupAddLabel.setIcon(new ImageBuilder("group_add", ImageBuilder.ICON).changeImageColor(Color.GRAY).setSize(30, 30).getImageIcon());
+
         UserInfo user = new UserInfo();
 
-        add(user, BorderLayout.NORTH);
+        JPanel header = new JPanel(new BorderLayout());
+        header.add(user);
+        header.add(cover(FlowLayout.RIGHT, 0, 0, groupAddLabel), BorderLayout.SOUTH);
+        header.setBorder(new ShadowBorder(3));
+
+        add(header, BorderLayout.NORTH);
         add(scroll);
     }
 
@@ -76,4 +86,7 @@ public class ChatRoomList extends Panel {
         }
     }
 
+    public JLabel getGroupAddLabel() {
+        return groupAddLabel;
+    }
 }

@@ -7,16 +7,25 @@ import chat.module.dto.MessageDTO;
 import chat.module.dto.UserDTO;
 import chat.module.service.ChatService;
 import chat.module.service.UserService;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
+import okhttp3.MultipartBody;
 import retrofit2.Call;
 
+import java.io.File;
 import java.util.List;
 
 public class ChatModel {
 
     private final ChatService service;
 
+    private final JsonParser parser;
+
     public ChatModel() {
         service = RetrofitUtils.createService(ChatService.class);
+        parser = new JsonParser();
     }
 
     public List<ChatRoomDTO> getUserChatRoomList() {
@@ -34,5 +43,13 @@ public class ChatModel {
         return list;
     }
 
+    public String uploadImage(File file) {
+        MultipartBody.Part part = RetrofitUtils.imageToMultipartBody(file);
+
+        JsonElement element = parser.parse(RetrofitUtils.getCallBody(service.uploadImage(part)));
+        JsonObject json = element.getAsJsonObject();
+
+        return json.get("url").getAsString();
+    }
 
 }
