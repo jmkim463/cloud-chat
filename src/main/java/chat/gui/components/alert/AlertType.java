@@ -6,7 +6,7 @@ import javax.swing.*;
 import java.awt.*;
 
 public enum AlertType {
-    SUCCESS("SUCCESS", getImageIcon("check", new Color(168, 216, 132))),
+    SUCCESS("SUCCESS", getImageIcon("check", new Color(59, 204, 78))),
     ERROR("ERROR", getImageIcon("cancel", new Color(243, 65, 53)));
 
     private String name;
@@ -27,6 +27,7 @@ public enum AlertType {
 
     public static ImageIcon getImageIcon(String fileName, Color color) {
         return new ImageBuilder(fileName + "_circle", ImageBuilder.ICON)
+                .changeImageColor(color)
                 .setSize(60, 60).getImageIcon();
     }
 }

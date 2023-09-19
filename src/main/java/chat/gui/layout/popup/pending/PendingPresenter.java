@@ -31,7 +31,7 @@ public class PendingPresenter {
 
         model.save(no, userDTO.getNo());
 
-        Alert.createAlert(AlertType.SUCCESS, "친추 성공", "친구 추가 완료");
+        Alert.createAlert(AlertType.SUCCESS, "친구 추가 완료", userDTO.getName() + "님이 친구가 되었습니다.");
 
         view.initResultPanel();
     }
@@ -40,7 +40,7 @@ public class PendingPresenter {
         String keyword = view.getKeyword();
 
         if(keyword.isEmpty()) {
-            Alert.createAlert(AlertType.ERROR, "입력 올퓨", "입력 플리즈");;
+            Alert.createAlert(AlertType.ERROR, "입력 오류", "검색어를 입력해주세요.");;
             return;
         }
 
@@ -59,7 +59,7 @@ public class PendingPresenter {
         }
 
         if(list.size() == 0) {
-            Alert.createAlert(AlertType.ERROR, "검색 ㅇㄹ", "검색 결과 없음");
+            Alert.createAlert(AlertType.ERROR, "검색 실패", keyword + "으로 검색된 회원이 없습니다.");
             view.initResultPanel();
             return;
         }

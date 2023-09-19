@@ -79,10 +79,12 @@ public class ChatBubble extends Panel {
         ImageIcon image = new ImageBuilder(messageDTO.getImageURL(), ImageBuilder.URL).getImageIcon();
         int w = image.getIconWidth(), h = image.getIconHeight();
 
-        double scale = MAX_IMAGE_WIDTH / (double) w;
+        if(w > MAX_IMAGE_WIDTH) {
+            double scale = MAX_IMAGE_WIDTH / (double) w;
 
-        w *= scale;
-        h *= scale;
+            w *= scale;
+            h *= scale;
+        }
 
         Graphics2D g2;
 

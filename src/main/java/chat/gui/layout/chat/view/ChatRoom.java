@@ -63,7 +63,7 @@ public class ChatRoom extends Panel {
 
             int imageSize = 50;
 
-            if(split.length > 2) {
+            if(split.length > 1) {
                 imageSize = 28;
 
                 profileImagesPanel.setLayout(new GridLayout(2, 2, 3, 3));

@@ -35,9 +35,9 @@ public class AccountPresenter {
         boolean isHaveSameUsername = model.isHaveSameUsername(username);
 
         if(isHaveSameUsername) {
-            Alert.createAlert(AlertType.SUCCESS, "성공", "중복아님");
+            Alert.createAlert(AlertType.SUCCESS, "사용 가능", "사용 가능한 아이디 입니다.");
         } else {
-            Alert.createAlert(AlertType.ERROR, "실패", "중복임");
+            Alert.createAlert(AlertType.ERROR, "사용 불가", "현재 사용 중인 아이디 입니다.");
         }
 
         view.setHaveSameIDCheck(isHaveSameUsername);
@@ -57,28 +57,33 @@ public class AccountPresenter {
 
         if(model.getOldUserDTO() == null) {
             if(!model.isCorrectIDPattern(id)) {
-                Alert.createAlert(AlertType.ERROR, "회원가입 실패", "아이디 형식");
+                Alert.createAlert(AlertType.ERROR, "아이디 오류", "아이디는 영문, 숫자 4자 이상 16이하로 입력해주세요.");
                 return;
             }
 
             if(!isCheckHaveSameID) {
-                Alert.createAlert(AlertType.ERROR, "회원가입 실패", "아이디 중복 체크");
+                Alert.createAlert(AlertType.ERROR, "아이디 오류", "아이디 중복 체크를 해주세요.");
                 return;
             }
         }
 
         if(!model.isCorrectPasswordPattern(password)) {
-            Alert.createAlert(AlertType.ERROR, "회원가입 실패", "비밀번호 형식");
+            Alert.createAlert(AlertType.ERROR, "비밀번호 오류", "비밀번호는 영문, 숫자, 특수문자를 포함한 5자 이상 50자 이하로 입력해주세요.");
             return;
         }
 
         if(!password.equals(passwordCheck)) {
-            Alert.createAlert(AlertType.ERROR, "회원가입 실패", "비밀번호 불일치");
+            Alert.createAlert(AlertType.ERROR, "비밀번호 오류", "비밀번호 불일치 합니다.");
             return;
         }
 
         if(imageFilePath == null) {
-            Alert.createAlert(AlertType.ERROR, "회원가입 실패", "이미지 미 추가");
+            Alert.createAlert(AlertType.ERROR, "이미지 오류", "이미지가 선택되지 않았습니다.");
+            return;
+        }
+
+        if(email.isEmpty()) {
+            Alert.createAlert(AlertType.ERROR, "이메일 오류", "이메일을 입력해주세요");
             return;
         }
 
@@ -88,7 +93,7 @@ public class AccountPresenter {
             model.updateAccount(password, name, email + "@" + domain, new File(imageFilePath));
         }
 
-        Alert.createAlert(AlertType.SUCCESS, "회원가입 성공", "완료");
+        Alert.createAlert(AlertType.SUCCESS, "회원가입 성공", name + "님의 회원가입이 완료되었습니다!");
 
         modal.dispose();
     }

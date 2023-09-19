@@ -88,6 +88,12 @@ public class Button extends JLabel {
         Graphics2D g2 = (Graphics2D) g;
         g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 
+        if(isEnabled()) {
+            setBackground(style.getBackground());
+        } else {
+            setBackground(Color.lightGray);
+        }
+
         if(textComponent != null) {
             if(Color.lightGray.equals(getBackground())) {
                 setBackground(style.getBackground());
@@ -98,12 +104,6 @@ public class Button extends JLabel {
                     setBackground(Color.lightGray);
                 }
             }
-        }
-
-        if(isEnabled()) {
-            setBackground(style.getBackground());
-        } else {
-            setBackground(Color.lightGray);
         }
 
         Dimension dimension = getPreferredSize();
