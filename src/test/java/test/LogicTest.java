@@ -38,4 +38,10 @@ public class LogicTest {
             e.printStackTrace();
         }
     }
+
+    @Test()
+    void hashcode() {
+        System.out.println("sle".hashCode());
+    }
+
 }

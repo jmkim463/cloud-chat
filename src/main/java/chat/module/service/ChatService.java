@@ -2,6 +2,7 @@ package chat.module.service;
 
 import chat.module.dto.ChatRoomDTO;
 import chat.module.dto.MessageDTO;
+import chat.module.dto.UserDTO;
 import okhttp3.MultipartBody;
 import retrofit2.Call;
 import retrofit2.http.*;
@@ -30,6 +31,11 @@ public interface ChatService {
     @POST("/api/chat/image")
     Call<String> uploadImage(
             @Part MultipartBody.Part image
+    );
+
+    @POST("/api/chat/chatroom")
+    Call<String> saveGroupChatRoom(
+            @Body ChatRoomDTO chatRoomDTO
     );
 
 }

@@ -29,7 +29,7 @@ public class AccountModel {
     }
 
     public boolean isCorrectIDPattern(String id) {
-        return id.matches("^(?=.*[a-zA-Z])[a-zA-Z\\d]{5,25}$");
+        return id.matches("^[a-zA-Z0-9]{4,16}$");
     }
 
     public boolean isCorrectPasswordPattern(String password) {

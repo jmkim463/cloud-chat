@@ -14,6 +14,7 @@ public class Frame extends JFrame {
         setSize(width, height);
         setFont(new Font());
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        setIconImage(new ImageBuilder("logo", ImageBuilder.RESOURCES).getImageIcon().getImage());
     }
 
     @Override

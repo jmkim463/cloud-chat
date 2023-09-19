@@ -34,7 +34,7 @@ public class FriendPresenter {
         List<JPanel> acceptedList = new ArrayList<>();
         for(UserDTO userDTO : model.getFriendList()) {
             AcceptedFriend item = new AcceptedFriend(userDTO);
-            item.addClickListener(e -> chatWithFriend(userDTO));
+            item.addClickListener(e -> clickChatButtonWithFriend(userDTO));
             acceptedList.add(item);
         }
 
@@ -60,7 +60,7 @@ public class FriendPresenter {
         refresh();
     }
 
-    public void chatWithFriend(UserDTO userDTO) {
+    public void clickChatButtonWithFriend(UserDTO userDTO) {
         Long userNo1 = ((UserDTO) Storage.getInstance().getData(Storage.LOGIN_USER)).getNo();
         Long userNo2 = userDTO.getNo();
 
@@ -69,6 +69,8 @@ public class FriendPresenter {
         ChatApp app = new ChatApp();
         app.selectChatroom(chatRoomDTO);
         app.open();
+
+        refresh();
     }
 
 }

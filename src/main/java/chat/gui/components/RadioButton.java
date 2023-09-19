@@ -19,6 +19,7 @@ public class RadioButton extends JToggleButton {
 
     public RadioButton() {
         label = new LabelBuilder("").setFont(13).getLabel();
+        label.setVisible(false);
         circleButton = new CircleButton();
 
         init();
@@ -26,6 +27,7 @@ public class RadioButton extends JToggleButton {
 
     public RadioButton(String text) {
         this();
+
         label.setText(text);
     }
 
@@ -48,6 +50,7 @@ public class RadioButton extends JToggleButton {
 
     public void setText(String text) {
         label.setText(text);
+        label.setVisible(true);
     }
 
     public void addItemListener(ItemListener itemListener) {

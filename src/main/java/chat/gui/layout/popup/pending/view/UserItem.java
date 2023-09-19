@@ -27,8 +27,9 @@ public class UserItem extends Panel {
         setLayout(new BorderLayout(30, 0));
 
         StringBuilder stringBuilder = new StringBuilder(userDTO.getName());
+        stringBuilder.replace(1, stringBuilder.length(), "*".repeat(stringBuilder.length() - 1));
 
-        radio.setText(stringBuilder.replace(1, stringBuilder.length(), "*").toString());
+        radio.setText(stringBuilder.toString());
         btn.setFont(10);
         btn.setVisible(false);
         btn.setClickEvent(e -> {

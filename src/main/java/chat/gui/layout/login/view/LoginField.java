@@ -19,7 +19,7 @@ public class LoginField extends Panel {
     public LoginField() {
         id = new JTextField();
         password = new JPasswordField();
-        loginButton = new Button(200, 35, "Log in");
+        loginButton = new Button(180, 35, "Log in");
 
         init();
     }

@@ -2,6 +2,7 @@ package chat.gui.layout.chat.view;
 
 import chat.gui.components.*;
 import chat.gui.components.Panel;
+import chat.gui.layout.popup.group.GroupApp;
 import chat.gui.utils.Colors;
 import chat.module.dto.UserDTO;
 import chat.module.Storage;
@@ -9,6 +10,8 @@ import chat.module.dto.ChatRoomDTO;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -34,7 +37,17 @@ public class ChatRoomList extends Panel {
 
         scroll.setShowThumb(false);
 
-        groupAddLabel.setIcon(new ImageBuilder("group_add", ImageBuilder.ICON).changeImageColor(Color.GRAY).setSize(30, 30).getImageIcon());
+        groupAddLabel.setIcon(new ImageBuilder("group_add", ImageBuilder.ICON)
+                .changeImageColor(Color.GRAY)
+                .setSize(30, 30)
+                .getImageIcon());
+        groupAddLabel.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                GroupApp app = new GroupApp();
+                app.open();
+            }
+        });
 
         UserInfo user = new UserInfo();
 
