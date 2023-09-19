@@ -27,7 +27,7 @@ public class ChatRoom extends Panel {
         this.chatroom = chatroom;
 
         nameLabel = new LabelBuilder(chatroom.getName()).getLabel();
-        chatLabel = new LabelBuilder(chatroom.getLastChat()).setFont(13).setColor(Color.gray).getLabel();
+        chatLabel = new LabelBuilder(MessageDTO.isImageMessage(chatroom.getLastChat()) ? "사진을 보냈습니다." : chatroom.getLastChat()).setFont(13).setColor(Color.gray).getLabel();
         lastChatTimeLabel = new LabelBuilder(chatroom.getLastAt()).setFont(10).setColor(Color.gray).getLabel();
         notReadChatCountLabel = new JLabel() {
             @Override

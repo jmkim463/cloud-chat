@@ -39,7 +39,7 @@ public class FriendModel {
     public void updateStatus(Long userNo1, int status) {
         Long userNo2 = ((UserDTO) Storage.getInstance().getData(Storage.LOGIN_USER)).getNo();
 
-        RetrofitUtils.getCallBody(friendService.updateStatus(userNo1, userNo2, status));
+        RetrofitUtils.execute(friendService.updateStatus(userNo1, userNo2, status));
     }
 
     public ChatRoomDTO getPrivateChatroom(Long userNo1, Long userNo2) {

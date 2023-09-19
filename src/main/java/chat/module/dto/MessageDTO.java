@@ -26,6 +26,10 @@ public class MessageDTO {
     }
 
     public static boolean isImageMessage(String content) {
+        if(content == null) {
+            return false;
+        }
+
         int index = content.indexOf("image://");
         return index == 0;
     }
